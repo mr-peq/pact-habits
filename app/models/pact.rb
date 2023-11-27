@@ -1,0 +1,2 @@
+class Pact < ApplicationRecord
+end

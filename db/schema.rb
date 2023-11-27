@@ -10,9 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_27_135857) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_27_141203) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "beneficiaries", force: :cascade do |t|
+    t.string "name"
+    t.string "logo_src"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pacts", force: :cascade do |t|
+    t.string "type"
+    t.integer "distance"
+    t.integer "duration"
+    t.boolean "recurring"
+    t.integer "weekdays"
+    t.integer "xp"
+    t.integer "completion_duration"
+    t.boolean "challenge"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_pacts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "pact_id", null: false
+    t.datetime "deadline_at"
+    t.integer "bet"
+    t.bigint "beneficiary_id", null: false
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["beneficiary_id"], name: "index_user_pacts_on_beneficiary_id"
+    t.index ["pact_id"], name: "index_user_pacts_on_pact_id"
+    t.index ["user_id"], name: "index_user_pacts_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +56,19 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_27_135857) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.date "birthday"
+    t.string "nickname"
+    t.text "strava_token"
+    t.integer "total_xp"
+    t.integer "achieved_pacts"
+    t.integer "failed_pacts"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "user_pacts", "beneficiaries"
+  add_foreign_key "user_pacts", "pacts"
+  add_foreign_key "user_pacts", "users"
 end
