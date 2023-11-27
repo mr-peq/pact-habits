@@ -1,0 +1,8 @@
+<ul>
+  <% @pacts.each do |pact| %>
+    <li><%= pact.type %></li>
+    <li><%= pact.distance %></li>
+    <li><%= pact.duration %></li>
+    <li><%= pact.weekdays %> <%if pact.recurring?%></li>
+    
+</ul>
