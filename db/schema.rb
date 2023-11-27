@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_27_141203) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_27_163036) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_27_141203) do
   end
 
   create_table "pacts", force: :cascade do |t|
-    t.string "type"
+    t.string "category"
     t.integer "distance"
     t.integer "duration"
     t.boolean "recurring"
