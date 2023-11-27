@@ -1,10 +1,13 @@
 puts "Clearing database..."
 
 UserPact.destroy_all
+Beneficiary.destroy_all
 Pact.destroy_all
 User.destroy_all
 
-emails = ["theodore1712@yahoo.fr", "josephlugand@proton.me", "ismael.sentissi@gmail.com"]
+# ============================= USERS ==================================
+puts "Creating 3 BOSS users..."
+
 theodore = {
   email: "theodore1712@yahoo.fr",
   password: 123456,
@@ -13,9 +16,9 @@ theodore = {
   birthday: Time.new(1995, 12, 17),
   nickname: "mr-peq",
   strava_token: "",
-  total_xp: 80,
-  achieved_pacts: 3,
-  failed_pacts: 2
+  total_xp: 0,
+  achieved_pacts: 0,
+  failed_pacts: 0
 }
 ismael = {
   email: "ismael.sentissi@gmail.com",
@@ -25,9 +28,9 @@ ismael = {
   birthday: Time.new(1994, 9, 16),
   nickname: "sentouss",
   strava_token: "",
-  total_xp: 200,
-  achieved_pacts: 7,
-  failed_pacts: 2
+  total_xp: 0,
+  achieved_pacts: 0,
+  failed_pacts: 0
 }
 joseph = {
   email: "josephlugand@proton.me",
@@ -37,12 +40,159 @@ joseph = {
   birthday: Time.new(1987, 1, 6),
   nickname: "jolu",
   strava_token: "",
-  total_xp: 80,
-  achieved_pacts: 3,
-  failed_pacts: 2
+  total_xp: 0,
+  achieved_pacts: 0,
+  failed_pacts: 0
 }
 
-puts "Creating 3 users..."
-3.times do
-  User.create!('')
+User.create!(theodore)
+User.create!(ismael)
+User.create!(joseph)
+
+# ============================= BENEFICIARIES ==================================
+puts "Creating beneficiaries..."
+Beneficiary.create!(name: "Amnesty International")
+Beneficiary.create!(name: "Medecins Sans Frontières")
+Beneficiary.create!(name: "Action Contre La Faim")
+
+# ============================= PACTS & CHALLENGES ==================================
+puts "Creating 8 new user pacts and 2 challenges..."
+
+CATEGORIES = %w[cycle run trail]
+DISTANCES = [10, 20, 30]    # => km
+DURATION = [30, 60, 90]    # => min
+WEEKDAYS_ARRAY = [0, 1, 2, 3, 4, 5, 6]
+XPS = [30, 50, 80]
+COMPLETION_DURATIONS = [14, 21, 28]     # => days
+BETS = [5, 10, 20, 50]
+
+# Helper function to get random pact stats
+def random_pact_stats(challenge)
+  if rand > 0.5
+    distance = DISTANCES.sample
+    duration = nil
+  else
+    duration = DURATION.sample
+    distance = nil
+  end
+
+  if rand > 0.5
+    recurring = true
+    weekdays = []
+    rand(1..6).times do
+      weekdays << (WEEKDAYS_ARRAY.sample)
+    end
+    weekdays = weekdays.uniq.sort
+  else
+    recurring = false
+    weekdays = nil
+  end
+
+  xp = XPS.sample
+  completion_duration = nil
+
+  if challenge
+    xp *= 2
+    completion_duration = COMPLETION_DURATIONS.sample
+  end
+  { category: CATEGORIES.sample, distance: distance, duration: duration, recurring: recurring, weekdays: weekdays, xp: xp, challenge: challenge, completion_duration: completion_duration }
 end
+
+12.times do
+  Pact.create!(random_pact_stats(false))
+end
+
+2.times do
+  Pact.create!(random_pact_stats(true))
+end
+
+# ============================= USER_PACTS ==================================
+puts "Binding pacts to users..."
+
+# Ongoing
+i = Pact.first.id
+4.times do
+  pact = Pact.find(i)
+  deadline_at = pact.recurring ? Time.now + (7 * 24 * 3600) : Time.now + (rand(2..12) * 3600)
+
+  UserPact.create!(
+    user: User.all.sample,
+    pact: pact,
+    deadline_at: deadline_at,
+    bet: BETS.sample,
+    beneficiary: Beneficiary.all.sample,
+    status: 0
+  )
+  i += 1
+end
+
+# Achieved
+4.times do
+  pact = Pact.find(i)
+  UserPact.create!(
+    user: User.all.sample,
+    pact: pact,
+    deadline_at: Time.now - (rand(1..30) * rand(0..24) * 3600),
+    bet: BETS.sample,
+    beneficiary: Beneficiary.all.sample,
+    status: 1
+  )
+  i += 1
+end
+
+# Failed
+4.times do
+  pact = Pact.find(i)
+  UserPact.create!(
+    user: User.all.sample,
+    pact: pact,
+    deadline_at: Time.now - (rand(1..30) * rand(0..24) * 3600),
+    bet: BETS.sample,
+    beneficiary: Beneficiary.all.sample,
+    status: 2
+  )
+  i += 1
+end
+
+# Challenges
+2.times do
+  pact = Pact.find(i)
+  UserPact.create!(
+    user: User.find_by(first_name: "Ismaël"),
+    pact: pact,
+    deadline_at: Time.now - (rand(1..30) * rand(0..24) * 3600),
+    bet: BETS.sample,
+    beneficiary: Beneficiary.all.sample,
+    status: 1
+  )
+  if i % 2
+    deadline_at = pact.recurring ? Time.now + (7 * 24 * 3600) : Time.now + (rand(2..12) * 3600)
+    UserPact.create!(
+      user: User.find_by(first_name: "Joseph"),
+      pact: pact,
+      deadline_at: deadline_at,
+      bet: BETS.sample,
+      beneficiary: Beneficiary.all.sample,
+      status: 0
+    )
+  end
+  i += 1
+end
+
+# ============================= USERS STATS ==================================
+
+puts "Calculating users' XP and stats..."
+
+User.all.each do |user|
+  temp_user = user
+  temp_user.user_pacts.where(status: "achieved").each do |achieved_pact|
+    temp_user.total_xp += achieved_pact.pact.xp
+    temp_user.achieved_pacts += 1
+  end
+  temp_user.user_pacts.where(status: "failed").each do
+    temp_user.failed_pacts += 1
+  end
+  temp_user.save
+end
+
+puts "Done"
