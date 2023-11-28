@@ -3,6 +3,7 @@ class PactsController < ApplicationController
   end
 
   def show
+    @user_pact = UserPact.find(params[:id])
   end
 
   def new

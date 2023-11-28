@@ -1,0 +1,25 @@
+<!--
+ -->
+<ul>
+  <li>Category : <%= @user_pact.pact.category %></li>
+  <% unless @user_pact.pact.distance.nil? %>
+  <li>Distance : <%= @user_pact.pact.distance %>km</li>
+  <% end %>
+  <% unless @user_pact.pact.duration.nil? %>
+  <li>Duration : <%= @user_pact.pact.duration %>min</li>
+  <% end %>
+  <% if @user_pact.pact.recurring %>
+  <li>On days: <%= @user_pact.pact.weekdays.join(' ') %></li>
+  <% end %>
+  <li>XP : <%= @user_pact.pact.xp %></li>
+  <li>Deadline : <%= @user_pact.deadline_at %></li>
+  <li>Bet : <%= @user_pact.bet %></li>
+  <li>Status : <%= @user_pact.status %></li>
+</ul>
+
+
+<!--
+ -->
+<%= simple_form_for(@user_pact.pact) do |f| %>
+<%= f.submit "Finish my pact"%>
+<% end %>
