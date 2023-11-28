@@ -2,13 +2,6 @@ class PactsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # All user_pacts for the current user:
-    @user_pacts = current_user.user_pacts
-
-    # And to separate them based on their status:
-    @ongoing_pacts = @user_pacts.where(status: :ongoing).map(&:pact)
-    @achieved_pacts = @user_pacts.where(status: :achieved).map(&:pact)
-    @failed_pacts = @user_pacts.where(status: :failed).map(&:pact)
   end
 
   def show

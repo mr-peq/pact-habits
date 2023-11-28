@@ -1,5 +1,5 @@
 class Pact < ApplicationRecord
-  CATEGORIES = ['Run', 'Cycle', 'Walk', 'Hike']
+  CATEGORIES = ['run', 'cycle', 'walk', 'hike']
   WEEKDAYS = {
     0 => 'Sunday',
     1 => 'Monday',
