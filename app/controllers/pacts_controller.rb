@@ -14,35 +14,14 @@ class PactsController < ApplicationController
   def update
     strava_client = StravaClient.new
     @user_pact = UserPact.find(params[:id])
-    category = @user_pact.pact.category
-    duration = @user_pact.pact.duration
-    distance = @user_pact.pact.distance
-    duration *= 60 unless duration.nil?     # => convert in seconds for strava
-    distance *= 1000 unless distance.nil?   # => convert in meters for strava
+    pact_specs = retrieve_pact_specs
 
-    activity_ids = strava_client.get_user_activities({category: category, distance: distance, duration: duration, pact_creation: @user_pact.deadline_at.to_i })
-    activity_ids.each do |activity_id|
-      if !current_user.checked_strava_ids.include?(activity_id)
-        current_user.checked_strava_ids << activity_id
-        current_user.achieved_pacts += 1
-        current_user.total_xp += @user_pact.pact.xp
-        @user_pact.status = 1
-        @user_pact.save
-        current_user.save
-        break
-      end
+    activity_ids = strava_client.get_user_activities(pact_specs)
+    if user_finished_pact(activity_ids)
+      redirect_to root_path, notice: "Congrats for your achievement! You've received #{@user_pact.pact.xp} XP"
+    else
+      redirect_to edit_pact_path(@user_pact), alert: "Looks like you're not quite there yet, champ..."
     end
-    redirect_to root_path, notice: "Congrats for your achievement! You've received #{@user_pact.pact.xp} XP"
-    # iterate over activity_ids
-    # Check if user's checked_strava_ids include? activity_id
-    # IF true, next
-    # ELSE
-    # - store activity_id in user.checked_strava_ids
-    # - user.achieved_pacts += 1
-    # - @user_pact.status = 1 (achieved)
-    # - user.total_xp += @user_pact.pact.xp
-    # - save @user_pact
-    # - save user
   end
 
   def join
@@ -87,5 +66,30 @@ class PactsController < ApplicationController
   # Strong parameters for UserPact
   def user_pact_params
     params.require(:user_pact).permit(:deadline_at, :bet)
+  end
+
+  def retrieve_pact_specs
+    category = @user_pact.pact.category
+    duration = @user_pact.pact.duration
+    distance = @user_pact.pact.distance
+    pact_creation = @user_pact.deadline_at.to_i
+    duration *= 60 unless duration.nil?     # => convert in seconds for strava
+    distance *= 1000 unless distance.nil?   # => convert in meters for strava
+    { category:, duration:, distance:, pact_creation: }
+  end
+
+  def user_finished_pact(activity_ids)
+    activity_ids.each do |activity_id|
+      if !current_user.checked_strava_ids.include?(activity_id)
+        current_user.checked_strava_ids << activity_id
+        current_user.achieved_pacts += 1
+        current_user.total_xp += @user_pact.pact.xp
+        @user_pact.status = 1
+        @user_pact.save
+        current_user.save
+        return true
+      end
+    end
+    false
   end
 end
