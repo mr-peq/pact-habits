@@ -27,7 +27,7 @@
 
     <p><%= @user_pact.pact.xp %> XP</p>
 
-    <% unless @user_pact.pact.recurring %>
+    <% unless @user_pact.pact.recurring || @user_pact.status == "achieved" %>
     <div class="finish-pact-button mt-5">
       <%= simple_form_for @user_pact, url: update_pact_path do |f| %>
       <%= f.submit "Finish my pact", style: "width: 100%; height: 100%;"%>

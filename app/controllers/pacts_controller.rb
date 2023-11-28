@@ -21,7 +21,6 @@ class PactsController < ApplicationController
     distance *= 1000 unless distance.nil?   # => convert in meters for strava
 
     activity_ids = strava_client.get_user_activities({category: category, distance: distance, duration: duration, pact_creation: @user_pact.deadline_at.to_i })
-
     activity_ids.each do |activity_id|
       if !current_user.checked_strava_ids.include?(activity_id)
         current_user.checked_strava_ids << activity_id
@@ -33,6 +32,7 @@ class PactsController < ApplicationController
         break
       end
     end
+    redirect_to root_path, notice: "Congrats for your achievement! You've received #{@user_pact.pact.xp} XP"
     # iterate over activity_ids
     # Check if user's checked_strava_ids include? activity_id
     # IF true, next
