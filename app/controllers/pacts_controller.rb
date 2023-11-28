@@ -5,6 +5,7 @@ class PactsController < ApplicationController
   end
 
   def show
+    @pact = Pact.find(params[:id])
   end
 
   def edit
