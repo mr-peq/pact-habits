@@ -31,15 +31,15 @@ class PactsController < ApplicationController
   end
 
   def create
-    @pact = Pact.new(pact_params)
-    raise
+    adjusted_params = pact_params
+    adjusted_params[:weekdays] = adjusted_params[:weekdays].reject(&:blank?).map { |day| Pact::WEEKDAYS[day] }
+    @pact = Pact.new(adjusted_params)
     ActiveRecord::Base.transaction do
       if @pact.save
         # Create the associated UserPact
         @user_pact = UserPact.new(user_pact_params)
         @user_pact.pact = @pact
         @user_pact.user = current_user
-        raise
         raise ActiveRecord::Rollback, "UserPact couldn't be created" unless @user_pact.save
 
         # Redirect to the homepage if successfull
@@ -57,11 +57,11 @@ class PactsController < ApplicationController
 
   # Strong parameters for Pact
   def pact_params
-    params.require(:pact).permit(:category, :distance, :duration, :recurring, :weekdays, :beneficiary_id)
+    params.require(:pact).permit(:category, :distance, :duration, :recurring, weekdays: [])
   end
 
   # Strong parameters for UserPact
   def user_pact_params
-    params.require(:user_pact).permit(:deadline_at, :bet)
+    params.require(:user_pact).permit(:deadline_at, :bet, :beneficiary_id)
   end
 end

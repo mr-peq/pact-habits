@@ -1,35 +1,58 @@
-<div class="container mt-4">
+<div class="container mt-5" data-controller="multi-step-form">
   <%= simple_form_for @pact, url: pacts_path, html: { class: 'form-horizontal' } do |f| %>
     <%= f.error_notification %>
 
-    <div class="form-group mb-3">
-      <%= f.input :category, collection: Pact::CATEGORIES, prompt: "Select a category", input_html: { class: 'form-select' } %>
+    <!-- Step 1: Category and Distance/Duration -->
+    <div data-multi-step-form-target="step">
+      <p>I commit to:</p>
+      <div class="category-wrapper d-flex justify-content-around flex-wrap mt-4">
+        <%= f.collection_radio_buttons :category, Pact::CATEGORIES, :to_s, :humanize do |b| %>
+          <label class="category-item card text-white text-center p-2" style="background-image: url('<%= category_background_image(b.value) %>');">
+            <%= b.radio_button class: 'category-selector d-none', data: { action: "pact-form#selectCategory" } %>
+            <%= b.text %>
+          </label>
+        <% end %>
+      </div>
+
+      <div class="input-group d-flex mb-3", style="margin-top: 70px">
+        <%= f.input :distance, as: :integer, label: false, input_html: { class: 'form-control', placeholder: '10 Km, 30 Min, ...', 'data-pact-form-target': 'distance' } %>
+        <div class="input-group-append d-flex btn-group" role="group" aria-label="Km Min Toggle">
+          <input type="radio" class="btn-check" name="distance_type" id="kmButton" autocomplete="off">
+          <label class="btn btn-outline-secondary" for="kmButton">Km</label>
+          <input type="radio" class="btn-check" name="distance_type" id="minButton" autocomplete="off">
+          <label class="btn btn-outline-secondary" for="minButton">Min</label>
+        </div>
+      </div>
     </div>
 
-    <div class="form-group mb-3">
-      <%= f.input :distance, input_html: { class: 'form-control', placeholder: 'Distance (km)' } %>
-    </div>
 
-    <div class="form-group mb-3">
-      <%= f.input :duration, input_html: { class: 'form-control', placeholder: 'Duration (min)' } %>
-    </div>
 
-    <div class="form-group form-check mb-3">
-      <%= f.input :recurring, as: :boolean, inline_label: 'Recurring', input_html: { class: 'form-check-input' } %>
-    </div>
-
-    <div id="weekdays-container" class="form-group mb-3">
-      <%= f.input :weekdays, as: :check_boxes, collection: Pact::WEEKDAYS.values, item_wrapper_class: 'form-check', item_label_class: 'form-check-label', input_html: { class: 'form-check-input' } %>
-    </div>
 
     <%= simple_fields_for @user_pact do |up| %>
-      <div class="form-group mb-3">
-        <%= up.input :deadline_at, as: :string, input_html: { class: 'form-control', type: 'datetime-local' } %>
-        <%= up.input :bet, input_html: { class: 'form-control' } %>
-        <%= up.input :beneficiary_id, collection: @beneficiaries, prompt: "Select a beneficiary", input_html: { class: 'form-select' } %>
+      <!-- Step 2: Deadline (Hidden initially) -->
+      <div data-multi-step-form-target="step" class="d-none">
+        <div class="mb-3">
+          <p>Before:</p>
+          <%= up.input :deadline_at, as: :string, label: false, input_html: { class: 'form-control', type: 'datetime-local' } %>
+        </div>
+      </div>
+
+      <!-- Step 3: Beneficiary and Bet (Hidden initially) -->
+      <div data-multi-step-form-target="step" class="d-none">
+        <div class="mb-3">
+          <p>Or give:</p>
+          <%= up.input :bet, as: :integer, label: false, input_html: { class: 'form-control', min: 1, step: 1, placeholder: 'Amount (€)' } %>
+          <p>to:</p>
+          <%= up.input :beneficiary_id, collection: @beneficiaries, label: false, prompt: "Select a charity", input_html: { class: 'form-select' } %>
+        </div>
+      <%= f.button :submit, class: 'btn btn-primary btn-block' %>
+  <% end %>
       </div>
     <% end %>
 
-    <%= f.button :submit %>
-  <% end %>
+  <!-- Navigation Buttons -->
+  <div>
+    <button type="button" data-action="multi-step-form#previous">Back</button>
+    <button type="button" data-action="multi-step-form#next">Next</button>
+  </div>
 </div>
