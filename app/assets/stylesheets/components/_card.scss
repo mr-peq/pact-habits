@@ -1,0 +1,21 @@
+.card-challenge {
+  border-radius: 15px;
+  height: 160px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  overflow: hidden; /* Ensures nothing spills out of the card's rounded corners */
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  background-color: #3081D0;
+  color: white;
+  display: flex;
+}
+
+.card-bet {
+  display: flex;
+}
+
+h3 {
+  font-weight: bold;
+  text-transform: capitalize;
+}
