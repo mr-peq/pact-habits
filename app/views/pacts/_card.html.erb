@@ -1,0 +1,30 @@
+<div class="pact-card my-2 <%= 'challenge' if user_pact.pact.challenge %>">
+  <div class="pact-card-top">
+    <div class="pact-card-details">
+      <h3>Sport</h3>
+      <% if user_pact.pact.distance.nil? %>
+      <p class="mb-0"><%= user_pact.pact.category.capitalize %> > <%= user_pact.pact.duration %> minutes</p>
+      <% else %>
+      <p class="mb-0"><%= user_pact.pact.category.capitalize %> > <%= user_pact.pact.distance %> km</p>
+      <% end %>
+      <p class="mb-0">Gain <%= user_pact.pact.xp %> XP <i class="fa-solid fa-star" style="color: #ecdf1e;"></i></p>
+    </div>
+    <div class="pact-card-bet">
+      <p class="mb-0"><%= user_pact.bet %>€</p>
+    </div>
+  </div>
+
+  <% if bottom == "submit" %>
+  <div class="pact-card-bottom mt-3 <%= 'd-none' if user_pact.pact.recurring || user_pact.status == 'achieved'%>">
+    <%= simple_form_for user_pact, url: update_pact_path, html: { style: "height: 100%; width: 70%;"} do |f| %>
+    <%= f.submit "Finish my pact" %>
+    <% end %>
+  </div>
+  <% end %>
+
+  <% if bottom == "timer" %>
+  <div class="pact-card-bottom mt-3">
+    <p>This is a timer placeholder</p>
+  </div>
+  <% end %>
+</div>
