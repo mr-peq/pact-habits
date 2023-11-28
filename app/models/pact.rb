@@ -14,4 +14,5 @@ class Pact < ApplicationRecord
   has_many :users, through: :user_pacts
 
   validates :category, inclusion: { in: CATEGORIES }
+  has_one_attached :photo
 end
