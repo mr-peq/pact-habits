@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <%= simple_form_for @pact, url: pacts_path, html: { class: 'form-horizontal' } do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-group mb-3">
+      <%= f.input :category, collection: Pact::CATEGORIES, prompt: "Select a category", input_html: { class: 'form-select' } %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.input :distance, input_html: { class: 'form-control', placeholder: 'Distance (km)' } %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.input :duration, input_html: { class: 'form-control', placeholder: 'Duration (min)' } %>
+    </div>
+
+    <div class="form-group form-check mb-3">
+      <%= f.input :recurring, as: :boolean, inline_label: 'Recurring', input_html: { class: 'form-check-input' } %>
+    </div>
+
+    <div id="weekdays-container" class="form-group mb-3">
+      <%= f.input :weekdays, as: :check_boxes, collection: Pact::WEEKDAYS.values, item_wrapper_class: 'form-check', item_label_class: 'form-check-label', input_html: { class: 'form-check-input' } %>
+    </div>
+
+    <%= simple_fields_for @user_pact do |up| %>
+      <div class="form-group mb-3">
+        <%= up.input :deadline_at, as: :string, input_html: { class: 'form-control', type: 'datetime-local' } %>
+        <%= up.input :bet, input_html: { class: 'form-control' } %>
+        <%= up.input :beneficiary_id, collection: @beneficiaries, prompt: "Select a beneficiary", input_html: { class: 'form-select' } %>
+      </div>
+    <% end %>
+
+    <%= f.button :submit %>
+  <% end %>
+</div>
