@@ -12,6 +12,9 @@ class PactsController < ApplicationController
   end
 
   def update
+    strava_client = StravaClient.new
+    response = strava_client.get_user_activities
+    raise
   end
 
   def join
