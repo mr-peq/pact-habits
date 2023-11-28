@@ -1,3 +1,41 @@
+<div class="mt-5">
+  <div class="timer mb-5">
+    <h2 class="mb-0">Time left:</h2>
+    <i class="fa-solid fa-circle-notch mt-5"></i>
+    <% time_remaining = @user_pact.deadline_at - Time.now %>
+    <% days = (time_remaining / 1.day).to_i %>
+    <% hours = ((time_remaining % 1.day) / 1.hour).to_i %>
+    <% minutes = ((time_remaining % 1.hour) / 1.minute).to_i %>
+    <% seconds = ((time_remaining % 1.minute) / 1.second).to_i %>
+
+    <p class="mb-0 mt-5"><%= days %> Days, <%= hours %> hours, <%= minutes %> minutes and <%= seconds %> seconds</p>
+  </div>
+  <div class="pact-card <%= 'challenge' if @user_pact.pact.challenge %>">
+    <div class="pact-card-top">
+      <div class="pact-card-details">
+        <h3>Sport</h3>
+        <% if @user_pact.pact.distance.nil? %>
+        <p class="mb-0"><%= @user_pact.pact.category.capitalize %> > <%= @user_pact.pact.duration %> minutes</p>
+        <% else %>
+        <p class="mb-0"><%= @user_pact.pact.category.capitalize %> > <%= @user_pact.pact.distance %> km</p>
+        <% end %>
+        <p class="mb-0">Gain <%= @user_pact.pact.xp %> XP <i class="fa-solid fa-star" style="color: #ecdf1e;"></i></p>
+      </div>
+      <div class="pact-card-bet">
+        <p class="mb-0"><%= @user_pact.bet %>€</p>
+      </div>
+    </div>
+    <div class="pact-card-bottom mt-3">
+      <% unless @user_pact.pact.recurring || @user_pact.status == "achieved" %>
+      <%= simple_form_for @user_pact, url: update_pact_path, html: { style: "height: 100%; width: 70%;"} do |f| %>
+      <%= f.submit "Finish my pact" %>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!--
 <div class="edit-container">
   <div class="timer">
     <h2>Time left:</h2>
@@ -36,28 +74,4 @@
     <% end %>
   </div>
 </div>
-
-
-
-<!--
-  <ul>
-    <li>Category : <%= @user_pact.pact.category %></li>
-    <% unless @user_pact.pact.distance.nil? %>
-    <li>Distance : <%= @user_pact.pact.distance %>km</li>
-    <% end %>
-    <% unless @user_pact.pact.duration.nil? %>
-    <li>Duration : <%= @user_pact.pact.duration %>min</li>
-    <% end %>
-    <% if @user_pact.pact.recurring %>
-    <li>On days: <%= @user_pact.pact.weekdays.join(' ') %></li>
-    <% end %>
-    <li>XP : <%= @user_pact.pact.xp %></li>
-    <li>Deadline : <%= @user_pact.deadline_at %></li>
-    <li>Bet : <%= @user_pact.bet %></li>
-    <li>Status : <%= @user_pact.status %></li>
-  </ul>
-
-  <%= simple_form_for(@user_pact.pact) do |f| %>
-  <%= f.submit "Finish my pact"%>
-  <% end %>
  -->
