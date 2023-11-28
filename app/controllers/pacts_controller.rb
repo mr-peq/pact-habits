@@ -32,6 +32,7 @@ class PactsController < ApplicationController
 
   def create
     adjusted_params = pact_params
+    raise
     adjusted_params[:weekdays] = adjusted_params[:weekdays].reject(&:blank?).map { |day| Pact::WEEKDAYS[day] }
     @pact = Pact.new(adjusted_params)
     ActiveRecord::Base.transaction do
