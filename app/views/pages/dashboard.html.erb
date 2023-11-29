@@ -1,9 +1,24 @@
-<ul>
-  <% @pacts.each do |pact| %>
-    <li><%= pact.category %></li>
-    <li><%= pact.distance %></li>
-    <li><%= pact.duration %></li>
-    <li><%= pact.xp %></li>
-    <li><%= pact.completion_duration %></li>
-    <% end %>
-</ul>
+<div class="dashboard-avatar w-100 my-2">
+  <p>This is an avatar placeholder</p>
+</div>
+
+<div class="ongoing-pacts w-100 my-5">
+  <h3 class="section-title mb-3">Ongoing pacts</h3>
+  <% @ongoing_pacts.each do |ongoing_pact| %>
+    <%= render partial: "pacts/card", locals: { user_pact: ongoing_pact, bottom: "timer", clickable: true } %>
+  <% end %>
+</div>
+
+<div class="achieved-pacts w-100 my-5">
+  <h3 class="section-title mb-3">Achieved pacts</h3>
+  <% @achieved_pacts.each do |achieved_pact| %>
+    <%= render partial: "pacts/card", locals: { user_pact: achieved_pact, bottom: "timer", clickable: false } %>
+  <% end %>
+</div>
+
+<div class="failed-pacts w-100 my-5">
+  <h3 class="section-title mb-3">Failed pacts</h3>
+  <% @failed_pacts.each do |failed_pact| %>
+    <%= render partial: "pacts/card", locals: { user_pact: failed_pact, bottom: "timer", clickable: false } %>
+  <% end %>
+</div>
