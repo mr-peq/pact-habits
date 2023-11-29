@@ -1,89 +1,24 @@
-<!-- ongoing pacts -->
-<div>
-  <h2>Ongoing Pacts</h2>
+<div class="dashboard-avatar w-100 my-2">
+  <p>This is an avatar placeholder</p>
 </div>
 
-    <!-- challenge -->
-      <div class="card-challenge">
-        <div class="activity">
-          <ul style="list-style:none">
-            <% @user_pacts.where(status: :ongoing).each do |user_pact| %>
-              <li>
-                <h3 style="font-weight: bold;"><%= user_pact.pact.category %></h3>
-                <p><%= user_pact.pact.distance %> km</p>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-        <div class="card-bet">
-          <ul style="list-style:none">
-            <% @user_pacts.where(status: :ongoing).each do |user_pact| %>
-              <li>
-                <p>Bet: <%= user_pact.bet %></p>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-
-<!-- achieved pacts -->
-<div>
-  <h2>Achieved Pacts</h2>
+<div class="ongoing-pacts w-100 my-5">
+  <h3 class="section-title mb-3">Ongoing pacts</h3>
+  <% @ongoing_pacts.each do |ongoing_pact| %>
+    <%= render partial: "pacts/card", locals: { user_pact: ongoing_pact, bottom: "timer", clickable: true } %>
+  <% end %>
 </div>
 
-  <!-- challenge -->
-   <div class="card-challenge">
-      <div class="activity">
-        <ul style="list-style:none">
-          <% @user_pacts.where(status: :achieved).each do |user_pact| %>
-              <li>
-                <div class="card-challenge">
-                  <h3 style="font-weight: bold;"><%= user_pact.pact.category %></h3>
-                  <p><%= user_pact.pact.distance %> km</p>
-                  <p>Bet: <%= user_pact.bet %></p>
-                </div>
-              </li>
-          <% end %>
-        </ul>
-      </div>
-        <div class="card-bet">
-          <ul style="list-style:none">
-            <% @user_pacts.where(status: :ongoing).each do |user_pact| %>
-              <li>
-                <p>Bet: <%= user_pact.bet %></p>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-    </div>
-
-<!-- failed pacts -->
-<div>
-  <h2>Failed Pacts</h2>
+<div class="achieved-pacts w-100 my-5">
+  <h3 class="section-title mb-3">Achieved pacts</h3>
+  <% @achieved_pacts.each do |achieved_pact| %>
+    <%= render partial: "pacts/card", locals: { user_pact: achieved_pact, bottom: "timer", clickable: false } %>
+  <% end %>
 </div>
 
-  <!-- challenge -->
-    <div class="card-challenge">
-      <div class="activity">
-        <ul style="list-style:none">
-          <% @user_pacts.where(status: :failed).each do |user_pact| %>
-              <li>
-                <div class="card-challenge" style="width:200px">
-                  <h3 style="font-weight: bold;"><%= user_pact.pact.category %></h3>
-                  <p><%= user_pact.pact.distance %> km</p>
-                  <p>Bet: <%= user_pact.bet %></p>
-                </div>
-              </li>
-          <% end %>
-        </ul>
-      </div>
-      <div class="card-bet">
-        <ul style="list-style:none">
-          <% @user_pacts.where(status: :ongoing).each do |user_pact| %>
-            <li>
-              <p>Bet: <%= user_pact.bet %></p>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+<div class="failed-pacts w-100 my-5">
+  <h3 class="section-title mb-3">Failed pacts</h3>
+  <% @failed_pacts.each do |failed_pact| %>
+    <%= render partial: "pacts/card", locals: { user_pact: failed_pact, bottom: "timer", clickable: false } %>
+  <% end %>
+</div>
