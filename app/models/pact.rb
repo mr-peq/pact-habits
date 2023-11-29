@@ -14,5 +14,12 @@ class Pact < ApplicationRecord
   has_many :users, through: :user_pacts
 
   validates :category, inclusion: { in: CATEGORIES }
-  has_one_attached :photo
+
+  def ongoing_challengers
+    user_pacts.where(status: "ongoing").map(&:user)
+  end
+
+  def achieved_challengers
+    user_pacts.where(status: "achieved").map(&:user)
+  end
 end
