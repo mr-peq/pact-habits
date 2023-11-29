@@ -1,0 +1,10 @@
+<!--seulement la show pour les challenges-->
+<div class="challenge-title">
+  <h3>Details of sport challenge selected</h3>
+</div>
+
+<div class="challenge-photo">
+  <%= simple_form_for(pact) do |f| %>
+  <%= f.input :photo, as: :file %>
+  <% end %>
+</div>
