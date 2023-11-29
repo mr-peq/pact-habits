@@ -9,8 +9,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root to: "pages#dashboard"
-  resources :pacts, except: :destroy
+  resources :pacts, except: [:destroy, :update]
   resources :challenges, only: :index
   get "/account", to: "pages#account"
+
   get "/pacts/:id/join", to: "pacts#join"
+  patch "pacts/:id/", to: "pacts#update", as: "update_pact"
+
+  get "/strava_token", to: "pages#strava_token"
 end

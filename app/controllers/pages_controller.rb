@@ -7,4 +7,9 @@ class PagesController < ApplicationController
 
   def account
   end
+
+  # def strava_token
+  #   params[:code]
+  #   raise
+  # end
 end
