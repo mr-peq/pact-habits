@@ -1,12 +1,65 @@
-.navbar-lewagon {
+.navbar-custom {
+  background-color: #f1faee; /* Replace with the color of your navbar background */
+  box-shadow: 0 -4px 6px rgba(0,0,0,0.1); /* This adds a slight shadow to the top of the navbar */
+  height: 70px; /* Set the height of the navbar */
+  overflow: visible; /* Allows the plus-icon to be positioned partially outside */
+}
+
+.navbar-custom .container {
+  display: flex;
   justify-content: space-between;
-  background: white;
+  align-items: center;
+  position: relative; /* Allows absolute positioning relative to the container */
+  height: 100%; /* Ensures container takes the full height of the navbar */
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-nav {
+  width: 100%;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.nav-item {
+  flex: 1;
+  text-align: center;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px; /* Adjust font size as needed */
+  color: #457b9d; /* Replace with the color of your icon and text */
+}
+
+.add-pact {
+  position: relative; /* Relative positioning for the plus-icon */
+}
+
+.add-pact .plus-icon {
+  background-color: #e63946; /* Replace with the color of the + button */
+  color: #f1faee; /* Replace with the color of the + icon */
+  border-radius: 50%;
+  width: 40px; /* Adjust the size of the + button */
+  height: 40px; /* Adjust the size of the + button */
+  line-height: 40px; /* Adjust the size of the + button */
+  font-size: 30px; /* Adjust the size of the + icon */
+  margin-bottom: 30px; /* Push the icon above the navbar */
+  position: absolute; /* Absolute positioning to place it exactly where you want */
+  top: -46px; /* Half of the height to move it above the navbar */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Offset by half of its own width to truly center it */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Optional: Adds shadow to the plus-icon */
+  z-index: 2; /* Ensures it's above other elements */
+}
+
+/* Hover and active styles */
+.nav-link:hover, .nav-link:focus, .nav-link:active {
+  color: #1d3557; /* Replace with the hover color of your icon and text */
+  text-decoration: none; /* No underline */
 }
