@@ -11,5 +11,5 @@
     <p class="mb-0 mt-5"><%= days %> Days, <%= hours %> hours, <%= minutes %> minutes and <%= seconds %> seconds</p>
   </div>
 
-  <%= render(partial: "card", locals: { user_pact: @user_pact , bottom: "submit" })%>
+  <%= render(partial: "card", locals: { user_pact: @user_pact , bottom: "submit", clickable: false })%>
 </div>

@@ -6,9 +6,9 @@ class PagesController < ApplicationController
     @user_pacts = current_user.user_pacts
 
     # And to separate them based on their status:
-    @ongoing_pacts = @user_pacts.where(status: :ongoing).map(&:pact)
-    @achieved_pacts = @user_pacts.where(status: :achieved).map(&:pact)
-    @failed_pacts = @user_pacts.where(status: :failed).map(&:pact)
+    @ongoing_pacts = @user_pacts.where(status: :ongoing)
+    @achieved_pacts = @user_pacts.where(status: :achieved)
+    @failed_pacts = @user_pacts.where(status: :failed)
   end
 
   def account
