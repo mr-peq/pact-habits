@@ -37,9 +37,15 @@
               <label class="form-check-label" for="anytime_checkbox">Anytime</label>
             </div>
 
-            <div class="mb-3 toggle-container">
-              <%= f.check_box :recurring, class: 'recurring-checkbox', id: 'recurring-toggle', 'data-action': 'datetime-picker#toggleRecurring', 'data-datetime-picker-target': 'recurring' %>
-              <label class="toggle-switch" for="recurring-toggle"></label>
+            <div class="toggle-container">
+              <input type="checkbox" class="d-none" id="recurring-toggle" name="recurring" data-action="datetime-picker#toggleRecurring" data-datetime-picker-target="recurring">
+              <label for="recurring-toggle" class="toggle-label">
+                <span class="toggle-option">Only Once</span>
+                <span class="toggle-switch">
+                  <span class="toggle-slider"></span>
+                </span>
+                <span class="toggle-option">Every Time</span>
+              </label>
             </div>
 
             <div class="weekdays-wrapper d-none" data-datetime-picker-target="weekdays">

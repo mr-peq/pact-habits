@@ -150,6 +150,66 @@
 // ---------------------------------------------------------------------------//
 // ---------------------------------------------------------------------------//
 
+.toggle-container {
+  width: 100%; /* Adjust to match your container width */
+  padding: 0.25rem; /* Adjust the padding around the toggle */
+  display: flex;
+  justify-content: center; /* Center the toggle within the container */
+  align-items: center;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  background-color: #e6e6e6; /* Light grey background */
+  border-radius: 20px; /* Rounded corners for the toggle */
+  cursor: pointer;
+  position: relative;
+  height: 2rem; /* Height of the entire toggle */
+  width: calc(100% - 0.5rem); /* Full width minus padding */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.toggle-option {
+  z-index: 1;
+  flex-grow: 1;
+  text-align: center; /* Center text in the toggle option area */
+  line-height: 2rem; /* Align text vertically */
+  transition: color 0.3s; /* Smooth text color transition */
+}
+
+.toggle-switch {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.25rem;
+  height: calc(100% - 0.5rem); /* Full height minus double the top position */
+  width: calc(50% - 0.5rem); /* Half width minus left position */
+  background-color: #fff; /* White background for the switch */
+  border-radius: 1rem; /* Rounded corners for the switch */
+  transition: all 0.3s ease-in-out; /* Smooth transition for moving the switch */
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #4dd0e1; /* Background color of the slider */
+  border-radius: 1rem; /* Rounded corners for the slider */
+}
+
+#recurring-toggle:checked + .toggle-label .toggle-switch {
+  left: calc(50% - 0.25rem); /* Move switch to the right half */
+}
+
+#recurring-toggle:checked + .toggle-label .toggle-option:first-child {
+  color: #aaa; /* Lighter color text for unselected option */
+}
+
+#recurring-toggle:not(:checked) + .toggle-label .toggle-option:last-child {
+  color: #aaa; /* Lighter color text for unselected option */
+}
 
 
 .weekday-toggle {
