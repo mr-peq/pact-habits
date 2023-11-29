@@ -10,7 +10,11 @@
       <% else %>
       <p class="mb-0"><%= challenge.category.capitalize %> > <%= challenge.distance %> km</p>
       <% end %>
-      <p class="mb-0">Gain <%= challenge.xp %> XP <i class="fa-solid fa-star" style="color: #ecdf1e;"></i></p>
+      <% if challenge.completion_duration == 1 %>
+        <p class="mb-0">Deadline : <%= challenge.completion_duration %> Week</p>
+      <% else %>
+        <p class="mb-0">Deadline : <%= challenge.completion_duration %> Weeks</p>
+      <% end %>
     </div>
     <div class="challenge-card-xp">
       <p class="mb-0"><%= challenge.xp %>XP</p>
