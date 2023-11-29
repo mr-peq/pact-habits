@@ -17,8 +17,8 @@
     </div>
   </div>
 
-  <% if challenge.recurring %>
     <div class="pact-card-bottom mt-3">
+    <% if challenge.recurring %>
       <div class="weekdays">
         <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(0) %>">M</div>
         <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(1) %>">T</div>
@@ -29,12 +29,16 @@
         <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(6) %>">S</div>
       </div>
     <% end %>
-      <div class="challenge-card-friends">
+      <div class="challenge-card-friends" style="display: flex;">
         <% challenge.ongoing_challengers.each do |challenger| %>
-          <p><%= challenger.first_name[0] %></p>
+          <div class="challenge-friend-avatar friend-ongoing">
+            <p class="mb-0"><%= challenger.first_name[0] %></p>
+          </div>
         <% end %>
         <% challenge.achieved_challengers.each do |challenger| %>
-          <p><%= challenger.first_name[0] %></p>
+          <div class="challenge-friend-avatar friend-achieved">
+            <p class="mb-0"><%= challenger.first_name[0] %></p>
+          </div>
         <% end %>
       </div>
     </div>
