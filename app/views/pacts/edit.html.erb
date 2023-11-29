@@ -1,0 +1,15 @@
+<div class="mt-5">
+  <div class="timer mb-5">
+    <h2 class="mb-0">Time left:</h2>
+    <i class="fa-solid fa-circle-notch mt-5"></i>
+    <% time_remaining = @user_pact.deadline_at - Time.now %>
+    <% days = (time_remaining / 1.day).to_i %>
+    <% hours = ((time_remaining % 1.day) / 1.hour).to_i %>
+    <% minutes = ((time_remaining % 1.hour) / 1.minute).to_i %>
+    <% seconds = ((time_remaining % 1.minute) / 1.second).to_i %>
+
+    <p class="mb-0 mt-5"><%= days %> Days, <%= hours %> hours, <%= minutes %> minutes and <%= seconds %> seconds</p>
+  </div>
+
+  <%= render(partial: "card", locals: { user_pact: @user_pact , bottom: "submit" })%>
+</div>
