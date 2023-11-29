@@ -1,0 +1,33 @@
+<div class="pact-card my-3 challenge">
+  <% if clickable %>
+    <%= link_to "", pact_path(challenge), class: "pact-clickable" %>
+  <% end %>
+  <div class="pact-card-top">
+    <div class="pact-card-details">
+      <h3>Sport <i class="fa-solid fa-people-group"></i></h3>
+      <% if challenge.pact.distance.nil? %>
+      <p class="mb-0"><%= challenge.pact.category.capitalize %> > <%= challenge.pact.duration %> minutes</p>
+      <% else %>
+      <p class="mb-0"><%= challenge.pact.category.capitalize %> > <%= challenge.pact.distance %> km</p>
+      <% end %>
+      <p class="mb-0">Gain <%= challenge.pact.xp %> XP <i class="fa-solid fa-star" style="color: #ecdf1e;"></i></p>
+    </div>
+    <div class="challenge-card-xp">
+      <p class="mb-0"><%= challenge.pact.xp %>XP</p>
+    </div>
+  </div>
+
+  <% if challenge.pact.recurring %>
+    <div class="pact-card-bottom mt-3">
+      <div class="weekdays">
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.pact.weekdays.include?(0) %>">M</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.pact.weekdays.include?(1) %>">T</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.pact.weekdays.include?(2) %>">W</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.pact.weekdays.include?(3) %>">T</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.pact.weekdays.include?(4) %>">F</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.pact.weekdays.include?(5) %>">S</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.pact.weekdays.include?(6) %>">S</div>
+      </div>
+    </div>
+  <% end %>
+</div>
