@@ -31,12 +31,9 @@ class PactsController < ApplicationController
   end
 
   def create
-    adjusted_params = pact_params
-    raise
-    adjusted_params[:weekdays] = adjusted_params[:weekdays].reject(&:blank?).map { |day| Pact::WEEKDAYS[day] }
-    @pact = Pact.new(adjusted_params)
+    @pact = Pact.new(pact_params)
     ActiveRecord::Base.transaction do
-      if @pact.save
+      if @pact.save!
         # Create the associated UserPact
         @user_pact = UserPact.new(user_pact_params)
         @user_pact.pact = @pact

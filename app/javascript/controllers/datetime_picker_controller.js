@@ -5,15 +5,16 @@ export default class extends Controller {
   static targets = ["datetime", "anytime", "recurring", "weekdays", "day"]
 
   connect() {
+    console.log(this.datetimeTarget);
     this.initializeFlatpickr();
   }
 
   initializeFlatpickr() {
     flatpickr(this.datetimeTarget, {
-      enableTime: true,
+      disableMobile: "true",
+      enableTime: false,
       dateFormat: "Y-m-d H:i",
       time_24hr: true,
-      // onChange: this.handleDateTimeChange.bind(this)
     });
   }
 

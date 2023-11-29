@@ -35,6 +35,10 @@
   filter: none;
 }
 
+.category-item.selected {
+  filter: none;
+}
+
 .category-selector:checked + label {
   filter: none;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* More prominent shadow to indicate selection */
@@ -130,6 +134,14 @@
   color: white;
   padding-left: 2rem; /* Increase left padding */
   padding-right: 2rem; /* Increase right padding */
+
+  &:active,
+  &:focus-visible,
+  &:hover {
+    color: white !important;
+    background-color: #01193c !important;
+    border: none !important;
+  }
 }
 
 // ---------------------------------------------------------------------------//
@@ -137,6 +149,8 @@
 // ! CSS FOR WEEKDAY TOGGLE (STEP 2 FORM) //
 // ---------------------------------------------------------------------------//
 // ---------------------------------------------------------------------------//
+
+
 
 .weekday-toggle {
   /* Existing styles */
