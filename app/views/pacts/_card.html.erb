@@ -23,7 +23,7 @@
   </div>
 
   <% if bottom == "submit" %>
-  <div class="pact-card-bottom mt-3 <%= 'd-none' if user_pact.pact.recurring || user_pact.status == 'achieved'%>">
+  <div class="pact-card-bottom mt-3 <%= 'd-none' if user_pact.pact.recurring || user_pact.status == 'achieved'%>" style="justify-content: center;">
     <%= simple_form_for user_pact, url: update_pact_path, html: { style: "height: 100%; width: 70%;"} do |f| %>
     <%= f.submit "Finish my pact" %>
     <% end %>
@@ -32,7 +32,24 @@
 
   <% if bottom == "timer" %>
   <div class="pact-card-bottom mt-3">
-    <p class="mb-0">This is a timer placeholder</p>
+    <% if user_pact.pact.recurring %>
+    <div class="weekdays">
+      <div class="weekday-circle <%= 'weekday-selected' if user_pact.pact.weekdays.include?(0) %>">M</div>
+      <div class="weekday-circle <%= 'weekday-selected' if user_pact.pact.weekdays.include?(1) %>">T</div>
+      <div class="weekday-circle <%= 'weekday-selected' if user_pact.pact.weekdays.include?(2) %>">W</div>
+      <div class="weekday-circle <%= 'weekday-selected' if user_pact.pact.weekdays.include?(3) %>">T</div>
+      <div class="weekday-circle <%= 'weekday-selected' if user_pact.pact.weekdays.include?(4) %>">F</div>
+      <div class="weekday-circle <%= 'weekday-selected' if user_pact.pact.weekdays.include?(5) %>">S</div>
+      <div class="weekday-circle <%= 'weekday-selected' if user_pact.pact.weekdays.include?(6) %>">S</div>
+    </div>
+    <% end %>
+
+    <% if user_pact.status == "ongoing" %>
+    <p class="mb-0 bottom-timer">timer placeholder</p>
+    <% elsif user_pact.status != "ongoing" && !user_pact.pact.recurring %>
+    <p class="mb-0">Before: <%= user_pact.deadline_at.strftime("%B %d, %Y") %></p>
+    <% end %>
+
   </div>
   <% end %>
 </div>
