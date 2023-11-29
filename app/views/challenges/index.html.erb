@@ -1,4 +1,4 @@
 <h1>Challenges</h1>
-<% @not_user_challenges.each do |challenge| %>
+<% @challenges.each do |challenge| %>
   <%= render partial: "challenge_card", locals: { challenge: challenge, clickable: true } %>
 <% end %>
