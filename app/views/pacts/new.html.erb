@@ -1,35 +1,112 @@
-<div class="container mt-4">
+<div class="container mt-5" data-controller="multi-step-form" data-multi-step-form-target="form">
   <%= simple_form_for @pact, url: pacts_path, html: { class: 'form-horizontal' } do |f| %>
     <%= f.error_notification %>
 
-    <div class="form-group mb-3">
-      <%= f.input :category, collection: Pact::CATEGORIES, prompt: "Select a category", input_html: { class: 'form-select' } %>
-    </div>
+    <!-- Step 1: Category and Distance/Duration -->
+    <div data-multi-step-form-target="step">
+      <h3>I make a pact with myself to:</h3>
+      <div class="category-wrapper d-flex justify-content-around flex-wrap mt-4">
+        <%= f.collection_radio_buttons :category, Pact::CATEGORIES, :to_s, :humanize do |b| %>
+          <label class="category-item card text-white text-center p-2" style="background-image: url('<%= category_background_image(b.value) %>');">
+            <%= b.radio_button class: 'category-selector d-none', data: { 'multi-step-form-target': 'category' }  %>
+            <%= b.text %>
+          </label>
+        <% end %>
+      </div>
 
-    <div class="form-group mb-3">
-      <%= f.input :distance, input_html: { class: 'form-control', placeholder: 'Distance (km)' } %>
-    </div>
-
-    <div class="form-group mb-3">
-      <%= f.input :duration, input_html: { class: 'form-control', placeholder: 'Duration (min)' } %>
-    </div>
-
-    <div class="form-group form-check mb-3">
-      <%= f.input :recurring, as: :boolean, inline_label: 'Recurring', input_html: { class: 'form-check-input' } %>
-    </div>
-
-    <div id="weekdays-container" class="form-group mb-3">
-      <%= f.input :weekdays, as: :check_boxes, collection: Pact::WEEKDAYS.values, item_wrapper_class: 'form-check', item_label_class: 'form-check-label', input_html: { class: 'form-check-input' } %>
+      <div class="input-group mb-3" data-controller="distance-duration" style="margin-top: 80px">
+        <%= f.input :distance, as: :integer, label: false, wrapper: false, input_html: { class: 'form-control', placeholder: '10 Km, 30 Min, ...', 'data-multi-step-form-target': 'distance', 'data-distance-duration-target': 'input' } %>
+        <div class="input-group-append">
+          <input type="radio" class="btn-check" name="distance_type" id="kmButton" autocomplete="off" checked data-action="click->distance-duration#setType" value="distance">
+          <label class="btn btn-secondary toggle-btn" for="kmButton">Km</label>
+          <input type="radio" class="btn-check" name="distance_type" id="minButton" autocomplete="off" data-action="click->distance-duration#setType" value="duration">
+          <label class="btn btn-secondary toggle-btn" for="minButton">Min</label>
+        </div>
+      </div>
     </div>
 
     <%= simple_fields_for @user_pact do |up| %>
-      <div class="form-group mb-3">
-        <%= up.input :deadline_at, as: :string, input_html: { class: 'form-control', type: 'datetime-local' } %>
-        <%= up.input :bet, input_html: { class: 'form-control' } %>
-        <%= up.input :beneficiary_id, collection: @beneficiaries, prompt: "Select a beneficiary", input_html: { class: 'form-select' } %>
+      <!-- Step 2: Deadline (Hidden initially) -->
+      <div data-multi-step-form-target="step" class="d-none" data-controller="datetime-picker" data-datetime-picker-anytime-value="false">
+        <div class="mb-3">
+          <%= up.input :deadline_at, as: :string, label: false, input_html: { class: 'form-control', 'data-datetime-picker-target': 'datetime', 'data-multi-step-form-target': 'deadline' } %>
+        </div>
+          <%= f.simple_fields_for :user_pact do |up| %>
+            <div class="form-check mb-3">
+              <%= check_box_tag 'anytime', '1', false, class: 'form-check-input', id: 'anytime_checkbox', 'data-action': 'datetime-picker#toggleAnytime', 'data-datetime-picker-target': 'anytime' %>
+              <label class="form-check-label" for="anytime_checkbox">Anytime</label>
+            </div>
+
+            <div class="toggle-container">
+              <input type="checkbox" class="d-none" id="recurring-toggle" name="recurring" data-action="datetime-picker#toggleRecurring" data-datetime-picker-target="recurring">
+              <label for="recurring-toggle" class="toggle-label">
+                <span class="toggle-option">Only Once</span>
+                <span class="toggle-switch">
+                  <span class="toggle-slider"></span>
+                </span>
+                <span class="toggle-option">Every Time</span>
+              </label>
+            </div>
+
+            <div class="weekdays-wrapper d-none" data-datetime-picker-target="weekdays">
+              <% ['M', 'T', 'W', 'T', 'F', 'S', 'S'].each_with_index do |day, index| %>
+                <label class="weekday-toggle">
+                  <%= f.check_box :weekdays, { multiple: true, class: 'd-none', 'data-action': 'datetime-picker#toggleDay', 'data-datetime-picker-target': 'day' }, index, nil %>
+                  <%= day %>
+                </label>
+              <% end %>
+            </div>
+          <% end %>
+      </div>
+
+
+      <!-- Step 3: Beneficiary and Bet (Hidden initially) -->
+      <div data-multi-step-form-target="step" class="d-none">
+        <div class="mb-3">
+          <h3>Or give:</h3>
+            <div class="stepper-wrapper" data-controller="stepper">
+              <button type="button" data-action="click->stepper#decrement">-</button>
+              <%= up.number_field :bet, value: 10, min: 1, class: 'form-control', 'data-stepper-target': 'value', 'data-multi-step-form-target': 'bet' %>
+              <button type="button" data-action="click->stepper#increment">+</button>
+            </div>
+
+          <h3>to:</h3>
+            <div class="beneficiary-wrapper d-flex justify-content-around flex-wrap mt-4">
+              <% @beneficiaries.each do |beneficiary| %>
+                <%= up.radio_button :beneficiary_id, beneficiary.id, class: 'beneficiary-selector d-none', id: "beneficiary_#{beneficiary.id}", data: { 'multi-step-form-target': 'beneficiary' } %>
+                <label for="beneficiary_<%= beneficiary.id %>" class="beneficiary-item" style="background-image: url('<%= beneficiary_image(beneficiary) %>');">
+                </label>
+              <% end %>
+            </div>
+
+        </div>
       </div>
     <% end %>
 
-    <%= f.button :submit %>
-  <% end %>
+
+      <!-- Step 4: Confirmation Step -->
+      <div data-multi-step-form-target="step" class="d-none" id="confirmation-step">
+        <h3>Confirm Your Pact</h3>
+        <!-- Display captured data here -->
+        <p>Category: <span data-multi-step-form-target="categoryConfirmation"></span></p>
+        <p>Distance: <span data-multi-step-form-target="distanceOrDurationConfirmation"></span></p>
+        <p>Deadline: <span data-multi-step-form-target="deadlineConfirmation"></span></p>
+        <p>Bet: <span data-multi-step-form-target="betConfirmation"></span> €</p>
+        <p>Charity: <span data-multi-step-form-target="beneficiaryConfirmation"></span></p>
+        <!-- When the form is valid, and all steps are confirmed, user can submit -->
+        <%= f.button :submit, "Make my Pact", class: 'btn btn-primary'%>
+      </div>
+
+    <% end %>
+
+  <!-- Navigation Buttons -->
+  <div class="navigation-buttons d-flex justify-content-between mt-4">
+    <button type="button" class="btn btn-previous" data-action="multi-step-form#previous" data-multi-step-form-target="previousButton">
+      <i class="fa-solid fa-arrow-left-long"></i> Previous
+    </button>
+    <button type="button" class="btn btn-next" data-action="multi-step-form#next" data-multi-step-form-target="nextButton">Next step</button>
+  </div>
+
+
+
 </div>
