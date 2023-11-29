@@ -179,6 +179,14 @@ end
   i += 1
 end
 
+# ============================= SUGGESTED CHALLENGES ==================================
+
+puts "Creating 4 new suggested challenges..."
+
+4.times do
+  Pact.create!(random_pact_stats(true))
+end
+
 # ============================= USERS STATS ==================================
 
 puts "Calculating users' XP and stats..."
