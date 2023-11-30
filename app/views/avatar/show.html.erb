@@ -1,83 +1,97 @@
 <h1 class="my-3"><%= @avatar.user.nickname %></h1>
 
-<div class="resume my-3">
-  <%= cl_image_tag(@avatar.user.avatar_picture.key, width: 100, height: 100, class: "avatar-picture", crop: :fill) %>
-  <div class="resume-details">
-    <p class="mb-0">Level <%= @avatar.level %></p>
-    <div class="d-flex"><p class="mb-0">Upgrade points left: </p><div style="margin-left: 5px;"><%= @avatar.upgrade_points %></div></div>
-    <p class="mb-0">Ranking: <em style="font-size: .8em">not ranked yet.</em></p>
+<div data-controller="upgrade-avatar">
+  <div class="resume my-3">
+    <%= cl_image_tag(@avatar.user.avatar_picture.key, width: 100, height: 100, class: "avatar-picture", crop: :fill) %>
+    <div class="resume-details">
+      <p class="mb-0">Level <%= @avatar.level %></p>
+      <div class="d-flex"><p class="mb-0">Upgrade points left: </p><div style="margin-left: 5px;" data-upgrade-avatar-target="upgradePoints"><%= @avatar.upgrade_points %></div></div>
+      <p class="mb-0">Ranking: <em style="font-size: .8em">not ranked yet.</em></p>
+    </div>
   </div>
-</div>
 
-<div class="xp my-3">
-  <div class="xp-text">
-    <p class="mb-0">XP : <%= @avatar.user.total_xp %> / 580</p>
-    <p class="mb-0">To next level: </p>
+  <div class="xp my-3">
+    <div class="xp-text">
+      <p class="mb-0">XP : <%= @avatar.user.total_xp %> / 580</p>
+      <p class="mb-0">To next level: </p>
+    </div>
+    <div class="xp-bar">
+      <div class="xp-bar-progression"></div>
+    </div>
   </div>
-  <div class="xp-bar">
-    <div class="xp-bar-progression"></div>
-  </div>
-</div>
 
-<div class="stats my-3">
-  <h3>Stats</h3>
-  <i class="fa-solid fa-circle-question info-bubble"></i>
-  <div class="inner-grid-2c">
-    <div class="stat">
-      <p class="mb-0">Health : </p>
-      <div class="stat-value"> <%= @avatar.health %></div>
-    </div>
-    <div class="stat">
-      <p class="mb-0">Mana : </p>
-      <div class="stat-value"> <%= @avatar.mana %></div>
-    </div>
-    <div class="stat">
-      <p class="mb-0">Attack : </p>
-      <div class="stat-value"> <%= @avatar.attack %></div>
-    </div>
-    <div class="stat">
-      <p class="mb-0">Defense : </p>
-      <div class="stat-value"> <%= @avatar.defense %></div>
-    </div>
-    <div class="stat">
-      <p class="mb-0">Magic P. : </p>
-      <div class="stat-value"> <%= @avatar.magic_power %></div>
-    </div>
-    <div class="stat">
-      <p class="mb-0">Magic D. : </p>
-      <div class="stat-value"> <%= @avatar.magic_defense %></div>
-    </div>
-    <div class="stat">
-      <p class="mb-0">Crit Rate : </p>
-      <div class="stat-value"> <%= @avatar.crit_rate %>%</div>
-    </div>
-    <div class="stat">
-      <p class="mb-0">Stamina : </p>
-      <div class="stat-value"> <%= @avatar.stamina %></div>
-    </div>
-    <div class="stat">
-      <p class="mb-0">Speed : </p>
-      <div class="stat-value"> <%= @avatar.speed %></div>
+  <div class="stats my-3">
+    <h3>Stats</h3>
+    <i class="fa-solid fa-circle-question info-bubble"></i>
+    <div class="inner-grid-2c">
+      <div class="stat">
+        <p class="mb-0">Health : </p>
+        <div class="stat-value" id="health"> <%= @avatar.health %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Mana : </p>
+        <div class="stat-value" id="mana"> <%= @avatar.mana %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Attack : </p>
+        <div class="stat-value" id="attack"> <%= @avatar.attack %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Defense : </p>
+        <div class="stat-value" id="defense"> <%= @avatar.defense %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Magic P. : </p>
+        <div class="stat-value" id="magicPower"> <%= @avatar.magic_power %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Magic D. : </p>
+        <div class="stat-value" id="magicDefense"> <%= @avatar.magic_defense %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Crit Rate : </p>
+        <div class="stat-value" id="critRate"> <%= @avatar.crit_rate %>%</div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Stamina : </p>
+        <div class="stat-value" id="stamina"> <%= @avatar.stamina %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Speed : </p>
+        <div class="stat-value" id="speed"> <%= @avatar.speed %></div>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="skills my-3">
-  <h3>Skills</h3>
-  <i class="fa-solid fa-circle-question info-bubble"></i>
-  <div class="inner-grid-2c-3l">
-    <% @avatar.skills.each do |skill| %>
-    <div class="skill"><%= skill.name %></div>
-    <% end %>
-    <% if @avatar.skills.count <= 5 %>
-    <div class="skill"></div>
-    <% end %>
+  <div class="skills my-3">
+    <h3>Skills</h3>
+    <i class="fa-solid fa-circle-question info-bubble"></i>
+    <div class="inner-grid-2c-3l" data-upgrade-avatar-target="skills">
+      <% @avatar.skills.each do |skill| %>
+      <div class="skill"><%= skill.name %></div>
+      <% end %>
+      <% if @avatar.skills.count <= 5 %>
+      <div class="skill-slot" id="skillSlot"></div>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<div class="items my-3">
-  <h3>Items</h3>
-  <i class="fa-solid fa-circle-question info-bubble"></i>
-  <em class="mt-4">You don't have any items.</em>
-  <em>Mobs will sometimes drop items when you defeat them.</em>
+  <div class="items my-3">
+    <h3>Items</h3>
+    <i class="fa-solid fa-circle-question info-bubble"></i>
+    <em class="mt-4">You don't have any items.</em>
+    <em>Mobs will sometimes drop items when you defeat them.</em>
+  </div>
+
+  <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomLabel">Available skills</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body small">
+      <% @missing_skills.each do |skill| %>
+      <p data-bs-dismiss="offcanvas" aria-label="Close" data-action="click->upgrade-avatar#addSkill"><%= skill.name %></p>
+      <% end %>
+    </div>
+  </div>
 </div>

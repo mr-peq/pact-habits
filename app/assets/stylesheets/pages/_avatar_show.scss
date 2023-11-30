@@ -69,6 +69,12 @@ h1, h3 {
   align-items: center;
 }
 
+.skill-slot {
+  display: flex;
+  align-items: center;
+  color: red;
+}
+
 .inner-grid-2c-3l {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -93,4 +99,15 @@ h1, h3 {
   top: 16px;
   right: 20px;
   font-size: 1.7em;
+}
+
+.increment-btn {
+  font-size: 1.5em;
+  color: #E63946;
+}
+
+.new-skill-btn {
+  font-size: 1.5em;
+  color: #E63946;
+  margin-left: 1em;
 }
