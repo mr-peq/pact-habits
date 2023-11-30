@@ -12,6 +12,8 @@ class PagesController < ApplicationController
   end
 
   def account
+    @user = current_user
+    @user_pacts = @user.user_pacts
   end
 
   # def strava_token
