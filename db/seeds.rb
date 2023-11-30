@@ -4,6 +4,8 @@ UserPact.destroy_all
 Beneficiary.destroy_all
 Pact.destroy_all
 User.destroy_all
+Avatar.destroy_all
+Skill.destroy_all
 
 # ============================= USERS ==================================
 puts "Creating 3 BOSS users..."
@@ -65,9 +67,49 @@ user_joseph.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'a
 
 # ============================= AVATARS ==================================
 puts "Creating avatars for them BOSSES..."
-Avatar.create!(user: user_theodore)
-Avatar.create!(user: user_ismael)
-Avatar.create!(user: user_joseph)
+avatar_theodore = Avatar.new(user: user_theodore)
+avatar_ismael = Avatar.new(user: user_ismael)
+avatar_joseph = Avatar.new(user: user_joseph)
+
+puts "Creating 12 skills..."
+# Min dmg: 15
+# Max dmg: 50
+Skill.create!(name: 'Low-kick', category: 'physical', dmg: 30)
+Skill.create!(name: 'Drunk Boxing', category: 'physical', dmg: 50)
+Skill.create!(name: 'Sneak Attack', category: 'physical', dmg: 20)
+Skill.create!(name: 'Arm Lock', category: 'physical', dmg: 35)
+Skill.create!(name: 'Nudge', category: 'physical', dmg: 25)
+Skill.create!(name: 'Fire Blast', category: 'magic', dmg: 45)
+Skill.create!(name: 'Icy breath', category: 'magic', dmg: 30)
+Skill.create!(name: 'Storm', category: 'magic', dmg: 40)
+Skill.create!(name: 'Bloodboil', category: 'magic', dmg: 20)
+Skill.create!(name: 'Focus Lotus', category: 'boost')
+Skill.create!(name: 'Mana Boost', category: 'boost')
+Skill.create!(name: 'On The Look-out', category: 'boost')
+
+puts "Learning some skills to the avatars..."
+
+3.times do
+  skill = Skill.all.sample
+  while avatar_theodore.skills.include?(skill)
+    skill = Skill.all.sample
+  end
+  AvatarSkill.create!(avatar: avatar_theodore, skill: skill)
+end
+3.times do
+  skill = Skill.all.sample
+  while avatar_ismael.skills.include?(skill)
+    skill = Skill.all.sample
+  end
+  AvatarSkill.create!(avatar: avatar_ismael, skill: skill)
+end
+3.times do
+  skill = Skill.all.sample
+  while avatar_joseph.skills.include?(skill)
+    skill = Skill.all.sample
+  end
+  AvatarSkill.create!(avatar: avatar_joseph, skill: skill)
+end
 
 # ============================= BENEFICIARIES ==================================
 puts "Creating beneficiaries..."
