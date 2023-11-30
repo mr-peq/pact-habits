@@ -62,6 +62,13 @@ user_theodore.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 
 user_ismael.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
 user_joseph.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
 
+
+# ============================= AVATARS ==================================
+puts "Creating avatars for them BOSSES..."
+Avatar.create!(user: user_theodore)
+Avatar.create!(user: user_ismael)
+Avatar.create!(user: user_joseph)
+
 # ============================= BENEFICIARIES ==================================
 puts "Creating beneficiaries..."
 Beneficiary.create!(name: "Amnesty International")

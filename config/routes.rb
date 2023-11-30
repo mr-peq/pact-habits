@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get "/account", to: "pages#account"
 
   post "/pacts/:id/join", to: "pacts#join", as: "join_challenge"
-  patch "pacts/:id/", to: "pacts#update", as: "update_pact"
+  patch "/pacts/:id/", to: "pacts#update", as: "update_pact"
 
   get "/strava_token", to: "pages#strava_token"
+
+  get "/avatar/:id", to: "avatar#show"
 end
