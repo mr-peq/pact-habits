@@ -32,9 +32,9 @@ class StravaClient
 
         # => ADD '&& activity["manual"] == false' to conditions for real case
         if attributes[:distance].nil?
-          results << activity["id"] if activity["type"] == attributes[:category].capitalize && activity["moving_time"] >= attributes[:duration]
+          results << activity["id"] if activity["type"] == attributes[:category].capitalize && activity["moving_time"].to_i >= attributes[:duration]
         else
-          results << activity["id"] if activity["type"] == attributes[:category].capitalize && activity["distance"] >= attributes[:distance]
+          results << activity["id"] if activity["type"] == attributes[:category].capitalize && activity["distance"].to_i >= attributes[:distance]
         end
       end
     end
