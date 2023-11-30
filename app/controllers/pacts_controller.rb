@@ -59,7 +59,7 @@ class PactsController < ApplicationController
 
   # Strong parameters for Pact
   def pact_params
-    params.require(:pact).permit(:category, :distance, :duration, :recurring, weekdays: [], :photo)
+    params.require(:pact).permit(:category, :distance, :duration, :recurring, weekdays: [])
   end
 
   # Strong parameters for UserPact
