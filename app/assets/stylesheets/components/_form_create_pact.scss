@@ -28,20 +28,15 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  filter: grayscale(100%);
 }
 
-.category-item:hover, .category-item:active {
-  filter: none;
+.category-item.grayscale {
+  filter: grayscale(100%);
 }
 
 .category-item.selected {
   filter: none;
-}
-
-.category-selector:checked + label {
-  filter: none;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* More prominent shadow to indicate selection */
+  box-shadow: 0 0 15px #1d3557;
 }
 
 // ---------------------------------------------------------------------------//
@@ -50,52 +45,62 @@
 // ---------------------------------------------------------------------------//
 // ---------------------------------------------------------------------------//
 
-.input-group .form-control {
-  flex: 1; /* Allows input to fill the space */
+.distance-duration-container {
+  margin-top: 40px;
 }
 
-.input-group-append {
+.stepper-wrapper {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.input-group .btn {
-  width: 50px; /* Adjust based on your preference */
-  height: calc(1.5em + 0.75rem + 2px); /* Match input height, adjust as needed */
-  text-align: center; /* Align the text in the middle */
+.stepper-wrapper input {
+  width: 200px;
+  text-align: center;
+  margin: 0 10px;
+  padding: 5px;
+  border: 1px solid #ced4da;
 }
 
-/* This will ensure that only the last button has rounded corners on the right */
-.input-group .btn:last-child {
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
+.btn-decrement, .btn-increment {
+  background-color: #457b9d;
+  color: white; /* White text */
+  border: none; /* No border */
+  font-size: 14px; /* Larger font size */
+  padding: 10px 15px; /* Larger buttons */
+  border-radius: 50%;
+
+  &:active,
+  &:focus-visible,
+  &:hover {
+    color: white !important;
+    background-color: #457b9d !important;
+    border: none !important;
+  }
 }
 
-/* This will ensure that only the first button has rounded corners on the left */
-.input-group .btn:first-child {
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
+.form-control {
+  margin: 0 10px; /* Space between buttons and input */
 }
 
-.btn-outline-primary {
-  flex: none; /* Do not allow the buttons to grow or shrink */
-}
-
-.btn-group-toggle {
+.toggle-buttons-wrapper {
   display: flex;
+  justify-content: center;
+  margin-top: 2rem; /* Adjust top margin as needed */
 }
 
 .toggle-btn {
-  border-radius: 0; /* Square corners for the buttons */
-  background-color: #f8f9fa; /* Light gray background */
-  color: #495057; /* Dark text */
-  border-color: #ced4da; /* Border color to match the input field */
-  margin-left: -1px; /* Align the buttons with the input */
+  background-color: #a8dadc; /* Default color */
+  width: 70px;
+  margin: 0 0.2rem; /* Adds space between buttons */
+  border: none; /* Removes border */
+  transition: background-color 0.3s; /* Smooth transition for background color */
 }
 
 .btn-check:checked + .toggle-btn {
-  background-color: #01193c; /* Bootstrap primary color when active */
-  color: white;
-  border-color: #01193c; /* Match border color to the background */
+  background-color: #1d3557; /* Color when selected */
+  color: #fff; /* Text color for selected state */
 }
 
 // ---------------------------------------------------------------------------//
@@ -146,9 +151,41 @@
 
 // ---------------------------------------------------------------------------//
 // ---------------------------------------------------------------------------//
+// ! CSS FOR CALENDAR (STEP 2 FORM) //
+// ---------------------------------------------------------------------------//
+// ---------------------------------------------------------------------------//
+
+/* Hide the input field */
+.flatpickr-input {
+  display: none;
+}
+
+/* Style the container to position the calendar */
+.flatpickr-calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Additional styles for the calendar itself */
+.flatpickr-calendar {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.flatpickr-calendar.inline {
+  top: 180px;
+}
+
+// ---------------------------------------------------------------------------//
+// ---------------------------------------------------------------------------//
 // ! CSS FOR WEEKDAY TOGGLE (STEP 2 FORM) //
 // ---------------------------------------------------------------------------//
 // ---------------------------------------------------------------------------//
+
 
 .toggle-container {
   width: 100%; /* Adjust to match your container width */
@@ -161,7 +198,7 @@
 .toggle-label {
   display: flex;
   align-items: center;
-  background-color: #e6e6e6; /* Light grey background */
+  background-color: #f1faee; /* Light grey background */
   border-radius: 20px; /* Rounded corners for the toggle */
   cursor: pointer;
   position: relative;
@@ -195,7 +232,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: #4dd0e1; /* Background color of the slider */
+  background-color: #a8dadc; /* Background color of the slider */
   border-radius: 1rem; /* Rounded corners for the slider */
 }
 
@@ -238,28 +275,20 @@
 // ---------------------------------------------------------------------------//
 // ---------------------------------------------------------------------------//
 
-.stepper-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+// .stepper-wrapper {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
 
-.stepper-wrapper button {
-  width: 40px;
-  height: 40px;
-  border: none;
-  background-color: #007bff; /* Bootstrap primary color */
-  color: white;
-  font-size: 20px;
-}
-
-.stepper-wrapper input {
-  width: 80px;
-  text-align: center;
-  margin: 0 10px;
-  padding: 5px;
-  border: 1px solid #ced4da;
-}
+// .stepper-wrapper button {
+//   width: 40px;
+//   height: 40px;
+//   border: none;
+//   background-color: #007bff; /* Bootstrap primary color */
+//   color: white;
+//   font-size: 20px;
+// }
 
 // ---------------------------------------------------------------------------//
 // ---------------------------------------------------------------------------//

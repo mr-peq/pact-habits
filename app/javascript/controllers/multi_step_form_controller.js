@@ -69,8 +69,19 @@ export default class extends Controller {
       this.currentStep++;
       this.showCurrentStep();
     }
+
+    if (this.currentStep === 1) { // Assuming step 2 is index 1
+      this.openFlatpickrOnStep2();
+    }
   }
 
+  openFlatpickrOnStep2() {
+    const datetimePickerController = this.application.getControllerForElementAndIdentifier(
+      this.formTarget,
+      "datetime-picker"
+    );
+    datetimePickerController.openFlatpickr();
+  }
 
   isBeforeConfirmationStep() {
     return this.currentStep === this.stepTargets.length - 2;
