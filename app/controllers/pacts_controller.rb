@@ -5,7 +5,8 @@ class PactsController < ApplicationController
   end
 
   def show
-    @pact = Pact.find(params[:id])
+    @challenge = Pact.find(params[:id])
+    @beneficiaries = Beneficiary.all
   end
 
   def edit
@@ -26,6 +27,23 @@ class PactsController < ApplicationController
   end
 
   def join
+    @challenge = Pact.find(params[:id])
+    ActiveRecord::Base.transaction do
+      if @challenge.save!
+        # Create the associated UserPact
+        deadline_at = Time.now + @challenge.completion_duration.week
+        beneficiary = Beneficiary.find(params[:beneficiary_id])
+        @user_pact = UserPact.new(deadline_at: deadline_at, bet: params[:bet], beneficiary: beneficiary)
+        @user_pact.pact = @challenge
+        @user_pact.user = current_user
+        raise ActiveRecord::Rollback, "UserPact couldn't be created" unless @user_pact.save
+
+        # Redirect to the homepage if successfull
+        redirect_to root_path, notice: 'Good luck for this challenge, champ! 💪'
+      else
+        redirect_to pact_path(@challenge), alert: "Something went wrong, please try again."
+      end
+    end
   end
 
   def new
@@ -59,7 +77,7 @@ class PactsController < ApplicationController
 
   # Strong parameters for Pact
   def pact_params
-    params.require(:pact).permit(:category, :distance, :duration, :recurring, weekdays: [], :photo)
+    params.require(:pact).permit(:category, :distance, :duration, :recurring, weekdays: [])
   end
 
   # Strong parameters for UserPact

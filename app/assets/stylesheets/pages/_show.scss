@@ -1,0 +1,40 @@
+.friends {
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.challenge-friend {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+
+  .challenge-friend-avatar {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.challenge-show-bottom {
+  text-align: center;
+  padding: 2em;
+}
+
+.offcanvas-body .beneficiary-item {
+  height: 140px;
+}
+
+.challenge-submit-btn {
+  text-align: center;
+}
+
+.offcanvas {
+  --bs-offcanvas-height: 43vh;
+}
+
+.offcanvas-header {
+  padding-bottom: 0;
+}
