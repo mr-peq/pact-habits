@@ -24,21 +24,22 @@
         <% end %>
       </li>
 
+      <!-- History -->
+      <li class="nav-item">
+        <%= link_to root_path, class: 'nav-link settings' do %>
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span class="nav-text">History</span>
+        <% end %>
+      </li>
+
       <!-- User Account -->
       <li class="nav-item">
         <%= link_to account_path, class: 'nav-link user' do %>
-          <i class="fa-regular fa-user"></i>
+          <i class="fa-solid fa-user"></i>
           <span class="nav-text">Account</span>
         <% end %>
       </li>
 
-      <!-- Settings -->
-      <li class="nav-item">
-        <%= link_to root_path, class: 'nav-link settings' do %>
-          <i class="fa-solid fa-gear"></i>
-          <span class="nav-text">Settings</span>
-        <% end %>
-      </li>
     </ul>
   </div>
 </nav>
