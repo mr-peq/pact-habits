@@ -5,8 +5,8 @@ export default class extends Controller {
   static targets = ["step", "previousButton", "nextButton", "form", "category", "distance", "duration", "deadline", "bet", "beneficiary", "categoryConfirmation", "distanceOrDurationConfirmation", "deadlineConfirmation", "betConfirmation", "beneficiaryConfirmation"]
 
   initialize() {
-    // this.showCurrentStep()
-    // console.log(this.categoryTargets);
+    this.showCurrentStep()
+    console.log(this.categoryTargets);
   }
 
   showCurrentStep() {

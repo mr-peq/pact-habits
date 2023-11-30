@@ -23,6 +23,18 @@
   padding: 2em;
 }
 
+.offcanvas-body .beneficiary-item {
+  height: 140px;
+}
+
+.challenge-submit-btn {
+  text-align: center;
+}
+
 .offcanvas {
   --bs-offcanvas-height: 43vh;
+}
+
+.offcanvas-header {
+  padding-bottom: 0;
 }

@@ -1,12 +1,15 @@
 <!--seulement la show pour les challenges-->
 <h3 class="section-title mb-3">Buddies involved</h3>
 <div class="friends my-3">
+<% if @challenge.ongoing_challengers.count.zero? && @challenge.ongoing_challengers.count.zero? %>
+  <p>No buddies took this challenge (yet).</p>
+<% else %>
   <% @challenge.ongoing_challengers.each do |challenger| %>
     <div class="challenge-friend mx-2">
       <div class="challenge-friend-avatar friend-ongoing">
         <p class="mb-0"><%= challenger.first_name[0] %></p>
       </div>
-      <p style="margin-bottom: 0;"><%= challenger.nickname %></p>
+      <p style="margin-bottom: 0; font-size: 0.7em;"><%= challenger.nickname %></p>
     </div>
   <% end %>
   <% @challenge.achieved_challengers.each do |challenger| %>
@@ -14,17 +17,22 @@
       <div class="challenge-friend-avatar friend-achieved">
         <p class="mb-0"><%= challenger.first_name[0] %></p>
       </div>
-      <p style="margin-bottom: 0;"><%= challenger.nickname %></p>
+      <p style="margin-bottom: 0; font-size: 0.7em;"><%= challenger.nickname %></p>
     </div>
   <% end %>
+<% end %>
 </div>
 
 <h3 class="section-title mb-3">Challenge details</h3>
 <%= render partial: "challenges/challenge_card", locals: { challenge: @challenge, clickable: false } %>
 
 <div class="challenge-show-bottom my-3">
-  <p>Ready to move your body? 💪</p>
-  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">I'm ready!</button>
+  <% if @challenge.user_pacts.find_by(user_id: current_user.id).nil? %>
+    <p>Ready to move your body? 💪</p>
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">I'm ready!</button>
+  <% else %>
+    <p>Good luck for this challenge ! 💪</p>
+  <% end %>
 </div>
 
 <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel" data-controller="multi-step-form">
@@ -36,7 +44,7 @@
     <%= simple_form_for @challenge, url: join_challenge_path, method: :post do |f| %>
       <%= simple_fields_for @user_pact do |up| %>
       <div data-multi-step-form-target="step">
-        <div class="mb-3">
+        <div>
           <h3>Or give:</h3>
             <div class="stepper-wrapper" data-controller="stepper">
               <button type="button" data-action="click->stepper#decrement">-</button>
@@ -45,7 +53,7 @@
             </div>
 
           <h3>to:</h3>
-            <div class="beneficiary-wrapper d-flex justify-content-around flex-wrap mt-4">
+            <div class="beneficiary-wrapper d-flex justify-content-around flex-wrap">
               <% @beneficiaries.each do |beneficiary| %>
                 <%= up.radio_button :beneficiary_id, beneficiary.id, class: 'beneficiary-selector d-none', id: "beneficiary_#{beneficiary.id}", data: { 'multi-step-form-target': 'beneficiary' } %>
                 <label for="beneficiary_<%= beneficiary.id %>" class="beneficiary-item" style="background-image: url('<%= beneficiary_image(beneficiary) %>');">
@@ -56,7 +64,9 @@
         </div>
       </div>
       <% end %>
-    <%= f.submit %>
+      <div class="challenge-submit-btn">
+      <%= f.submit "I'm taking this challenge!", class: "btn btn-primary"%>
+      </div>
     <% end %>
   </div>
 </div>
