@@ -6,13 +6,13 @@ export default class extends Controller {
 
   increment() {
     let currentValue = Number(this.valueTarget.value);
-    this.valueTarget.value = currentValue + 5;
+    this.valueTarget.value = currentValue + 1;
   }
 
   decrement() {
     let currentValue = Number(this.valueTarget.value);
-    if (currentValue > 6) {
-      this.valueTarget.value = currentValue - 5;
+    if (currentValue > 1) {
+      this.valueTarget.value = currentValue - 1;
     }
   }
 }

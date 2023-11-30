@@ -1,26 +1,42 @@
-<div class="container mt-5" data-controller="multi-step-form" data-multi-step-form-target="form">
+<div class="container mt-4" data-controller="multi-step-form" data-multi-step-form-target="form">
+  <h2 class="text-center" style="font-weight: bold">- Make a new Pact -</h2>
+  <br>
+  <br>
   <%= simple_form_for @pact, url: pacts_path, html: { class: 'form-horizontal' } do |f| %>
     <%= f.error_notification %>
 
     <!-- Step 1: Category and Distance/Duration -->
     <div data-multi-step-form-target="step">
       <h3>I make a pact with myself to:</h3>
-      <div class="category-wrapper d-flex justify-content-around flex-wrap mt-4">
+      <div class="category-wrapper d-flex justify-content-around flex-wrap mt-4" data-controller="category-select">
         <%= f.collection_radio_buttons :category, Pact::CATEGORIES, :to_s, :humanize do |b| %>
-          <label class="category-item card text-white text-center p-2" style="background-image: url('<%= category_background_image(b.value) %>');">
-            <%= b.radio_button class: 'category-selector d-none', data: { 'multi-step-form-target': 'category' }  %>
+          <label class="category-item card text-white text-center p-2" style="background-image: url('<%= category_background_image(b.value) %>');" data-action="click->category-select#selectCategory">
+            <%= b.radio_button class: 'category-selector d-none', data: { 'multi-step-form-target': 'category' } %>
             <%= b.text %>
           </label>
         <% end %>
       </div>
 
-      <div class="input-group mb-3" data-controller="distance-duration" style="margin-top: 80px">
-        <%= f.input :distance, as: :integer, label: false, wrapper: false, input_html: { class: 'form-control', placeholder: '10 Km, 30 Min, ...', 'data-multi-step-form-target': 'distance', 'data-distance-duration-target': 'input' } %>
-        <div class="input-group-append">
+      <div class="distance-duration-container" data-controller="distance-duration stepper">
+        <!-- Toggle Buttons for Km and Min -->
+        <div class="toggle-buttons-wrapper d-flex justify-content-center mt-2">
           <input type="radio" class="btn-check" name="distance_type" id="kmButton" autocomplete="off" checked data-action="click->distance-duration#setType" value="distance">
           <label class="btn btn-secondary toggle-btn" for="kmButton">Km</label>
+
           <input type="radio" class="btn-check" name="distance_type" id="minButton" autocomplete="off" data-action="click->distance-duration#setType" value="duration">
           <label class="btn btn-secondary toggle-btn" for="minButton">Min</label>
+        </div>
+        <br>
+        <!-- Stepper Section -->
+        <div class="stepper-wrapper d-flex align-items-center">
+          <!-- Decrement Button -->
+          <button type="button" class="btn btn-decrement" data-action="click->stepper#decrement">-</button>
+
+          <!-- Distance/Duration Input -->
+          <%= f.input :distance, label: false, as: :integer, value: 10, min: 1, input_html: { 'data-stepper-target': 'value', 'data-multi-step-form-target': 'distance', 'data-distance-duration-target': 'input' } %>
+
+          <!-- Increment Button -->
+          <button type="button" class="btn btn-increment" data-action="click->stepper#increment">+</button>
         </div>
       </div>
     </div>
@@ -32,10 +48,7 @@
           <%= up.input :deadline_at, as: :string, label: false, input_html: { class: 'form-control', 'data-datetime-picker-target': 'datetime', 'data-multi-step-form-target': 'deadline' } %>
         </div>
           <%= f.simple_fields_for :user_pact do |up| %>
-            <div class="form-check mb-3">
-              <%= check_box_tag 'anytime', '1', false, class: 'form-check-input', id: 'anytime_checkbox', 'data-action': 'datetime-picker#toggleAnytime', 'data-datetime-picker-target': 'anytime' %>
-              <label class="form-check-label" for="anytime_checkbox">Anytime</label>
-            </div>
+          <br>
 
             <div class="toggle-container">
               <input type="checkbox" class="d-none" id="recurring-toggle" name="recurring" data-action="datetime-picker#toggleRecurring" data-datetime-picker-target="recurring">
