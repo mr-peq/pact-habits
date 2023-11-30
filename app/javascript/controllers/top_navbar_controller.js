@@ -12,14 +12,11 @@ export default class extends Controller {
 
   handleScroll() {
     let currentScroll = window.scrollY || document.documentElement.scrollTop;
-    console.log('Current Scroll: ', currentScroll);
 
     if (currentScroll > this.lastScrollTop) {
       console.log('Scrolling down');
-      this.navbarTarget.classList.add('navbar-hidden');
     } else {
       console.log('Scrolling up');
-      this.navbarTarget.classList.remove('navbar-hidden');
     }
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
   }
