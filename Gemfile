@@ -78,3 +78,4 @@ end
 
 # Add new gems here
 gem "httparty"
+gem "cloudinary"

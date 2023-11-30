@@ -1,5 +1,23 @@
 <div class="dashboard-avatar w-100 my-2">
-  <p>This is an avatar placeholder</p>
+  <%= link_to "", root_path, class: "link-to-avatar-page" %>
+  <div class="avatar-profile">
+    <div class="avatar-picture">
+    </div>
+    <div class="avatar-nickname"><%= @user.nickname %></div>
+  </div>
+  <div class="avatar-status">
+    <div class="avatar-level">
+      <p class="avatar-level-text mb-0">Level 4</p>
+      <div class="avatar-xp-bar">
+        <div class="xp-bar-progression"></div>
+      </div>
+    </div>
+    <div class="avatar-badges">
+      <div class="badge"><i class="fa-solid fa-mountain-sun"></i></div>
+      <div class="badge"><i class="fa-solid fa-person-running"></i></div>
+      <div class="badge"><i class="fa-solid fa-bicycle"></i></div>
+    </div>
+  </div>
 </div>
 
 <div class="ongoing-pacts w-100 my-5">
