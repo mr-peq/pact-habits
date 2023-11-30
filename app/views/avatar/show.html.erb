@@ -11,8 +11,8 @@
 
 <div class="xp my-3">
   <div class="xp-text">
-    <p>XP : <%= @avatar.user.total_xp %> / 580</p>
-    <p>To next level: </p>
+    <p class="mb-0">XP : <%= @avatar.user.total_xp %> / 580</p>
+    <p class="mb-0">To next level: </p>
   </div>
   <div class="xp-bar">
     <div class="xp-bar-progression"></div>
@@ -20,10 +20,58 @@
 </div>
 
 <div class="stats my-3">
+  <h3>Stats</h3>
+  <div class="inner-grid-2c">
+    <div class="stat">
+      <p class="mb-0">Health : </p>
+      <div class="stat-value"> <%= @avatar.health %></div>
+    </div>
+    <div class="stat">
+      <p class="mb-0">Mana : </p>
+      <div class="stat-value"> <%= @avatar.mana %></div>
+    </div>
+    <div class="stat">
+      <p class="mb-0">Attack : </p>
+      <div class="stat-value"> <%= @avatar.attack %></div>
+    </div>
+    <div class="stat">
+      <p class="mb-0">Defense : </p>
+      <div class="stat-value"> <%= @avatar.defense %></div>
+    </div>
+    <div class="stat">
+      <p class="mb-0">Magic P. : </p>
+      <div class="stat-value"> <%= @avatar.magic_power %></div>
+    </div>
+    <div class="stat">
+      <p class="mb-0">Magic D. : </p>
+      <div class="stat-value"> </div>
+    </div>
+    <div class="stat">
+      <p class="mb-0">Crit Rate : </p>
+      <div class="stat-value"> <%= @avatar.crit_rate %>%</div>
+    </div>
+    <div class="stat">
+      <p class="mb-0">Stamina : </p>
+      <div class="stat-value"> <%= @avatar.stamina %></div>
+    </div>
+    <div class="stat">
+      <p class="mb-0">Speed : </p>
+      <div class="stat-value"> <%= @avatar.speed %></div>
+    </div>
+  </div>
 </div>
 
 <div class="abilities my-3">
+  <h3>Abilities</h3>
+  <div class="inner-grid-2c-3l">
+    <% 6.times do %>
+    <div class="ability">placeholder</div>
+    <% end %>
+  </div>
 </div>
 
 <div class="items my-3">
+  <h3>Items</h3>
+  <em class="mt-4">You don't have any items.</em>
+  <em>Mobs will sometimes drop items when you defeat them.</em>
 </div>
