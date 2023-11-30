@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :user_pacts
   has_many :pacts, through: :user_pacts
-  has_one :avatar
+  has_one :avatar, dependent: :destroy
 
   has_one_attached :photo
   has_one_attached :avatar_picture
