@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+// ! BOTTOM NAVBAR ! //
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
 .navbar-custom {
   background-color: #f1faee; /* Replace with the color of your navbar background */
   box-shadow: 0 -4px 6px rgba(0,0,0,0.1); /* This adds a slight shadow to the top of the navbar */
@@ -62,4 +68,43 @@
 .nav-link:hover, .nav-link:focus, .nav-link:active {
   color: #1d3557; /* Replace with the hover color of your icon and text */
   text-decoration: none; /* No underline */
+}
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+// ! TOP NAVBAR ! //
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+.top-navbar {
+  height: 70px;
+  padding: 8px 0;
+  background-color: #f1faee;
+  box-shadow: 0 -4px 6px rgba(0,0,0,0.1); /* This adds a slight shadow to the top of the navbar */
+}
+
+.top-navbar .container {
+  padding: 0;
+}
+
+.user-picture, .app-logo, .fa-gear {
+  height: 40px;
+  width: auto;
+}
+
+.user-picture {
+  border-radius: 50%;
+}
+
+.navbar-logo {
+  display: flex;
+}
+
+.navbar-settings .fa-gear {
+  font-size: 22px;
+  color: #457b9d;
+}
+
+.navbar-user, .navbar-logo {
+  padding: 0 16px;
 }
