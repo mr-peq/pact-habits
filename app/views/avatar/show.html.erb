@@ -1,0 +1,29 @@
+<h1 class="my-3"><%= @avatar.user.nickname %></h1>
+
+<div class="resume my-3">
+  <%= cl_image_tag(@avatar.user.avatar_picture.key, width: 100, height: 100, class: "avatar-picture", crop: :fill) %>
+  <div class="resume-details">
+    <p class="mb-0">Level <%= @avatar.level %></p>
+    <p class="mb-0">Upgrade points left: </p>
+    <p class="mb-0">Ranking: </p>
+  </div>
+</div>
+
+<div class="xp my-3">
+  <div class="xp-text">
+    <p>XP : <%= @avatar.user.total_xp %> / 580</p>
+    <p>To next level: </p>
+  </div>
+  <div class="xp-bar">
+    <div class="xp-bar-progression"></div>
+  </div>
+</div>
+
+<div class="stats my-3">
+</div>
+
+<div class="abilities my-3">
+</div>
+
+<div class="items my-3">
+</div>

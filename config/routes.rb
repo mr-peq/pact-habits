@@ -18,5 +18,5 @@ Rails.application.routes.draw do
 
   get "/strava_token", to: "pages#strava_token"
 
-  get "/avatar/:id", to: "avatar#show"
+  get "/avatar/:id", to: "avatar#show", as: "avatar"
 end
