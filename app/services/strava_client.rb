@@ -27,7 +27,7 @@ class StravaClient
     athlete_activities_url = "https://www.strava.com/api/v3/athlete/activities?after=#{attributes[:pact_creation]}"
     activities = self.class.get(athlete_activities_url, @options)
     results = []
-    unless activities.count.empty?
+    unless activities.empty?
       activities.each do |activity|
 
         # => ADD '&& activity["manual"] == false' to conditions for real case
@@ -39,6 +39,6 @@ class StravaClient
       end
     end
     results
-    
+
   end
 end
