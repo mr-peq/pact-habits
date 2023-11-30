@@ -63,7 +63,7 @@ DISTANCES = [10, 20, 30]    # => km
 DURATION = [30, 60, 90]    # => min
 WEEKDAYS_ARRAY = [0, 1, 2, 3, 4, 5, 6]
 XPS = [30, 50, 80]
-COMPLETION_DURATIONS = [14, 21, 28]     # => days
+COMPLETION_DURATIONS = [1, 2, 3]     # => weeks
 BETS = [5, 10, 20, 50]
 
 # Helper function to get random pact stats
