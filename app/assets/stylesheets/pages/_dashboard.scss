@@ -9,8 +9,10 @@
 .dashboard-avatar {
   position: relative;
   height: 150px;
-  border: 1px solid black;
   padding: 1em;
+  background-color: #a3d1f9cc;
+  border-radius: 10px;
+  box-shadow: 4px 0 12px #c8c8c852;
 }
 
 .section-title {
@@ -25,8 +27,6 @@
 }
 
 .avatar-picture {
-  height: 80px;
-  width: 80px;
   border: 1px solid black;
   border-radius: 50%;
 }
@@ -37,6 +37,8 @@
   margin-left: 1em;
   display: flex;
   align-items: center;
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
 .avatar-status {

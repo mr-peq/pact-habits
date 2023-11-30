@@ -45,9 +45,22 @@ joseph = {
   failed_pacts: 0
 }
 
-User.create!(theodore)
-User.create!(ismael)
-User.create!(joseph)
+user_theodore = User.create!(theodore)
+user_ismael = User.create!(ismael)
+user_joseph = User.create!(joseph)
+
+theodore_url = "https://avatars.githubusercontent.com/u/141660300?v=4"
+ismael_url = "https://avatars.githubusercontent.com/u/29755099?v=4}"
+joseph_url = "https://avatars.githubusercontent.com/u/145439534?v=4"
+avatar_picture_url = "https://www.fightersgeneration.com/np7/char/guy-ffrevenge-bust.png"
+
+user_theodore.photo.attach(io: URI.open(theodore_url), filename: 'photo.jpg')
+user_ismael.photo.attach(io: URI.open(ismael_url), filename: 'photo.jpg')
+user_joseph.photo.attach(io: URI.open(joseph_url), filename: 'photo.jpg')
+
+user_theodore.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
+user_ismael.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
+user_joseph.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
 
 # ============================= BENEFICIARIES ==================================
 puts "Creating beneficiaries..."
