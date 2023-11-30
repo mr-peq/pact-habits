@@ -1,0 +1,44 @@
+<nav class="navbar fixed-bottom navbar-custom">
+  <div class="container">
+    <ul class="nav navbar-nav d-flex flex-row">
+      <!-- Home -->
+      <li class="nav-item">
+        <%= link_to root_path, class: "nav-link home #{'active' if controller.action_name == 'dashboard'}" do %>
+          <i class="fa-solid fa-house"></i>
+          <span class="nav-text">Home</span>
+        <% end %>
+      </li>
+
+      <!-- Challenges -->
+      <li class="nav-item">
+        <%= link_to challenges_path, class: "nav-link challenges #{'active' if controller.action_name == 'challenges'}" do %>
+          <i class="fa-solid fa-fire"></i>
+          <span class="nav-text">Challenges</span>
+        <% end %>
+      </li>
+
+      <!-- Add Pact -->
+      <li class="nav-item add-pact">
+        <%= link_to new_pact_path, class: "nav-link plus" do %>
+          <span class="plus-icon">+</span>
+        <% end %>
+      </li>
+
+      <!-- History -->
+      <li class="nav-item">
+        <%= link_to account_path, class: "nav-link history #{'active' if controller.action_name == 'history'}" do %>
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span class="nav-text">History</span>
+        <% end %>
+      </li>
+
+      <!-- User Account -->
+      <li class="nav-item">
+        <%= link_to account_path, class: "nav-link user #{'active' if controller.action_name == 'account'}" do %>
+          <i class="fa-solid fa-user"></i>
+          <span class="nav-text">Account</span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>
