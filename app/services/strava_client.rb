@@ -24,12 +24,11 @@ class StravaClient
   end
 
   def get_user_activities(attributes = {})
-    athlete_activities_url = "https://www.strava.com/api/v3/athlete/activities?after=#{attributes[:pact_creation]}"
+    athlete_activities_url = "https://www.strava.com/api/v3/athlete/activities?before=#{attributes[:pact_deadline]}&after=#{attributes[:pact_creation]}"
     activities = self.class.get(athlete_activities_url, @options)
     results = []
     unless activities.empty?
       activities.each do |activity|
-
         # => ADD '&& activity["manual"] == false' to conditions for real case
         if attributes[:distance].nil?
           results << activity["id"] if activity["type"] == attributes[:category].capitalize && activity["moving_time"].to_i >= attributes[:duration]

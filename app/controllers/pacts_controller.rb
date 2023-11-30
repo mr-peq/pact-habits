@@ -89,10 +89,11 @@ class PactsController < ApplicationController
     category = @user_pact.pact.category
     duration = @user_pact.pact.duration
     distance = @user_pact.pact.distance
-    pact_creation = @user_pact.deadline_at.to_i
+    pact_creation = @user_pact.created_at.to_i
+    pact_deadline = @user_pact.deadline_at.to_i
     duration *= 60 unless duration.nil?     # => convert in seconds for strava
     distance *= 1000 unless distance.nil?   # => convert in meters for strava
-    { category:, duration:, distance:, pact_creation: }
+    { category:, duration:, distance:, pact_creation:, pact_deadline: }
   end
 
   def user_finished_pact(activity_ids)
