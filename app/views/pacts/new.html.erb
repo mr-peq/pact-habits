@@ -51,7 +51,7 @@
           <br>
 
             <div class="toggle-container">
-              <input type="checkbox" class="d-none" id="recurring-toggle" name="recurring" data-action="datetime-picker#toggleRecurring" data-datetime-picker-target="recurring">
+              <input type="checkbox" class="d-none" id="recurring-toggle" name="recurring" data-action="datetime-picker#toggleRecurring" data-datetime-picker-target="recurring" data-multi-step-form-target="recurring">
               <label for="recurring-toggle" class="toggle-label">
                 <span class="toggle-option">Only Once</span>
                 <span class="toggle-switch">
@@ -64,7 +64,7 @@
             <div class="weekdays-wrapper d-none" data-datetime-picker-target="weekdays">
               <% ['M', 'T', 'W', 'T', 'F', 'S', 'S'].each_with_index do |day, index| %>
                 <label class="weekday-toggle">
-                  <%= f.check_box :weekdays, { multiple: true, class: 'd-none', 'data-action': 'datetime-picker#toggleDay', 'data-datetime-picker-target': 'day' }, index, nil %>
+                  <%= f.check_box :weekdays, { multiple: true, class: 'd-none', 'data-action': 'datetime-picker#toggleDay', 'data-datetime-picker-target': 'day', 'data-multi-step-form-target': 'day' }, index, nil %>
                   <%= day %>
                 </label>
               <% end %>
@@ -77,18 +77,22 @@
       <div data-multi-step-form-target="step" class="d-none">
         <div class="mb-3">
           <h3>Or give:</h3>
-            <div class="stepper-wrapper" data-controller="stepper">
-              <button type="button" data-action="click->stepper#decrement">-</button>
-              <%= up.number_field :bet, value: 10, min: 1, class: 'form-control', 'data-stepper-target': 'value', 'data-multi-step-form-target': 'bet' %>
-              <button type="button" data-action="click->stepper#increment">+</button>
+            <div class="slider-wrapper" data-controller="slider">
+              <!-- Slider input for bet -->
+              <%= up.input :bet, label: false, as: :range, input_html: { min: 5, max: 50, value: 10, class: 'form-control-range', 'data-action': 'input->slider#updateValue', 'data-slider-target': 'range', 'data-multi-step-form-target': 'bet' } %>
+              <!-- Display the current value of the slider -->
+              <span id="betValue" data-slider-target="valueDisplay">10</span>
             </div>
-
+          <br>
+          <br>
           <h3>to:</h3>
-            <div class="beneficiary-wrapper d-flex justify-content-around flex-wrap mt-4">
+            <div class="beneficiary-wrapper d-flex justify-content-around flex-wrap" data-controller="category-select">
               <% @beneficiaries.each do |beneficiary| %>
-                <%= up.radio_button :beneficiary_id, beneficiary.id, class: 'beneficiary-selector d-none', id: "beneficiary_#{beneficiary.id}", data: { 'multi-step-form-target': 'beneficiary' } %>
-                <label for="beneficiary_<%= beneficiary.id %>" class="beneficiary-item" style="background-image: url('<%= beneficiary_image(beneficiary) %>');">
-                </label>
+                <div data-beneficiary-id="<%= beneficiary.id %>" data-beneficiary-name="<%= beneficiary.name %>">
+                  <%= up.radio_button :beneficiary_id, beneficiary.id, class: 'beneficiary-selector d-none', id: "beneficiary_#{beneficiary.id}", data: { 'multi-step-form-target': 'beneficiary' } %>
+                  <label for="beneficiary_<%= beneficiary.id %>" class="beneficiary-item text-center p-2" style="background-image: url('<%= beneficiary_image(beneficiary) %>');" data-action="click->category-select#selectBeneficiary">
+                  </label>
+                </div>
               <% end %>
             </div>
 
@@ -96,18 +100,13 @@
       </div>
     <% end %>
 
-
       <!-- Step 4: Confirmation Step -->
       <div data-multi-step-form-target="step" class="d-none" id="confirmation-step">
         <h3>Confirm Your Pact</h3>
-        <!-- Display captured data here -->
-        <p>Category: <span data-multi-step-form-target="categoryConfirmation"></span></p>
-        <p>Distance: <span data-multi-step-form-target="distanceOrDurationConfirmation"></span></p>
-        <p>Deadline: <span data-multi-step-form-target="deadlineConfirmation"></span></p>
-        <p>Bet: <span data-multi-step-form-target="betConfirmation"></span> €</p>
-        <p>Charity: <span data-multi-step-form-target="beneficiaryConfirmation"></span></p>
-        <!-- When the form is valid, and all steps are confirmed, user can submit -->
-        <%= f.button :submit, "Make my Pact", class: 'btn btn-primary'%>
+        <!-- Dynamic confirmation message -->
+        <div id="confirmation-message" class="confirmation-message"></div>
+        <!-- Submit button -->
+        <%= f.button :submit, "Make my Pact", class: 'btn btn-pact' %>
       </div>
 
     <% end %>

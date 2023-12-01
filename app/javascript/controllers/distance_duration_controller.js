@@ -17,4 +17,9 @@ export default class extends Controller {
       this.inputTarget.placeholder = 'Enter duration (Min)';
     }
   }
+
+  getSelectedType() {
+    const radio = this.element.querySelector('input[name="distance_type"]:checked');
+    return radio ? radio.value : null; // Returns 'distance' or 'duration'
+  }
 }
