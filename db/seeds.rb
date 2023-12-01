@@ -120,7 +120,7 @@ Beneficiary.create!(name: "Action Contre La Faim")
 # ============================= PACTS & CHALLENGES ==================================
 puts "Creating 8 new user pacts and 2 challenges..."
 
-CATEGORIES = %w[cycle run walk hike]
+CATEGORIES = %w[ride run walk hike]
 DISTANCES = [10, 20, 30]    # => km
 DURATION = [30, 60, 90]    # => min
 WEEKDAYS_ARRAY = [0, 1, 2, 3, 4, 5, 6]
