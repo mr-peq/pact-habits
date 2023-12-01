@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_194514) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_01_133947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,7 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_194514) do
     t.integer "duration"
     t.boolean "recurring", default: false
     t.integer "weekdays", array: true
-    t.integer "xp"
+    t.integer "xp", default: 20
     t.integer "completion_duration"
     t.boolean "challenge", default: false
     t.datetime "created_at", null: false
