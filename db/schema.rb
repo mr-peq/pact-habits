@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_152900) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_30_194514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,33 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_152900) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "avatar_skills", force: :cascade do |t|
+    t.bigint "avatar_id", null: false
+    t.bigint "skill_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["avatar_id"], name: "index_avatar_skills_on_avatar_id"
+    t.index ["skill_id"], name: "index_avatar_skills_on_skill_id"
+  end
+
+  create_table "avatars", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "level", default: 1
+    t.integer "health", default: 100
+    t.integer "attack", default: 10
+    t.integer "crit_rate", default: 2
+    t.integer "magic_power", default: 10
+    t.integer "defense", default: 10
+    t.integer "mana", default: 100
+    t.integer "speed", default: 10
+    t.integer "stamina", default: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "magic_defense", default: 10
+    t.integer "upgrade_points", default: 4
+    t.index ["user_id"], name: "index_avatars_on_user_id"
+  end
+
   create_table "beneficiaries", force: :cascade do |t|
     t.string "name"
     t.string "logo_src"
@@ -60,6 +87,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_152900) do
     t.boolean "challenge", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "category"
+    t.integer "dmg"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "user_pacts", force: :cascade do |t|
@@ -99,6 +134,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_152900) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "avatar_skills", "avatars"
+  add_foreign_key "avatar_skills", "skills"
+  add_foreign_key "avatars", "users"
   add_foreign_key "user_pacts", "beneficiaries"
   add_foreign_key "user_pacts", "pacts"
   add_foreign_key "user_pacts", "users"

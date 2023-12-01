@@ -1,0 +1,57 @@
+<div data-upgrade-avatar-target="statsAndSkills">
+  <div class="stats my-3">
+    <h3>Stats</h3>
+    <i class="fa-solid fa-circle-question info-bubble"></i>
+    <div class="inner-grid-2c">
+      <div class="stat">
+        <p class="mb-0">Health : </p>
+        <div class="stat-value" id="health"> <%= avatar.health %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Mana : </p>
+        <div class="stat-value" id="mana"> <%= avatar.mana %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Attack : </p>
+        <div class="stat-value" id="attack"> <%= avatar.attack %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Defense : </p>
+        <div class="stat-value" id="defense"> <%= avatar.defense %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Magic P. : </p>
+        <div class="stat-value" id="magic_power"> <%= avatar.magic_power %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Magic D. : </p>
+        <div class="stat-value" id="magic_defense"> <%= avatar.magic_defense %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Crit Rate : </p>
+        <div class="stat-value" id="crit_rate"> <%= avatar.crit_rate %>%</div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Stamina : </p>
+        <div class="stat-value" id="stamina"> <%= avatar.stamina %></div>
+      </div>
+      <div class="stat">
+        <p class="mb-0">Speed : </p>
+        <div class="stat-value" id="speed"> <%= avatar.speed %></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="skills my-3">
+    <h3>Skills</h3>
+    <i class="fa-solid fa-circle-question info-bubble"></i>
+    <div class="inner-grid-2c-3l" data-upgrade-avatar-target="skills">
+      <% avatar.skills.each do |skill| %>
+      <div class="skill"><%= skill.name %></div>
+      <% end %>
+      <% if avatar.skills.count <= 5 %>
+      <div class="skill-slot" id="skillSlot"></div>
+      <% end %>
+    </div>
+  </div>
+</div>

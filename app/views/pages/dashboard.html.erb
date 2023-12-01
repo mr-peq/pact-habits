@@ -1,5 +1,5 @@
 <div class="dashboard-avatar w-100 my-2">
-  <%= link_to "", root_path, class: "link-to-avatar-page" %>
+  <%= link_to "", avatar_path(@user.avatar), class: "link-to-avatar-page" %>
   <div class="avatar-profile">
     <%= cl_image_tag(@user.avatar_picture.key, width: 80, height: 80, class: "avatar-picture", crop: :fill) %>
     <div class="avatar-nickname"><%= @user.nickname %></div>
