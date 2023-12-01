@@ -20,67 +20,25 @@
     </div>
   </div>
 
-  <div class="stats my-3">
-    <h3>Stats</h3>
-    <i class="fa-solid fa-circle-question info-bubble"></i>
-    <div class="inner-grid-2c">
-      <div class="stat">
-        <p class="mb-0">Health : </p>
-        <div class="stat-value" id="health"> <%= @avatar.health %></div>
-      </div>
-      <div class="stat">
-        <p class="mb-0">Mana : </p>
-        <div class="stat-value" id="mana"> <%= @avatar.mana %></div>
-      </div>
-      <div class="stat">
-        <p class="mb-0">Attack : </p>
-        <div class="stat-value" id="attack"> <%= @avatar.attack %></div>
-      </div>
-      <div class="stat">
-        <p class="mb-0">Defense : </p>
-        <div class="stat-value" id="defense"> <%= @avatar.defense %></div>
-      </div>
-      <div class="stat">
-        <p class="mb-0">Magic P. : </p>
-        <div class="stat-value" id="magicPower"> <%= @avatar.magic_power %></div>
-      </div>
-      <div class="stat">
-        <p class="mb-0">Magic D. : </p>
-        <div class="stat-value" id="magicDefense"> <%= @avatar.magic_defense %></div>
-      </div>
-      <div class="stat">
-        <p class="mb-0">Crit Rate : </p>
-        <div class="stat-value" id="critRate"> <%= @avatar.crit_rate %>%</div>
-      </div>
-      <div class="stat">
-        <p class="mb-0">Stamina : </p>
-        <div class="stat-value" id="stamina"> <%= @avatar.stamina %></div>
-      </div>
-      <div class="stat">
-        <p class="mb-0">Speed : </p>
-        <div class="stat-value" id="speed"> <%= @avatar.speed %></div>
-      </div>
-    </div>
+  <div class="update-avatar">
+    <div class="update-avatar-btn btn btn-primary hide" data-action="click->upgrade-avatar#update" data-upgrade-avatar-target="updateBtn">Save changes</div>
   </div>
 
-  <div class="skills my-3">
-    <h3>Skills</h3>
-    <i class="fa-solid fa-circle-question info-bubble"></i>
-    <div class="inner-grid-2c-3l" data-upgrade-avatar-target="skills">
-      <% @avatar.skills.each do |skill| %>
-      <div class="skill"><%= skill.name %></div>
-      <% end %>
-      <% if @avatar.skills.count <= 5 %>
-      <div class="skill-slot" id="skillSlot"></div>
-      <% end %>
-    </div>
-  </div>
+  <%= render "stats_and_skills", avatar: @avatar %>
 
   <div class="items my-3">
     <h3>Items</h3>
     <i class="fa-solid fa-circle-question info-bubble"></i>
     <em class="mt-4">You don't have any items.</em>
     <em>Mobs will sometimes drop items when you defeat them.</em>
+  </div>
+
+  <div class="tournament my-3">
+    <div class="tournament-btn btn btn-primary">Find Tournament</div>
+  </div>
+
+  <div class="see-ranking my-3">
+    <div class="see-ranking-btn btn btn-primary">See Ranking</div>
   </div>
 
   <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
@@ -94,4 +52,25 @@
       <% end %>
     </div>
   </div>
+</div>
+
+<div id="initialStats" class="d-none">
+  <% health = @avatar.health %>
+  <% mana = @avatar.mana %>
+  <% attack = @avatar.attack %>
+  <% defense = @avatar.defense %>
+  <% magicPower = @avatar.magic_power %>
+  <% magicDefense = @avatar.magic_defense %>
+  <% critRate = @avatar.crit_rate %>
+  <% stamina = @avatar.stamina %>
+  <% speed = @avatar.speed %>
+  <div><p>health</p><p><%= health %></p></div>
+  <div><p>mana</p><p><%= mana %></p></div>
+  <div><p>attack</p><p><%= attack %></p></div>
+  <div><p>defense</p><p><%= defense %></p></div>
+  <div><p>magicPower</p><p><%= magicPower %></p></div>
+  <div><p>magicDefense</p><p><%= magicDefense %></p></div>
+  <div><p>critRate</p><p><%= critRate %></p></div>
+  <div><p>stamina</p><p><%= stamina %></p></div>
+  <div><p>speed</p><p><%= speed %></p></div>
 </div>

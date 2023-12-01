@@ -36,6 +36,14 @@ h1, h3 {
   border: 1px solid;
 }
 
+.update-avatar, .tournament, .see-ranking {
+  text-align: center;
+}
+
+.hide {
+  opacity: 0;
+}
+
 .stats {
   height: 400px;
   border: 1px solid black;
@@ -110,4 +118,15 @@ h1, h3 {
   font-size: 1.5em;
   color: #E63946;
   margin-left: 1em;
+}
+
+.offcanvas-body p {
+  text-align: center;
+  font-size: 1.3em;
+  margin-bottom: 0em;
+  line-height: 32px;
+}
+
+.offcanvas-body p:nth-child(even) {
+  background-color: #c6c6c657;
 }
