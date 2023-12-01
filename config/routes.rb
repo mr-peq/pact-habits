@@ -13,8 +13,11 @@ Rails.application.routes.draw do
   resources :challenges, only: :index
   get "/account", to: "pages#account"
 
-  get "/pacts/:id/join", to: "pacts#join"
-  patch "pacts/:id/", to: "pacts#update", as: "update_pact"
+  post "/pacts/:id/join", to: "pacts#join", as: "join_challenge"
+  patch "/pacts/:id/", to: "pacts#update", as: "update_pact"
 
   get "/strava_token", to: "pages#strava_token"
+
+  get "/avatar/:id", to: "avatar#show", as: "avatar"
+  patch "/avatar/:id", to: "avatar#update", as: "avatar_update"
 end

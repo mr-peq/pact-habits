@@ -4,6 +4,8 @@ UserPact.destroy_all
 Beneficiary.destroy_all
 Pact.destroy_all
 User.destroy_all
+Avatar.destroy_all
+Skill.destroy_all
 
 # ============================= USERS ==================================
 puts "Creating 3 BOSS users..."
@@ -45,9 +47,69 @@ joseph = {
   failed_pacts: 0
 }
 
-User.create!(theodore)
-User.create!(ismael)
-User.create!(joseph)
+user_theodore = User.create!(theodore)
+user_ismael = User.create!(ismael)
+user_joseph = User.create!(joseph)
+
+theodore_url = "https://avatars.githubusercontent.com/u/141660300?v=4"
+ismael_url = "https://avatars.githubusercontent.com/u/29755099?v=4}"
+joseph_url = "https://avatars.githubusercontent.com/u/145439534?v=4"
+avatar_picture_url = "https://www.fightersgeneration.com/np7/char/guy-ffrevenge-bust.png"
+
+user_theodore.photo.attach(io: URI.open(theodore_url), filename: 'photo.jpg')
+user_ismael.photo.attach(io: URI.open(ismael_url), filename: 'photo.jpg')
+user_joseph.photo.attach(io: URI.open(joseph_url), filename: 'photo.jpg')
+
+user_theodore.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
+user_ismael.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
+user_joseph.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
+
+
+# ============================= AVATARS ==================================
+puts "Creating avatars for them BOSSES..."
+avatar_theodore = Avatar.new(user: user_theodore)
+avatar_ismael = Avatar.new(user: user_ismael)
+avatar_joseph = Avatar.new(user: user_joseph)
+
+puts "Creating 12 skills..."
+# Min dmg: 15
+# Max dmg: 50
+Skill.create!(name: 'Low-kick', category: 'physical', dmg: 30)
+Skill.create!(name: 'Drunk Boxing', category: 'physical', dmg: 50)
+Skill.create!(name: 'Sneak Attack', category: 'physical', dmg: 20)
+Skill.create!(name: 'Arm Lock', category: 'physical', dmg: 35)
+Skill.create!(name: 'Nudge', category: 'physical', dmg: 25)
+Skill.create!(name: 'Fire Blast', category: 'magic', dmg: 45)
+Skill.create!(name: 'Icy breath', category: 'magic', dmg: 30)
+Skill.create!(name: 'Storm', category: 'magic', dmg: 40)
+Skill.create!(name: 'Bloodboil', category: 'magic', dmg: 20)
+Skill.create!(name: 'Focus Lotus', category: 'boost')
+Skill.create!(name: 'Mana Boost', category: 'boost')
+Skill.create!(name: 'On The Look-out', category: 'boost')
+
+puts "Learning some skills to the avatars..."
+
+3.times do
+  skill = Skill.all.sample
+  while avatar_theodore.skills.include?(skill)
+    skill = Skill.all.sample
+  end
+  AvatarSkill.create!(avatar: avatar_theodore, skill: skill)
+end
+3.times do
+  skill = Skill.all.sample
+  while avatar_ismael.skills.include?(skill)
+    skill = Skill.all.sample
+  end
+  AvatarSkill.create!(avatar: avatar_ismael, skill: skill)
+end
+3.times do
+  skill = Skill.all.sample
+  while avatar_joseph.skills.include?(skill)
+    skill = Skill.all.sample
+  end
+  AvatarSkill.create!(avatar: avatar_joseph, skill: skill)
+end
 
 # ============================= BENEFICIARIES ==================================
 puts "Creating beneficiaries..."
@@ -58,12 +120,12 @@ Beneficiary.create!(name: "Action Contre La Faim")
 # ============================= PACTS & CHALLENGES ==================================
 puts "Creating 8 new user pacts and 2 challenges..."
 
-CATEGORIES = %w[cycle run walk hike]
+CATEGORIES = %w[ride run walk hike]
 DISTANCES = [10, 20, 30]    # => km
 DURATION = [30, 60, 90]    # => min
 WEEKDAYS_ARRAY = [0, 1, 2, 3, 4, 5, 6]
 XPS = [30, 50, 80]
-COMPLETION_DURATIONS = [14, 21, 28]     # => days
+COMPLETION_DURATIONS = [1, 2, 3]     # => weeks
 BETS = [5, 10, 20, 50]
 
 # Helper function to get random pact stats
@@ -177,6 +239,14 @@ end
     )
   end
   i += 1
+end
+
+# ============================= SUGGESTED CHALLENGES ==================================
+
+puts "Creating 4 new suggested challenges..."
+
+4.times do
+  Pact.create!(random_pact_stats(true))
 end
 
 # ============================= USERS STATS ==================================

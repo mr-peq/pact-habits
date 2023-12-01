@@ -1,6 +1,18 @@
+.link-to-avatar-page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+}
+
 .dashboard-avatar {
+  position: relative;
   height: 150px;
-  border: 1px solid black;
+  padding: 1em;
+  background-color: #a3d1f9cc;
+  border-radius: 10px;
+  box-shadow: 4px 0 12px #c8c8c852;
 }
 
 .section-title {
@@ -8,14 +20,85 @@
   border-bottom: 2px solid black;
 }
 
-.ongoing-pacts {
+.avatar-profile {
+  height: 60px;
+  display: flex;
+  // justify-content: flex-start;
+}
+
+.avatar-picture {
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.avatar-nickname {
+  margin-bottom: 0;
+  height: 60px;
+  margin-left: 1em;
+  display: flex;
+  align-items: center;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.avatar-status {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatar-level {
+  height: 50px;
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.avatar-level-text {
 
 }
 
-.achieved-pacts {
-
+.avatar-xp-bar {
+  height: 14px;
+  border: 1px solid black;
+  width: 120px;
 }
 
-.failed-pacts {
-
+.xp-bar-progression {
+  height: 100%;
+  width: 82%;
+  background-color: black;
 }
+
+.avatar-badges {
+  height: 100%;
+  width: 60%;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+}
+
+.badge {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+}
+
+// .ongoing-pacts {
+
+// }
+
+// .achieved-pacts {
+
+// }
+
+// .failed-pacts {
+
+// }

@@ -1,0 +1,50 @@
+<div class="pact-card my-3 challenge">
+  <% if clickable %>
+    <%= link_to "", pact_path(challenge), class: "pact-clickable" %>
+  <% end %>
+  <div class="pact-card-top">
+    <div class="pact-card-details">
+      <h3>Sport <i class="fa-solid fa-people-group"></i></h3>
+      <% if challenge.distance.nil? %>
+      <p class="mb-0"><%= challenge.category.capitalize %> > <%= challenge.duration %> minutes</p>
+      <% else %>
+      <p class="mb-0"><%= challenge.category.capitalize %> > <%= challenge.distance %> km</p>
+      <% end %>
+      <% if challenge.completion_duration == 1 %>
+        <p class="mb-0">Deadline : <%= challenge.completion_duration %> Week</p>
+      <% else %>
+        <p class="mb-0">Deadline : <%= challenge.completion_duration %> Weeks</p>
+      <% end %>
+    </div>
+    <div class="challenge-card-xp">
+      <p class="mb-0"><%= challenge.xp %>XP</p>
+    </div>
+  </div>
+
+    <div class="pact-card-bottom mt-3">
+    <% if challenge.recurring %>
+      <div class="weekdays">
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(0) %>">M</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(1) %>">T</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(2) %>">W</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(3) %>">T</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(4) %>">F</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(5) %>">S</div>
+        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(6) %>">S</div>
+      </div>
+    <% end %>
+      <div class="challenge-card-friends" style="display: flex;">
+        <% challenge.ongoing_challengers.each do |challenger| %>
+          <div class="challenge-friend-avatar friend-ongoing">
+            <p class="mb-0"><%= challenger.first_name[0] %></p>
+          </div>
+        <% end %>
+        <% challenge.achieved_challengers.each do |challenger| %>
+          <div class="challenge-friend-avatar friend-achieved">
+            <p class="mb-0"><%= challenger.first_name[0] %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+</div>

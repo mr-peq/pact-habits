@@ -1,0 +1,132 @@
+h1, h3 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.resume {
+  height: 150px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+}
+
+.resume-details {
+  margin-left: 1em;
+}
+
+.resume-details > p:first-child {
+  font-weight: bold;
+}
+
+.xp {
+  height: 50px;
+}
+
+.xp-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8em;
+  line-height: 0.6em;
+  margin-bottom: 0.5em;
+}
+
+.xp-bar {
+  height: 20px;
+  border: 1px solid;
+}
+
+.update-avatar, .tournament, .see-ranking {
+  text-align: center;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.stats {
+  height: 400px;
+  border: 1px solid black;
+  padding: 1em;
+  position: relative;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 2em;
+}
+
+.inner-grid-2c {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  height: 330px;
+}
+
+.skills {
+  height: 300px;
+  border: 1px solid black;
+  padding: 1em;
+  position: relative;
+}
+
+.skill {
+  display: flex;
+  align-items: center;
+}
+
+.skill-slot {
+  display: flex;
+  align-items: center;
+  color: red;
+}
+
+.inner-grid-2c-3l {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  height: 230px;
+}
+
+.items {
+  height: 230px;
+  border: 1px solid black;
+  text-align: center;
+  padding: 1em;
+  position: relative;
+
+  em {
+    display: block;
+  }
+}
+
+.info-bubble {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 1.7em;
+}
+
+.increment-btn {
+  font-size: 1.5em;
+  color: #E63946;
+}
+
+.new-skill-btn {
+  font-size: 1.5em;
+  color: #E63946;
+  margin-left: 1em;
+}
+
+.offcanvas-body p {
+  text-align: center;
+  font-size: 1.3em;
+  margin-bottom: 0em;
+  line-height: 32px;
+}
+
+.offcanvas-body p:nth-child(even) {
+  background-color: #c6c6c657;
+}

@@ -5,6 +5,8 @@ class PactsController < ApplicationController
   end
 
   def show
+    @challenge = Pact.find(params[:id])
+    @beneficiaries = Beneficiary.all
   end
 
   def edit
@@ -25,6 +27,23 @@ class PactsController < ApplicationController
   end
 
   def join
+    @challenge = Pact.find(params[:id])
+    ActiveRecord::Base.transaction do
+      if @challenge.save!
+        # Create the associated UserPact
+        deadline_at = Time.now + @challenge.completion_duration.week
+        beneficiary = Beneficiary.find(params[:beneficiary_id])
+        @user_pact = UserPact.new(deadline_at: deadline_at, bet: params[:bet], beneficiary: beneficiary)
+        @user_pact.pact = @challenge
+        @user_pact.user = current_user
+        raise ActiveRecord::Rollback, "UserPact couldn't be created" unless @user_pact.save
+
+        # Redirect to the homepage if successfull
+        redirect_to root_path, notice: 'Good luck for this challenge, champ! 💪'
+      else
+        redirect_to pact_path(@challenge), alert: "Something went wrong, please try again."
+      end
+    end
   end
 
   def new
@@ -70,10 +89,11 @@ class PactsController < ApplicationController
     category = @user_pact.pact.category
     duration = @user_pact.pact.duration
     distance = @user_pact.pact.distance
-    pact_creation = @user_pact.deadline_at.to_i
+    pact_creation = @user_pact.created_at.to_i
+    pact_deadline = @user_pact.deadline_at.to_i
     duration *= 60 unless duration.nil?     # => convert in seconds for strava
     distance *= 1000 unless distance.nil?   # => convert in meters for strava
-    { category:, duration:, distance:, pact_creation: }
+    { category:, duration:, distance:, pact_creation:, pact_deadline: }
   end
 
   def user_finished_pact(activity_ids)
