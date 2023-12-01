@@ -106,7 +106,9 @@
         <!-- Dynamic confirmation message -->
         <div id="confirmation-message" class="confirmation-message"></div>
         <!-- Submit button -->
-        <%= f.button :submit, "Make my Pact", class: 'btn btn-pact' %>
+        <div class="pact-btn-container mt-5">
+          <%= f.button :submit, "Make my Pact", class: 'btn btn-pact' %>
+        </div>
       </div>
 
     <% end %>
