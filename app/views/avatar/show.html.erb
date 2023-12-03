@@ -13,8 +13,8 @@
 
     <div class="xp my-3">
       <div class="xp-text">
-        <p class="mb-0">XP : <%= @avatar.xp %> / 580</p>
-        <p class="mb-0">To next level: <%= @avatar. %></p>
+        <p class="mb-0">XP : <%= @avatar.xp %> / <%= @avatar.level.to_next %></p>
+        <p class="mb-0">To next level: <%= @avatar.level.to_next - @avatar.xp %></p>
       </div>
       <div class="xp-bar">
         <div class="xp-bar-progression"></div>
