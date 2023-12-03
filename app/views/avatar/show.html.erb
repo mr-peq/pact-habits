@@ -5,7 +5,7 @@
     <div class="resume my-3">
       <%= cl_image_tag(@avatar.user.avatar_picture.key, width: 100, height: 100, class: "avatar-picture", crop: :fill) %>
       <div class="resume-details">
-        <p class="mb-0">Level <%= @avatar.level %></p>
+        <p class="mb-0">Level <%= @avatar.level.current %></p>
         <div class="d-flex"><p class="mb-0">Upgrade points left: </p><div style="margin-left: 5px;" data-upgrade-avatar-target="upgradePoints"><%= @avatar.upgrade_points %></div></div>
         <p class="mb-0">Ranking: <em style="font-size: .8em">not ranked yet.</em></p>
       </div>
@@ -13,8 +13,8 @@
 
     <div class="xp my-3">
       <div class="xp-text">
-        <p class="mb-0">XP : <%= @avatar.user.total_xp %> / 580</p>
-        <p class="mb-0">To next level: </p>
+        <p class="mb-0">XP : <%= @avatar.xp %> / 580</p>
+        <p class="mb-0">To next level: <%= @avatar. %></p>
       </div>
       <div class="xp-bar">
         <div class="xp-bar-progression"></div>
