@@ -14,10 +14,10 @@
     <div class="xp my-3">
       <div class="xp-text">
         <p class="mb-0">XP : <%= @avatar.xp %> / <%= @avatar.level.to_next %></p>
-        <p class="mb-0">To next level: <%= @avatar.level.to_next - @avatar.xp %></p>
+        <p class="mb-0">To next level: <%= @avatar.to_next_level %></p>
       </div>
-      <div class="xp-bar">
-        <div class="xp-bar-progression"></div>
+      <div class="xp-bar">  
+        <div class="xp-bar-progression" style="width: <%= @fill_percentage %>%"></div>
       </div>
     </div>
 
