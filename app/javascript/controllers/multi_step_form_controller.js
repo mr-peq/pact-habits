@@ -68,7 +68,7 @@ export default class extends Controller {
     const recurring = this.recurringTarget.checked;
     const selectedWeekdays = this.captureWeekdays(); // This will be an array of selected weekdays
     let weekdaysText = selectedWeekdays.join(", "); // This will create a string like "M, W, F"
-    console.log(deadline);
+
 
 
 
