@@ -1,4 +1,4 @@
-<div class="mt-5">
+<div class="mt-5" data-controller="pact">
   <div class="timer mb-5">
     <h2>Time left:</h2>
     <div class="circle-timer" data-controller="circle-timer">
@@ -37,4 +37,13 @@
   </div>
 
   <%= render(partial: "card", locals: { user_pact: @user_pact , bottom: "submit", clickable: false })%>
+
+  <div class="custom-modal d-none" data-pact-target="modal">
+    <div class="modal-container">
+      <div class="modal-badge">
+        <i class="fa-solid fa-certificate modal-badge-icon"></i>
+      </div>
+      <button class="get-badge btn btn-primary">Claim my badge !</button>
+    </div>
+  </div>
 </div>
