@@ -1,7 +1,7 @@
 <div class="avatar-page">
   <h1 class="my-3"><%= @avatar.user.nickname %></h1>
 
-  <div>
+  <div data-controller="badge">
     <div class="resume my-3">
       <%= cl_image_tag(@avatar.user.avatar_picture.key, width: 100, height: 100, class: "avatar-picture", crop: :fill) %>
       <div class="resume-details">

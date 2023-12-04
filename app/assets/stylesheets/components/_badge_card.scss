@@ -43,7 +43,7 @@
   margin-right: 1em;
 }
 
-.modal {
+.custom-modal {
   position: fixed;
   z-index: 1;
   left: 0;
@@ -53,6 +53,30 @@
   overflow: auto;
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  text-align: center;
+  background: white;
+  border: 1px solid black;
+  padding: 1em;
+}
+
+.modal-badge {
+  width: 340px;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-badge-icon {
+  font-size: 7em;
+  color: red;
+  animation: 2s linear .01s infinite spin
 }
 
 @keyframes stand-out {
@@ -61,5 +85,14 @@
   }
   to {
     box-shadow: none;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
   }
 }
