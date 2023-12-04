@@ -1,0 +1,23 @@
+<div class="badge-card my-3 <%= 'claimable' if owned %>">
+  <% if owned %>
+    <button class="launch-modal"></button>
+  <% end %>
+  <em class="badge-name"><%= badge.name %></em>
+
+  <div class="badge-contents">
+    <div class="badge-details">
+      <div class="mb-0"><%= badge.description %></div>
+    </div>
+    <div class="badge-status">
+      <% if owned %>
+        <i class="fa-solid fa-key"></i>
+      <% else %>
+        <i class="fa-solid fa-lock"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal d-none">
+  <p>Hello I am a test</p>
+</div>
