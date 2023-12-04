@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_03_184630) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_04_113511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_184630) do
     t.index ["user_id"], name: "index_avatars_on_user_id"
   end
 
+  create_table "badges", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+    t.string "category"
+  end
+
   create_table "beneficiaries", force: :cascade do |t|
     t.string "name"
     t.string "logo_src"
@@ -104,6 +112,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_184630) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+  end
+
+  create_table "user_badges", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "badge_id", null: false
+    t.boolean "claimed", default: false
+    t.index ["badge_id"], name: "index_user_badges_on_badge_id"
+    t.index ["user_id"], name: "index_user_badges_on_user_id"
   end
 
   create_table "user_pacts", force: :cascade do |t|
@@ -147,6 +165,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_184630) do
   add_foreign_key "avatar_skills", "skills"
   add_foreign_key "avatars", "levels"
   add_foreign_key "avatars", "users"
+  add_foreign_key "user_badges", "badges"
+  add_foreign_key "user_badges", "users"
   add_foreign_key "user_pacts", "beneficiaries"
   add_foreign_key "user_pacts", "pacts"
   add_foreign_key "user_pacts", "users"

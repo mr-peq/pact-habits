@@ -3,6 +3,8 @@
 <head>
   <title>We're sorry, but something went wrong (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!--
   <style>
   .rails-default-error-page {
     background-color: #EFEFEF;
@@ -52,15 +54,40 @@
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
   </style>
+  -->
+  <style>
+    .information {
+      background-color: black;
+      color: white;
+      text-align: center;
+      border: 1px solid #CCC;
+      width: 60%;
+      margin: 4em auto 0;
+      padding: 3em;
+    }
+    a{
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/500.html -->
+<!-- default <body class="rails-default-error-page">
+  This file lives in public/500.html
   <div class="dialog">
     <div>
       <h1>We're sorry, but something went wrong.</h1>
     </div>
     <p>If you are the application owner check the logs for more information.</p>
   </div>
+</body> -->
+<body>
+  <div class="information">
+      <h1>500</h1>
+      <p>Ruh-roh, something just isn't right... Time to paw through your logs and get down and dirty in your stack-trace;)</p>
+      <a href="https://www.pacthabit.com/">Return home</a>
+  </div>
 </body>
+
 </html>

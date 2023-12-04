@@ -7,6 +7,10 @@ class AvatarController < ApplicationController
       .joins("LEFT JOIN avatar_skills ON skills.id = avatar_skills.skill_id AND avatar_skills.avatar_id = #{@avatar.id}")
       .where("avatar_skills.skill_id IS NULL")
     @fill_percentage = (@avatar.xp.to_f / @avatar.level.to_next).round(3) * 100
+    @user_badges = current_user.user_badges.where(claimed: false)
+    @missing_badges = Badge
+      .joins("LEFT JOIN user_badges ON badges.id = user_badges.badge_id AND user_badges.user_id = #{current_user.id}")
+      .where("user_badges.badge_id IS NULL")
   end
 
   def update
