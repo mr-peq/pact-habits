@@ -1,0 +1,124 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  grid-gap: 0;
+}
+
+.grid-item {
+  .pact-timeline-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .pact-pact-card {
+    flex-grow:1;
+    align-items: center;
+    justify-content: space-between;
+    color: #A6ACBA;
+    padding: 0px 12px;;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+  }
+
+  .pact-card-details {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .pact-box {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: flex;
+    flex-grow: 1;
+    border-radius: 20px;
+    background-color: #333B4B;
+  }
+
+  .pact-card-time {
+    font-size: 14px;
+    color: #10CC61;
+    padding-left: 10px;
+    padding-top: 15px;
+  }
+
+  .pact-card-content {
+    flex-grow: 1;
+    padding: 0 20px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .pact-card-category {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 2px;
+    margin-bottom: 4px;
+  }
+
+  .pact-card-distanceOrDuration {
+    font-size: 16px;
+    margin: 2px;
+    margin-bottom: 4px;
+  }
+
+  .pact-card-xp {
+    font-size: 16px;
+    color: #ffd700;
+    margin: 2px;
+  }
+
+  .pact-card-bet {
+    background-color: #10CC61;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+  }
+
+  .pact-bet-amount {
+    font-size: 20px;
+    color: #333B4B;
+  }
+
+  .timeline {
+    position: relative;
+    height: 100px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+  }
+
+  .line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #10CC61;
+    height: 142%;
+  }
+
+  .circle {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-40%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: #10CC61;
+    border-radius: 50%;
+  }
+}
+
+.date-group h3 {
+  color: #A6ACBA;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 40px;
+  border-bottom: solid;
+}
+
+.date-group .grid-container .grid-item:last-child .timeline .line {
+  height: 120%;
+}

@@ -3,6 +3,14 @@
   <head>
     <title>PactHabits</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= render 'shared/ios_pwa_links' %>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,7 +20,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body style="background-color: #ffffff;">
+  <body style="background-color: #242933; margin-bottom: 120px;">
     <%= render "shared/top_navbar"%>
     <%= render "shared/bottom_navbar" %>
     <%= render "shared/flashes" %>
