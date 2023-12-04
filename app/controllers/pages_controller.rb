@@ -3,13 +3,15 @@ class PagesController < ApplicationController
 
   def dashboard
     # All user_pacts for the current user:
-    @user_pacts = current_user.user_pacts
     @user = current_user
+    @user_pacts = current_user.user_pacts
 
     # And to separate them based on their status:
     @ongoing_pacts = @user_pacts.where(status: :ongoing)
     @achieved_pacts = @user_pacts.where(status: :achieved)
     @failed_pacts = @user_pacts.where(status: :failed)
+
+    @ongoing_user_pacts = @user_pacts.sort_by(&:deadline_at).group_by { |user_pact| user_pact.deadline_at.to_date }
 
     @fill_percentage = (@user.avatar.xp.to_f / @user.avatar.level.to_next).round(3) * 100
   end
