@@ -4,6 +4,7 @@ UserPact.destroy_all
 Beneficiary.destroy_all
 Pact.destroy_all
 User.destroy_all
+Level.destroy_all
 Avatar.destroy_all
 Skill.destroy_all
 
@@ -65,11 +66,21 @@ user_ismael.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'a
 user_joseph.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
 
 
-# ============================= AVATARS ==================================
+# ============================= AVATARS & LEVELS ==================================
+puts "Creating levels..."
+# for details about the calculation, see : https://blog.jakelee.co.uk/converting-levels-into-xp-vice-versa/
+i = 0
+x = 0.11
+y = 2
+10.times do
+  i += 1
+  Level.create!(current: i, to_next: ((i / x)**y))
+end
+
 puts "Creating avatars for them BOSSES..."
-avatar_theodore = Avatar.new(user: user_theodore)
-avatar_ismael = Avatar.new(user: user_ismael)
-avatar_joseph = Avatar.new(user: user_joseph)
+avatar_theodore = Avatar.new(user: user_theodore, level: Level.first)
+avatar_ismael = Avatar.new(user: user_ismael, level: Level.first)
+avatar_joseph = Avatar.new(user: user_joseph, level: Level.first)
 
 puts "Creating 12 skills..."
 # Min dmg: 15
@@ -255,8 +266,18 @@ puts "Calculating users' XP and stats..."
 
 User.all.each do |user|
   temp_user = user
+  avatar = temp_user.avatar
   temp_user.user_pacts.where(status: "achieved").each do |achieved_pact|
     temp_user.total_xp += achieved_pact.pact.xp
+    avatar.xp += achieved_pact.pact.xp
+    if avatar.xp > avatar.level.to_next
+      remain = avatar.xp - avatar.level.to_next
+      next_level = avatar.level.current + 1
+      avatar.level = Level.find_by(current: next_level)
+      avatar.upgrade_points += 2
+      avatar.xp = remain
+    end
+    avatar.save
     temp_user.achieved_pacts += 1
   end
   temp_user.user_pacts.where(status: "failed").each do

@@ -20,6 +20,7 @@ class PactsController < ApplicationController
 
     activity_ids = strava_client.get_user_activities(pact_specs)
     if user_finished_pact(activity_ids)
+      upgrade(current_user, @user_pact.pact.xp)
       redirect_to root_path, notice: "Congrats for your achievement! You've received #{@user_pact.pact.xp} XP"
     else
       redirect_to edit_pact_path(@user_pact), alert: "Looks like you're not quite there yet, champ..."
@@ -109,5 +110,23 @@ class PactsController < ApplicationController
       end
     end
     false
+  end
+
+  def upgrade(user, xp)
+    avatar = user.avatar
+    user.total_xp += xp
+    avatar.xp += xp
+    level_up_avatar(avatar) if avatar.xp > avatar.level.to_next
+    avatar.save
+    user.achieved_pacts += 1
+    user.save
+  end
+
+  def level_up_avatar(avatar)
+    remain = avatar.xp - avatar.level.to_next
+    next_level = avatar.level.current + 1
+    avatar.level = Level.find_by(current: next_level)
+    avatar.upgrade_points += 2
+    avatar.xp = remain
   end
 end

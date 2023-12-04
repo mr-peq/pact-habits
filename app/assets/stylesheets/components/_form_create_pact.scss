@@ -414,3 +414,18 @@
   color: #a8dadc; /* A different color for list items, like Bootstrap's info color */
   margin-bottom: 5px; /* Space between list items */
 }
+
+.btn-pact {
+  font-size: 25px;
+  border-radius: 10px;
+  background: #457b9d;
+  color: white;
+  font-weight: 500;
+  padding-inline: 1em;
+}
+
+.pact-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

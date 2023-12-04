@@ -1,4 +1,4 @@
-<div class="dashboard-avatar w-100 my-2">
+<div class="dashboard-avatar w-100 mt-4">
   <%= link_to "", avatar_path(@user.avatar), class: "link-to-avatar-page" %>
   <div class="avatar-profile">
     <%= cl_image_tag(@user.avatar_picture.key, width: 80, height: 80, class: "avatar-picture", crop: :fill) %>
@@ -6,9 +6,9 @@
   </div>
   <div class="avatar-status">
     <div class="avatar-level">
-      <p class="avatar-level-text mb-0">Level 4</p>
+      <p class="avatar-level-text mb-0">Level <%= @user.avatar.level.current %></p>
       <div class="avatar-xp-bar">
-        <div class="xp-bar-progression"></div>
+        <div class="xp-bar-progression" style="width: <%= @fill_percentage %>%"></div>
       </div>
     </div>
     <div class="avatar-badges">

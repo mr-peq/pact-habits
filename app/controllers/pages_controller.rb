@@ -10,6 +10,8 @@ class PagesController < ApplicationController
     @ongoing_pacts = @user_pacts.where(status: :ongoing)
     @achieved_pacts = @user_pacts.where(status: :achieved)
     @failed_pacts = @user_pacts.where(status: :failed)
+
+    @fill_percentage = (@user.avatar.xp.to_f / @user.avatar.level.to_next).round(3) * 100
   end
 
   def account
