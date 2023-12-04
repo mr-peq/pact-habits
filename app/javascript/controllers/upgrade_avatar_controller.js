@@ -104,7 +104,7 @@ export default class extends Controller {
         break;
       case "crit_rate":
         statValue.innerText = `${+(statValue.innerText.slice(0, -1)) - 2}%`;
-        if (statValue.innerText == initialStats[statValue.id]) this.#removeDecrementButton(statValue.parentElement);
+        if (statValue.innerText.slice(0, -1) == initialStats[statValue.id]) this.#removeDecrementButton(statValue.parentElement);
         break;
       default:
         statValue.innerText = +(statValue.innerText) - 1;
