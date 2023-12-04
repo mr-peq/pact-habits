@@ -1,14 +1,39 @@
 <div class="mt-5">
   <div class="timer mb-5">
-    <h2 class="mb-0">Time left:</h2>
-    <i class="fa-solid fa-circle-notch mt-5"></i>
+    <h2>Time left:</h2>
+    <div class="circle-timer" data-controller="circle-timer">
+      <div class="d-none" data-circle-timer-target="createdAt"><%= @user_pact.created_at.to_i * 1000 %></div>
+      <div class="d-none" data-circle-timer-target="deadline"><%= @user_pact.deadline_at.to_i * 1000 %></div>
+    </div>
+
     <% time_remaining = @user_pact.deadline_at - Time.now %>
     <% days = (time_remaining / 1.day).to_i %>
     <% hours = ((time_remaining % 1.day) / 1.hour).to_i %>
     <% minutes = ((time_remaining % 1.hour) / 1.minute).to_i %>
     <% seconds = ((time_remaining % 1.minute) / 1.second).to_i %>
+    <div class="numeric-timer" data-controller="timer">
+      <div class="days">
+        <div class="numbers" id="days"><%= days %></div>
+        <div class="timer-text">Days</div>
+      </div>
+      <div class="separator">:</div>
+      <div class="hours">
+        <div class="numbers" id="hours"><%= hours %></div>
+        <div class="timer-text">Hours</div>
+      </div>
+      <div class="separator">:</div>
+      <div class="minutes">
+        <div class="numbers" id="minutes"><%= minutes %></div>
+        <div class="timer-text">Minutes</div>
+      </div>
+      <div class="separator">:</div>
+      <div class="seconds">
+        <div class="numbers" id="seconds"><%= seconds %></div>
+        <div class="timer-text">Seconds</div>
+      </div>
 
-    <p class="mb-0 mt-5"><%= days %> Days, <%= hours %> hours, <%= minutes %> minutes and <%= seconds %> seconds</p>
+      <div class="d-none" id="deadline"><%= @user_pact.deadline_at.to_i * 1000 %></div>
+    </div>
   </div>
 
   <%= render(partial: "card", locals: { user_pact: @user_pact , bottom: "submit", clickable: false })%>

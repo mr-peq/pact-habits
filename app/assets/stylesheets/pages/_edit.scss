@@ -1,10 +1,47 @@
 .timer {
   text-align: center;
-  i {
-    font-size: 10em;
-    color: #42cc42;
-  }
-  h2, p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
     font-weight: bold;
+    margin-bottom: 1em;
   }
+}
+
+.circle-timer {
+  width: 30vmin;
+  height: 30vmin;
+  border: 1.7vh solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(white, white) content-box no-repeat,
+              conic-gradient(#afff00 100%, 0, #767776f0 ) border-box;
+  margin-bottom: 1em;
+}
+
+.numeric-timer {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.days, .hours, .minutes, .seconds {
+  width: 70px;
+}
+
+.fewer-days {
+  text-align: end;
+
+  * {
+    margin-right: 0.6em;
+  }
+}
+
+.numbers, .separator {
+  font-size: 2em;
+}
+
+.timer-text {
+  font-size: 1em;
 }
