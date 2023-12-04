@@ -65,7 +65,7 @@
 
   <% if bottom == "submit" %>
   <div class="pact-card-bottom mt-3 <%= 'd-none' if user_pact.pact.recurring || user_pact.status == 'achieved'%>" style="justify-content: center;">
-    <%= simple_form_for user_pact, url: update_pact_path, html: { style: "height: 100%; width: 70%;"} do |f| %>
+    <%= simple_form_for user_pact, url: update_pact_path, html: { style: "height: 100%; width: 70%;" }, data: { action: "submit->pact#validate" } do |f| %>
     <%= f.submit "Finish my pact" %>
     <% end %>
   </div>
