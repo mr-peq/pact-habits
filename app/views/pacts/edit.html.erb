@@ -39,11 +39,9 @@
   <%= render(partial: "card", locals: { user_pact: @user_pact , bottom: "submit", clickable: false })%>
 
   <div class="custom-modal d-none" data-pact-target="modal">
-    <div class="modal-container">
-      <div class="modal-badge">
-        <i class="fa-solid fa-certificate modal-badge-icon"></i>
-      </div>
-      <button class="get-badge btn btn-primary">Claim my badge !</button>
+    <div class="modal-runner">
+      <img src="https://media4.giphy.com/media/3ohs4zmO7MclAHeBe8/giphy.gif?cid=ecf05e47c5ob4lh8veso9o4m2fescglzznyf98f71rde63qy&ep=v1_gifs_related&rid=giphy.gif&ct=g" alt="">
+      <p id="waitMessage">Fetching your Strava Activities...</p>
     </div>
   </div>
 </div>

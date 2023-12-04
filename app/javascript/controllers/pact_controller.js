@@ -12,11 +12,22 @@ export default class extends Controller {
   validate(e) {
     e.preventDefault();
     this.showModal();
+    const waitMessage = document.getElementById('waitMessage');
+    const form = document.querySelector('form');
+
+    const messages = [
+      "Compiling data...",
+      "Looking for a pact-finisher..."
+    ];
+    let i = 0;
+    setInterval(() => {
+      waitMessage.innerText = messages[i];
+      i++;
+    }, 2000);
 
     setTimeout(() => {
-      const form = document.querySelector('form');
-      console.log(form);
-    }, 1000);
+      form.submit();
+    }, 5000);
   }
 
   showModal() {
