@@ -1,3 +1,5 @@
+<% content_for :meta_title, "#{@avatar.user.nickname}" %>  <% content_for :meta_description, "Cet avatar a les skills suivantes #{ }"%>  <% content_for :meta_image, cl_image_path(@avatar.photo.path) %>
+
 <div class="avatar-page">
   <h1 class="my-3"><%= @avatar.user.nickname %></h1>
 
@@ -16,7 +18,7 @@
         <p class="mb-0">XP : <%= @avatar.xp %> / <%= @avatar.level.to_next %></p>
         <p class="mb-0">To next level: <%= @avatar.to_next_level %></p>
       </div>
-      <div class="xp-bar">  
+      <div class="xp-bar">
         <div class="xp-bar-progression" style="width: <%= @fill_percentage %>%"></div>
       </div>
     </div>
