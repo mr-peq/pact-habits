@@ -1,4 +1,16 @@
-ActiveRecord::Schema[7.1].define(version: 2023_12_03_184630) do
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema[7.1].define(version: 2023_12_04_113511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,6 +71,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_184630) do
     t.index ["user_id"], name: "index_avatars_on_user_id"
   end
 
+  create_table "badges", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+    t.string "category"
+  end
+
   create_table "beneficiaries", force: :cascade do |t|
     t.string "name"
     t.string "logo_src"
@@ -92,6 +112,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_184630) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+  end
+
+  create_table "user_badges", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "badge_id", null: false
+    t.boolean "claimed", default: false
+    t.index ["badge_id"], name: "index_user_badges_on_badge_id"
+    t.index ["user_id"], name: "index_user_badges_on_user_id"
   end
 
   create_table "user_pacts", force: :cascade do |t|
@@ -135,6 +165,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_184630) do
   add_foreign_key "avatar_skills", "skills"
   add_foreign_key "avatars", "levels"
   add_foreign_key "avatars", "users"
+  add_foreign_key "user_badges", "badges"
+  add_foreign_key "user_badges", "users"
   add_foreign_key "user_pacts", "beneficiaries"
   add_foreign_key "user_pacts", "pacts"
   add_foreign_key "user_pacts", "users"

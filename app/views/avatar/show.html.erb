@@ -1,12 +1,14 @@
 <div class="avatar-page">
   <h1 class="my-3"><%= @avatar.user.nickname %></h1>
 
-  <div data-controller="upgrade-avatar">
+  <div data-controller="badge">
     <div class="resume my-3">
       <%= cl_image_tag(@avatar.user.avatar_picture.key, width: 100, height: 100, class: "avatar-picture", crop: :fill) %>
       <div class="resume-details">
         <p class="mb-0">Level <%= @avatar.level.current %></p>
+        <!--
         <div class="d-flex"><p class="mb-0">Upgrade points left: </p><div style="margin-left: 5px;" data-upgrade-avatar-target="upgradePoints"><%= @avatar.upgrade_points %></div></div>
+         -->
         <p class="mb-0">Ranking: <em style="font-size: .8em">not ranked yet.</em></p>
       </div>
     </div>
@@ -16,11 +18,26 @@
         <p class="mb-0">XP : <%= @avatar.xp %> / <%= @avatar.level.to_next %></p>
         <p class="mb-0">To next level: <%= @avatar.to_next_level %></p>
       </div>
-      <div class="xp-bar">  
+      <div class="xp-bar">
         <div class="xp-bar-progression" style="width: <%= @fill_percentage %>%"></div>
       </div>
     </div>
 
+    <div>
+      <h3 class="section-title mb-3" style="text-align: left;">My badges</h3>
+      <div class="my-badges"> placeholder
+      </div>
+    </div>
+
+    <% @user_badges.each do |user_badge| %>
+      <%= render partial: "badge_card", locals: { badge: user_badge.badge, owned: true } %>
+    <% end %>
+
+    <% @missing_badges.each do |missing_badge| %>
+      <%= render partial: "badge_card", locals: { badge: missing_badge, owned: false } %>
+    <% end %>
+
+    <!--
     <div class="update-avatar">
       <div class="update-avatar-btn btn btn-primary hide" data-action="click->upgrade-avatar#update" data-upgrade-avatar-target="updateBtn">Save changes</div>
     </div>
@@ -66,4 +83,6 @@
     <div><p>stamina</p><p><%= @avatar.stamina %></p></div>
     <div><p>speed</p><p><%= @avatar.speed %></p></div>
   </div>
+     -->
+
 </div>
