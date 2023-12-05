@@ -1,5 +1,7 @@
 <div class="mt-5" data-controller="pact">
-  <div class="timer mb-5">
+  <%= render(partial: "show_card", locals: { user_pact: @user_pact , clickable: false })%>
+
+  <div class="timer mb-5" style="color: #A6ACBA">
     <h2>Time left:</h2>
     <div class="circle-timer" data-controller="circle-timer">
       <div class="d-none" data-circle-timer-target="createdAt"><%= @user_pact.created_at.to_i * 1000 %></div>
@@ -36,7 +38,11 @@
     </div>
   </div>
 
-  <%= render(partial: "card", locals: { user_pact: @user_pact , bottom: "submit", clickable: false })%>
+  <div class="pact-card-finish">
+    <%= simple_form_for @user_pact, url: update_pact_path, data: { action: "submit->pact#validate" } do |f| %>
+      <%= f.submit "Finish my pact" %>
+    <% end %>
+  </div>
 
   <div class="custom-modal d-none" data-pact-target="modal">
     <div class="modal-runner">
