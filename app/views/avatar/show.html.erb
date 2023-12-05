@@ -2,7 +2,6 @@
 <% content_for :meta_description, "Cet avatar a les skills suivantes #{ }"%>
 <% content_for :meta_image, "#{cl_image_path(@avatar.user.avatar_picture.key)}" %>
 
-<%= cl_image_path(@avatar.user.avatar_picture.key) %>
 <div class="avatar-page">
   <h1 class="my-3"><%= @avatar.user.nickname %></h1>
 
