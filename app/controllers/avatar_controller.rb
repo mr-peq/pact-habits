@@ -12,6 +12,9 @@ class AvatarController < ApplicationController
       .joins("LEFT JOIN user_badges ON badges.id = user_badges.badge_id AND user_badges.user_id = #{current_user.id}")
       .where("user_badges.badge_id IS NULL")
     @my_badges = current_user.user_badges.where(claimed: true).map(&:badge)
+    @all_badges_count = Badge.all.count
+
+    @user = current_user
   end
 
   def update

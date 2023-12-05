@@ -15,12 +15,7 @@ class PagesController < ApplicationController
 
     # Key figures:
     @finished_pacts = @user_pacts.where.not(status: :ongoing).count
-    @success_rate =
-      if @finished_pacts.positive?
-        (@achieved_pacts.count.to_f / @finished_pacts) * 100
-      else
-        0
-      end
+    @success_rate = @finished_pacts.positive? ? (@achieved_pacts.count.to_f / @finished_pacts) * 100 : 0
 
     @total_donated = @failed_pacts.sum(&:bet)
 

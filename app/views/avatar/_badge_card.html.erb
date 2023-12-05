@@ -1,7 +1,10 @@
 <div class="badge-card my-3 <%= 'claimable' if owned %>">
+  <% if !owned %>
+    <div class="badge-card-filter"></div>
+  <% end %>
 
   <div class="badge-card-icon">
-     <div class="badge-icon">
+     <div class="badge-icon" style="<%= 'animation: none; background-color: #D8D8D8;' if !owned %>">
       <%= render partial: "badges/#{badge.name.downcase.gsub('-', '_').gsub(' ', '_').gsub('=', 'is')}" %>
      </div>
   </div>
