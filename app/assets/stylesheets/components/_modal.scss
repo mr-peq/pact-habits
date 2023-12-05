@@ -95,6 +95,24 @@
   border-radius: 50%;
 }
 
+.spin-faster {
+  animation: 1s linear infinite spin, 0.5s linear 1 move-up;
+}
+
+.spin-even-faster {
+  animation: 0.5s linear infinite spin, 0.25s linear 1 move-upper;
+}
+
+.spin-rocket {
+  top: -100px;
+  animation: 0.2s linear infinite spin;
+}
+
+.dive-in {
+  top: -100px;
+  animation: 0.5s linear 1 dive-in;
+}
+
 .get-badge {
   margin-bottom: 2em;
 }
@@ -113,5 +131,45 @@
   }
   to {
     transform: rotateY(360deg);
+  }
+}
+
+@keyframes move-up {
+  0% {
+    top: 0;
+  } 50% {
+    top: -10px;
+  } 75% {
+    top: -30px;
+  } 100% {
+    top: -50px;
+  }
+}
+
+@keyframes move-upper {
+  0% {
+    top: -50px;
+  } 50% {
+    top: -70px;
+  } 75% {
+    top: -90px;
+  } 100% {
+    top: -100px;
+  }
+}
+
+@keyframes dive-in {
+  0% {
+    top: -100px;
+    transform: rotateY(0deg) scale(1);
+  } 50% {
+    top: -50px;
+    transform: rotateY(180deg) scale(0.5);
+  } 75% {
+    top: -25px;
+    transform: rotateY(270deg) scale(0.25);
+  } 100% {
+    top: 0;
+    transform: rotateY(360deg) scale(0.1);
   }
 }
