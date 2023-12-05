@@ -32,7 +32,6 @@
       <div class="key-figure-label">Success Rate</div>
     </div>
   </div>
-
   <!--
   <div class="avatar-status">
     <div class="avatar-badges">
@@ -44,6 +43,11 @@
   -->
 </div>
 
+<!-- Ongoing pacts sorted -->
+<br>
+<div class="disclaimer">
+  <h3><strong class="highlight-text">Keep Pushing!</strong> You have <strong class="highlight-text"><%=@ongoing_pacts.count%></strong> ongoing pacts, with <strong class="highlight-text"><%= @total_ongoing_bet %>€</strong> on the line </h3>
+</div>
 <% @ongoing_pacts_sorted.each do |date, pacts| %>
   <div class="date-group">
     <h3><%= date == Date.today ? 'Today' : date.strftime('%A, %b %e') %></h3>

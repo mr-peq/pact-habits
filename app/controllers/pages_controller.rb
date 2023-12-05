@@ -23,6 +23,7 @@ class PagesController < ApplicationController
       end
 
     @total_donated = @failed_pacts.sum(&:bet)
+    @total_ongoing_bet = @ongoing_pacts.sum(&:bet)
 
     @fill_percentage = (@user.avatar.xp.to_f / @user.avatar.level.to_next).round(3) * 100
   end

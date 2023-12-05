@@ -7,6 +7,9 @@
     <div class="pact-pact-card">
       <div class="pact-card-time"><%=user_pact.deadline_at.strftime("%H:%M") %></div>
       <div class="pact-box">
+        <% if clickable %>
+            <%= link_to "", edit_pact_path(user_pact), class: "pact-clickable" %>
+        <% end %>
         <div class="pact-card-content">
           <p class="pact-card-category"><%= user_pact.pact.category.capitalize %>
             <% case user_pact.pact.category
@@ -26,11 +29,11 @@
               <% else %>
                 <p class="pact-card-distanceOrDuration"><i class="fa-solid fa-arrows-left-right"></i> <%= user_pact.pact.distance %>km</p>
               <% end %>
-              <p class="pact-card-xp"><i><i class="fa-solid fa-star" style="color: #ecdf1e;"></i> +<%= user_pact.pact.xp %> XP <i class="fa-solid fa-star" style="color: #ecdf1e;"></i></i></p>
+              <p class="pact-bet-amount"><i class="fa-solid fa-coins"></i> <%= user_pact.bet %> €</p>
             </div>
         </div>
-        <div class="pact-card-bet">
-          <span class="pact-bet-amount"><%= user_pact.bet %>€</span>
+        <div class="pact-card-xp">
+          <p class="pact-card-xp-amount"> +<%= user_pact.pact.xp %> XP </p>
         </div>
       </div>
     </div>
@@ -40,9 +43,6 @@
 <!-- CODE THEODORE - ANCIEN DISPLAY
 
 <div class="pact-card my-3 <%= 'challenge' if user_pact.pact.challenge %>">
-  <% if clickable %>
-    <%= link_to "", edit_pact_path(user_pact), class: "pact-clickable" %>
-  <% end %>
   <div class="pact-card-top">
     <div class="pact-card-details">
       <h3>Sport <% if user_pact.pact.challenge %><i class="fa-solid fa-people-group"></i><% end %></h3>

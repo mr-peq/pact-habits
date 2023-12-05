@@ -33,6 +33,7 @@
     flex-grow: 1;
     border-radius: 20px;
     background-color: #333B4B;
+    position: relative;
   }
 
   .pact-card-time {
@@ -63,23 +64,37 @@
     margin-bottom: 4px;
   }
 
-  .pact-card-xp {
+  .pact-bet-amount {
     font-size: 16px;
-    color: #ffd700;
     margin: 2px;
+    color: #FFD700;
   }
 
-  .pact-card-bet {
+  .pact-card-xp {
     background-color: #4ECDC4;
-    padding: 10px 20px;
     border-radius: 20px;
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
   }
 
-  .pact-bet-amount {
+  .pact-card-xp-amount {
     font-size: 20px;
     color: #333B4B;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .pact-clickable {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1; /* Ensures the link is above other content */
   }
 
   .timeline {
@@ -121,4 +136,15 @@
 
 .date-group .grid-container .grid-item:last-child .timeline .line {
   height: 120%;
+}
+
+.disclaimer h3 {
+margin-top: 10px;
+padding: 5px;
+text-align: justify;
+color: #A6ACBA;
+}
+
+.highlight-text {
+  color: #4ECDC4;
 }
