@@ -58,8 +58,28 @@
           <div class="leaderboard-list">
             <% @top_users.each_with_index do |user, index| %>
               <div class="leaderboard-user <%= 'current-user' if user == current_user %>">
-                <span class="rank"><%= index + 1 %>.</span>
-                <span class="nickname"><%= user.nickname %></span>
+                <span class="rank">
+                  <% case index %>
+                  <% when 0 %>
+                    <i class="fa-solid fa-trophy" style="color: #FFD601;"></i> <!-- First place icon (Gold) -->
+                  <% when 1 %>
+                    <i class="fa-solid fa-medal" style="color: silver;"></i> <!-- Second place icon (Silver) -->
+                  <% when 2 %>
+                    <i class="fa-solid fa-award" style="color: #cd7f32;"></i> <!-- Third place icon (Bronze) -->
+                  <% else %>
+                    <%= index + 1 %>.
+                  <% end %>
+                </span>
+                <div class="user-info">
+                  <% if user.avatar_picture.present? %>
+                    <%= image_tag(cl_image_path(user.avatar_picture.key), class: "avatar-image", alt: "#{user.nickname}'s avatar") %>
+                    <span class="nickname"><%= user.nickname %></span>
+                  <% else %>
+                    <!-- Placeholder for users without an avatar picture -->
+                    <div class="avatar-placeholder"></div>
+                    <span class="nickname"><%= user.nickname %></span>
+                  <% end %>
+                </div>
                 <span class="total-xp"><%= user.total_xp %> XP</span>
               </div>
             <% end %>
@@ -68,7 +88,10 @@
               <div class="dots">...</div>
               <div class="leaderboard-user current-user">
                 <span class="rank"><%= @current_user_rank %>.</span>
-                <span class="nickname"><%= @current_user.nickname %></span>
+                <div class="user-info">
+                  <%= image_tag(cl_image_path(user.avatar_picture.key), class: "avatar-image", alt: "#{user.nickname}'s avatar") %>
+                  <span class="nickname"><%= @current_user.nickname %></span>
+                </div>
                 <span class="total-xp"><%= @current_user.total_xp %> XP</span>
               </div>
             <% end %>

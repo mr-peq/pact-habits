@@ -36,18 +36,31 @@
 
 .rank {
   font-weight: bold;
-  margin-right: 10px;
+  width: 80px;
 }
 
 .nickname {
   flex-grow: 1;
+  font-weight: bold;
 }
 
 .total-xp {
   font-weight: bold;
+  margin-left: 10px;
 }
 
 .dots {
   text-align: center;
   margin: 10px 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.avatar-image, .avatar-placeholder {
+  margin-right: 10px;
 }
