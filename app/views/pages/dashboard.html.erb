@@ -1,46 +1,158 @@
-<div class="dashboard-avatar w-100 mt-4">
-  <%= link_to "", avatar_path(@user.avatar), class: "link-to-avatar-page" %>
-  <div class="avatar-bio">
-    <div class="avatar-profile">
-      <%= image_tag "https://i.pinimg.com/originals/58/20/fe/5820fe42115912f3e21d6588c6d6637f.jpg", width: 100, height: 100, class: "avatar-picture", alt: "User Avatar" %>
-      <div class="avatar-info">
-        <div class="avatar-nickname"><%= @user.nickname %></div>
-        <div class="avatar-level">
-          <p class="avatar-level-text mb-0">Level <%= @user.avatar.level.current %></p>
+<div data-controller="swiper">
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <!-- First Card: Avatar Bio -->
+      <div class="swiper-slide">
+        <!-- Content of your first card -->
+        <div class="dashboard-avatar w-100 mt-4">
+          <%= link_to "", avatar_path(@user.avatar), class: "link-to-avatar-page" %>
+          <div class="avatar-bio">
+            <div class="avatar-profile">
+              <%= image_tag "https://i.pinimg.com/originals/58/20/fe/5820fe42115912f3e21d6588c6d6637f.jpg", width: 100, height: 100, class: "avatar-picture", alt: "User Avatar" %>
+              <div class="avatar-info">
+                <div class="avatar-nickname"><%= @user.nickname %></div>
+                <div class="avatar-level">
+                  <p class="avatar-level-text mb-0">Level <%= @user.avatar.level.current %></p>
+                  <!--
+                  <div class="avatar-xp-bar">
+                    <div class="xp-bar-progression" style="width: <%= @fill_percentage %>%"></div>
+                  </div>
+                  -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Figures Section -->
+          <div class="key-figures">
+            <div class="key-figure">
+              <div class="key-figure-number"><%= @finished_pacts %></div>
+              <div class="key-figure-label">Ended Pacts</div>
+            </div>
+            <div class="key-figure">
+              <div class="key-figure-number"><%= @total_donated %> €</div>
+              <div class="key-figure-label">Donated</div>
+            </div>
+            <div class="key-figure">
+            <div class="key-figure-number"><%= number_with_precision(@success_rate, precision: 0) %>%</div>
+              <div class="key-figure-label">Success Rate</div>
+            </div>
+          </div>
           <!--
-          <div class="avatar-xp-bar">
-            <div class="xp-bar-progression" style="width: <%= @fill_percentage %>%"></div>
+          <div class="avatar-status">
+            <div class="avatar-badges">
+              <div class="badge"><i class="fa-solid fa-mountain-sun"></i></div>
+              <div class="badge"><i class="fa-solid fa-person-running"></i></div>
+              <div class="badge"><i class="fa-solid fa-bicycle"></i></div>
+            </div>
+          </div>
+          -->
+        </div>
+      </div>
+
+      <!-- Second Card: Leaderboard -->
+      <div class="swiper-slide">
+        <!-- Content of the leaderboard -->
+                <div class="dashboard-avatar w-100 mt-4">
+          <%= link_to "", avatar_path(@user.avatar), class: "link-to-avatar-page" %>
+          <div class="avatar-bio">
+            <div class="avatar-profile">
+              <%= image_tag "https://i.pinimg.com/originals/58/20/fe/5820fe42115912f3e21d6588c6d6637f.jpg", width: 100, height: 100, class: "avatar-picture", alt: "User Avatar" %>
+              <div class="avatar-info">
+                <div class="avatar-nickname"><%= @user.nickname %></div>
+                <div class="avatar-level">
+                  <p class="avatar-level-text mb-0">Level <%= @user.avatar.level.current %></p>
+                  <!--
+                  <div class="avatar-xp-bar">
+                    <div class="xp-bar-progression" style="width: <%= @fill_percentage %>%"></div>
+                  </div>
+                  -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Figures Section -->
+          <div class="key-figures">
+            <div class="key-figure">
+              <div class="key-figure-number"><%= @finished_pacts %></div>
+              <div class="key-figure-label">Ended Pacts</div>
+            </div>
+            <div class="key-figure">
+              <div class="key-figure-number"><%= @total_donated %> €</div>
+              <div class="key-figure-label">Donated</div>
+            </div>
+            <div class="key-figure">
+            <div class="key-figure-number"><%= number_with_precision(@success_rate, precision: 0) %>%</div>
+              <div class="key-figure-label">Success Rate</div>
+            </div>
+          </div>
+          <!--
+          <div class="avatar-status">
+            <div class="avatar-badges">
+              <div class="badge"><i class="fa-solid fa-mountain-sun"></i></div>
+              <div class="badge"><i class="fa-solid fa-person-running"></i></div>
+              <div class="badge"><i class="fa-solid fa-bicycle"></i></div>
+            </div>
+          </div>
+          -->
+        </div>
+      </div>
+
+      <!-- Third Card: Badges -->
+      <div class="swiper-slide">
+        <!-- Content of the badges -->
+                <div class="dashboard-avatar w-100 mt-4">
+          <%= link_to "", avatar_path(@user.avatar), class: "link-to-avatar-page" %>
+          <div class="avatar-bio">
+            <div class="avatar-profile">
+              <%= image_tag "https://i.pinimg.com/originals/58/20/fe/5820fe42115912f3e21d6588c6d6637f.jpg", width: 100, height: 100, class: "avatar-picture", alt: "User Avatar" %>
+              <div class="avatar-info">
+                <div class="avatar-nickname"><%= @user.nickname %></div>
+                <div class="avatar-level">
+                  <p class="avatar-level-text mb-0">Level <%= @user.avatar.level.current %></p>
+                  <!--
+                  <div class="avatar-xp-bar">
+                    <div class="xp-bar-progression" style="width: <%= @fill_percentage %>%"></div>
+                  </div>
+                  -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Figures Section -->
+          <div class="key-figures">
+            <div class="key-figure">
+              <div class="key-figure-number"><%= @finished_pacts %></div>
+              <div class="key-figure-label">Ended Pacts</div>
+            </div>
+            <div class="key-figure">
+              <div class="key-figure-number"><%= @total_donated %> €</div>
+              <div class="key-figure-label">Donated</div>
+            </div>
+            <div class="key-figure">
+            <div class="key-figure-number"><%= number_with_precision(@success_rate, precision: 0) %>%</div>
+              <div class="key-figure-label">Success Rate</div>
+            </div>
+          </div>
+          <!--
+          <div class="avatar-status">
+            <div class="avatar-badges">
+              <div class="badge"><i class="fa-solid fa-mountain-sun"></i></div>
+              <div class="badge"><i class="fa-solid fa-person-running"></i></div>
+              <div class="badge"><i class="fa-solid fa-bicycle"></i></div>
+            </div>
           </div>
           -->
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Key Figures Section -->
-  <div class="key-figures">
-    <div class="key-figure">
-      <div class="key-figure-number"><%= @finished_pacts %></div>
-      <div class="key-figure-label">Ended Pacts</div>
-    </div>
-    <div class="key-figure">
-      <div class="key-figure-number"><%= @total_donated %> €</div>
-      <div class="key-figure-label">Donated</div>
-    </div>
-    <div class="key-figure">
-    <div class="key-figure-number"><%= number_with_precision(@success_rate, precision: 0) %>%</div>
-      <div class="key-figure-label">Success Rate</div>
-    </div>
+    <!-- Optional: Pagination -->
+    <div class="swiper-pagination"></div>
+
   </div>
-  <!--
-  <div class="avatar-status">
-    <div class="avatar-badges">
-      <div class="badge"><i class="fa-solid fa-mountain-sun"></i></div>
-      <div class="badge"><i class="fa-solid fa-person-running"></i></div>
-      <div class="badge"><i class="fa-solid fa-bicycle"></i></div>
-    </div>
-  </div>
-  -->
 </div>
 
 <!-- Ongoing pacts sorted -->
@@ -48,6 +160,7 @@
 <div class="disclaimer">
   <h3><strong class="highlight-text">Keep Pushing!</strong> You have <strong class="highlight-text"><%=@ongoing_pacts.count%></strong> ongoing pacts, with <strong class="highlight-text"><%= @total_ongoing_bet %>€</strong> on the line </h3>
 </div>
+
 <% @ongoing_pacts_sorted.each do |date, pacts| %>
   <div class="date-group">
     <h3><%= date == Date.today ? 'Today' : date.strftime('%A, %b %e') %></h3>

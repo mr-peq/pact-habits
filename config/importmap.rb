@@ -22,3 +22,4 @@ pin "process", to: "https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/pro
 pin "tg", to: "https://ga.jspm.io/npm:tg@0.0.7/tg.js"
 pin "util", to: "https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/util.js"
 pin "vm", to: "https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/vm.js"
+pin "swiper", to: "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs"

@@ -111,7 +111,7 @@
     bottom: 0;
     width: 4px;
     background-color: #4ECDC4;
-    height: 142%;
+    height: 180%;
   }
 
   .circle {
@@ -147,4 +147,15 @@ color: #A6ACBA;
 
 .highlight-text {
   color: #4ECDC4;
+}
+
+.weekday-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.iteration-counter {
+  font-size: 14px;
+  margin-left: auto;
 }
