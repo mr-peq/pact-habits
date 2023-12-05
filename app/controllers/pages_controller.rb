@@ -11,7 +11,18 @@ class PagesController < ApplicationController
     @achieved_pacts = @user_pacts.where(status: :achieved)
     @failed_pacts = @user_pacts.where(status: :failed)
 
-    @ongoing_user_pacts = @user_pacts.sort_by(&:deadline_at).group_by { |user_pact| user_pact.deadline_at.to_date }
+    @ongoing_pacts_sorted = @ongoing_pacts.sort_by(&:deadline_at).group_by { |user_pact| user_pact.deadline_at.to_date }
+
+    # Key figures:
+    @finished_pacts = @user_pacts.where.not(status: :ongoing).count
+    @success_rate =
+      if @finished_pacts.positive?
+        (@achieved_pacts.count.to_f / @finished_pacts) * 100
+      else
+        0
+      end
+
+    @total_donated = @failed_pacts.sum(&:bet)
 
     @fill_percentage = (@user.avatar.xp.to_f / @user.avatar.level.to_next).round(3) * 100
   end
