@@ -50,11 +50,10 @@
 }
 
 .pact-card-bottom {
-  height: 40px;
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
 
   input {
     width: 100%;
@@ -74,24 +73,27 @@
 
 .weekdays {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 5px;
+  flex-grow: 1;
 }
 
 .weekday-circle {
   text-align: center;
-  border: 1px solid #CED4DA;
+  border: 1px solid #242933;
   width: 25px;
   height: 25px;
   border-radius: 50%;
   margin-right: 3px;
-  background-color: #B0B0B0;
-  color: white;
+  background-color: #A6ACBA;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333B4B;
   font-weight: bold;
 }
 .weekday-circle.weekday-selected {
-  background-color: $light-blue;
-  color: $dark-blue;
+  background-color: #4ECDC4;
+  color: #333B4B;
 }
 
 .challenge {

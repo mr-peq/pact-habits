@@ -56,6 +56,9 @@ class PactsController < ApplicationController
   def create
     @pact = Pact.new(pact_params)
     ActiveRecord::Base.transaction do
+      if pact_params[:weekdays].present?
+        @pact.recurring = true
+      end
       if @pact.save!
         # Create the associated UserPact
         @user_pact = UserPact.new(user_pact_params)

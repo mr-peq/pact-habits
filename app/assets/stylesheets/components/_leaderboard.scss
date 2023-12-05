@@ -1,0 +1,53 @@
+.leaderboard-card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #4ECDC4;
+  font-weight: bold;
+  font-size: 30px;
+  letter-spacing: 2px;
+  font-family: montserrat;
+}
+
+.leaderboard-list {
+  list-style: none;
+  padding: 0;
+}
+
+.leaderboard-user {
+  font-size: 20px;
+  color: #A6ACBA;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.leaderboard-user.current-user {
+  font-weight: bold;
+  color: #4ECDC4;
+}
+
+.rank {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.nickname {
+  flex-grow: 1;
+}
+
+.total-xp {
+  font-weight: bold;
+}
+
+.dots {
+  text-align: center;
+  margin: 10px 0;
+}
