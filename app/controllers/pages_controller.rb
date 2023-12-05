@@ -16,7 +16,10 @@ class PagesController < ApplicationController
     next_occurrence || user_pact.deadline_at.to_date
   end
 
-
+  def leaderboard
+    @top_users = User.order(total_xp: :desc).limit(3)
+    @current_user_rank = User.where('total_xp > ?', current_user.total_xp).count + 1
+  end
 
   def dashboard
     # All user_pacts for the current user:
@@ -50,6 +53,9 @@ class PagesController < ApplicationController
     @total_ongoing_bet = @ongoing_pacts.sum(&:bet)
 
     @fill_percentage = (@user.avatar.xp.to_f / @user.avatar.level.to_next).round(3) * 100
+
+    @top_users = User.order(total_xp: :desc).limit(3)
+    @current_user_rank = User.where('total_xp > ?', current_user.total_xp).count + 1
   end
 
   def account
