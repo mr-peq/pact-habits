@@ -34,20 +34,44 @@
     </div>
 
     <% @user_badges.each do |user_badge| %>
-      <%= render partial: "badge_card", locals: { badge: user_badge.badge, owned: true } %>
+    <%= render "badge_card", badge: user_badge.badge, owned: true %>
     <% end %>
 
     <% @missing_badges.each do |missing_badge| %>
-      <%= render partial: "badge_card", locals: { badge: missing_badge, owned: false } %>
+    <%= render "badge_card", badge: missing_badge, owned: false %>
     <% end %>
+
+  </div>
+
+  <!--
+  <div id="initialStats" class="d-none">
+    <div><p>health</p><p><%#= @avatar.health %></p></div>
+    <div><p>mana</p><p><%#= @avatar.mana %></p></div>
+    <div><p>attack</p><p><%#= @avatar.attack %></p></div>
+    <div><p>defense</p><p><%#= @avatar.defense %></p></div>
+    <div><p>magic_power</p><p><%#= @avatar.magic_power %></p></div>
+    <div><p>magic_defense</p><p><%#= @avatar.magic_defense %></p></div>
+    <div><p>crit_rate</p><p><%#= @avatar.crit_rate %></p></div>
+    <div><p>stamina</p><p><%#= @avatar.stamina %></p></div>
+    <div><p>speed</p><p><%#= @avatar.speed %></p></div>
+  </div>
+   -->
+
+</div>
+
+    <%# @user_badges.each do |user_badge| %>
+      <%#= render partial: "badge_card", locals: { badge: user_badge.badge, owned: true } %>
+    <%# end %>
 
     <!--
     <div class="update-avatar">
       <div class="update-avatar-btn btn btn-primary hide" data-action="click->upgrade-avatar#update" data-upgrade-avatar-target="updateBtn">Save changes</div>
     </div>
+     -->
 
-    <%= render "stats_and_skills", avatar: @avatar %>
+    <%#= render "stats_and_skills", avatar: @avatar %>
 
+    <!--
     <div class="items my-3">
       <h3>Items</h3>
       <i class="fa-solid fa-circle-question info-bubble"></i>
@@ -62,31 +86,18 @@
     <div class="see-ranking my-3">
       <div class="see-ranking-btn btn btn-primary">See Ranking</div>
     </div>
+     -->
 
+     <!--
     <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasBottomLabel">Available skills</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body small">
-        <% @missing_skills.each do |skill| %>
-        <p data-bs-dismiss="offcanvas" aria-label="Close" data-action="click->upgrade-avatar#addSkill"><%= skill.name %></p>
-        <% end %>
+        <%# @missing_skills.each do |skill| %>
+        <p data-bs-dismiss="offcanvas" aria-label="Close" data-action="click->upgrade-avatar#addSkill"><%#= skill.name %></p>
+        <%# end %>
       </div>
     </div>
-  </div>
-
-  <div id="initialStats" class="d-none">
-    <div><p>health</p><p><%= @avatar.health %></p></div>
-    <div><p>mana</p><p><%= @avatar.mana %></p></div>
-    <div><p>attack</p><p><%= @avatar.attack %></p></div>
-    <div><p>defense</p><p><%= @avatar.defense %></p></div>
-    <div><p>magic_power</p><p><%= @avatar.magic_power %></p></div>
-    <div><p>magic_defense</p><p><%= @avatar.magic_defense %></p></div>
-    <div><p>crit_rate</p><p><%= @avatar.crit_rate %></p></div>
-    <div><p>stamina</p><p><%= @avatar.stamina %></p></div>
-    <div><p>speed</p><p><%= @avatar.speed %></p></div>
-  </div>
-     -->
-
-</div>
+      -->

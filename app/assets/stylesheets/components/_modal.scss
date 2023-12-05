@@ -16,13 +16,15 @@
 .modal-container {
   text-align: center;
   background: white;
-  border: 1px solid black;
+  border: 3px solid #A4AAB8;
   padding: 1em;
+  background-color: #242933;
+  border-radius: 10px;
 }
 
 .modal-badge {
   width: 340px;
-  height: 280px;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,9 +51,52 @@
 }
 
 .modal-badge-icon {
-  font-size: 7em;
-  color: red;
-  animation: 2s linear .01s infinite spin
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #ffd700;
+  border: 6px solid white;
+  animation: 2s linear .01s infinite spin;
+
+  svg {
+    display: block;
+    margin: auto;
+    margin-top: auto;
+    height: 140px;
+    width: 100px;
+    margin-top: 6px;
+    filter: invert(12%) sepia(15%) saturate(1003%) hue-rotate(181deg) brightness(94%) contrast(88%);
+  }
+}
+
+.modal-badge-icon::before {
+  position: absolute;
+  border: 3px dotted #8c1616;
+  width: 140px;
+  height: 140px;
+  background: none;
+  display: block;
+  content: "";
+  border-radius: 50%;
+}
+
+.modal-badge-icon::after {
+  position: absolute;
+  border: 3px ridge #956464;
+  width: 148px;
+  height: 148px;
+  background: none;
+  display: block;
+  content: "";
+  border-radius: 50%;
+}
+
+.get-badge {
+  margin-bottom: 2em;
 }
 
 .test {
