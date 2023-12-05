@@ -3,20 +3,31 @@
 <% content_for :meta_image, "#{cl_image_path(@avatar.user.avatar_picture.key)}" %>
 
 <div class="avatar-page">
-  <h1 class="my-3"><%= @avatar.user.nickname %></h1>
 
   <div data-controller="badge">
-    <div class="resume my-3">
-      <%= cl_image_tag(@avatar.user.avatar_picture.key, width: 100, height: 100, class: "avatar-picture", crop: :fill) %>
-      <div class="resume-details">
-        <p class="mb-0">Level <%= @avatar.level.current %></p>
-        <!--
-        <div class="d-flex"><p class="mb-0">Upgrade points left: </p><div style="margin-left: 5px;" data-upgrade-avatar-target="upgradePoints"><%= @avatar.upgrade_points %></div></div>
-         -->
-        <p class="mb-0">Ranking: <em style="font-size: .8em">not ranked yet.</em></p>
+    <div class="avatar-page-resume">
+      <div style="text-align: center">
+        <%= image_tag "https://i.pinimg.com/originals/58/20/fe/5820fe42115912f3e21d6588c6d6637f.jpg", width: 100, height: 100, class: "avatar-picture", alt: "User Avatar", style: "margin-bottom: .5em;" %>
+        <h3 class="avatar-page-level">Level <%= @avatar.level.current %></h3>
+      </div>
+
+      <div class="avatar-page-stats">
+        <div class="avatar-resume-stat">
+          <%= image_tag "stat-illustrations/ranking.svg", class: "stat-illustration" %>
+          <p class="mb-0"> 288</p>
+        </div>
+        <div class="avatar-resume-stat">
+          <%= image_tag "stat-illustrations/badge.svg", class: "stat-illustration" %>
+          <p class="mb-0"> <%= @my_badges.count %> / <%= @all_badges_count %></p>
+        </div>
+        <div class="avatar-resume-stat">
+          <%= image_tag "stat-illustrations/xp.svg", class: "stat-illustration" %>
+          <p class="mb-0"> <%= @user.total_xp %></p>
+        </div>
       </div>
     </div>
 
+    <!--
     <div class="xp my-3">
       <div class="xp-text">
         <p class="mb-0">XP : <%= @avatar.xp %> / <%= @avatar.level.to_next %></p>
@@ -26,28 +37,58 @@
         <div class="xp-bar-progression" style="width: <%= @fill_percentage %>%"></div>
       </div>
     </div>
+     -->
 
     <div>
       <h3 class="section-title mb-3" style="text-align: left;">My badges</h3>
-      <div class="my-badges"> placeholder
+      <div class="my-badges">
+        <% @my_badges.each do |badge| %>
+          <div class="badge-icon mx-2" style="animation: none;">
+            <%= render partial: "badges/#{badge.name.downcase.gsub('-', '_').gsub(' ', '_').gsub('=', 'is')}" %>
+          </div>
+        <% end %>
       </div>
     </div>
 
     <% @user_badges.each do |user_badge| %>
-      <%= render partial: "badge_card", locals: { badge: user_badge.badge, owned: true } %>
+    <%= render "badge_card", badge: user_badge.badge, owned: true %>
     <% end %>
 
     <% @missing_badges.each do |missing_badge| %>
-      <%= render partial: "badge_card", locals: { badge: missing_badge, owned: false } %>
+    <%= render "badge_card", badge: missing_badge, owned: false %>
     <% end %>
+
+  </div>
+
+  <!--
+  <div id="initialStats" class="d-none">
+    <div><p>health</p><p><%#= @avatar.health %></p></div>
+    <div><p>mana</p><p><%#= @avatar.mana %></p></div>
+    <div><p>attack</p><p><%#= @avatar.attack %></p></div>
+    <div><p>defense</p><p><%#= @avatar.defense %></p></div>
+    <div><p>magic_power</p><p><%#= @avatar.magic_power %></p></div>
+    <div><p>magic_defense</p><p><%#= @avatar.magic_defense %></p></div>
+    <div><p>crit_rate</p><p><%#= @avatar.crit_rate %></p></div>
+    <div><p>stamina</p><p><%#= @avatar.stamina %></p></div>
+    <div><p>speed</p><p><%#= @avatar.speed %></p></div>
+  </div>
+   -->
+
+</div>
+
+    <%# @user_badges.each do |user_badge| %>
+      <%#= render partial: "badge_card", locals: { badge: user_badge.badge, owned: true } %>
+    <%# end %>
 
     <!--
     <div class="update-avatar">
       <div class="update-avatar-btn btn btn-primary hide" data-action="click->upgrade-avatar#update" data-upgrade-avatar-target="updateBtn">Save changes</div>
     </div>
+     -->
 
-    <%= render "stats_and_skills", avatar: @avatar %>
+    <%#= render "stats_and_skills", avatar: @avatar %>
 
+    <!--
     <div class="items my-3">
       <h3>Items</h3>
       <i class="fa-solid fa-circle-question info-bubble"></i>
@@ -62,31 +103,18 @@
     <div class="see-ranking my-3">
       <div class="see-ranking-btn btn btn-primary">See Ranking</div>
     </div>
+     -->
 
+     <!--
     <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasBottomLabel">Available skills</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body small">
-        <% @missing_skills.each do |skill| %>
-        <p data-bs-dismiss="offcanvas" aria-label="Close" data-action="click->upgrade-avatar#addSkill"><%= skill.name %></p>
-        <% end %>
+        <%# @missing_skills.each do |skill| %>
+        <p data-bs-dismiss="offcanvas" aria-label="Close" data-action="click->upgrade-avatar#addSkill"><%#= skill.name %></p>
+        <%# end %>
       </div>
     </div>
-  </div>
-
-  <div id="initialStats" class="d-none">
-    <div><p>health</p><p><%= @avatar.health %></p></div>
-    <div><p>mana</p><p><%= @avatar.mana %></p></div>
-    <div><p>attack</p><p><%= @avatar.attack %></p></div>
-    <div><p>defense</p><p><%= @avatar.defense %></p></div>
-    <div><p>magic_power</p><p><%= @avatar.magic_power %></p></div>
-    <div><p>magic_defense</p><p><%= @avatar.magic_defense %></p></div>
-    <div><p>crit_rate</p><p><%= @avatar.crit_rate %></p></div>
-    <div><p>stamina</p><p><%= @avatar.stamina %></p></div>
-    <div><p>speed</p><p><%= @avatar.speed %></p></div>
-  </div>
-     -->
-
-</div>
+      -->

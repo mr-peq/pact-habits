@@ -1,14 +1,38 @@
 .badge-card {
+  position: relative;
   border-radius: 10px;
   box-shadow: 4px 0 12px #c8c8c852;
-  background: #737b6bbd;
+  background: #333B4B;
   display: flex;
+  overflow: hidden;
+
+  em {
+    color: #A6ACBA;
+  }
 }
 
 .badge-card.claimable {
-  position: relative;
-  background: #10CC61;
-  animation: .5s ease-in-out .5s infinite alternate stand-out
+  border: 2px solid #4DD1D1;
+  animation: .5s ease-in-out .5s infinite alternate stand-out;
+
+  em {
+    color: white;
+    font-weight: bold;
+  }
+
+  i {
+    color: #4DD1D1;
+  }
+}
+
+.badge-card-filter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: gray;
+  opacity: 0.3;
+  backdrop-filter: blur(5px);
 }
 
 .badge-card-icon {
@@ -18,7 +42,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #A6ACBA;
   border-radius: 10px;
 }
 
@@ -29,14 +52,15 @@
 }
 
 .badge-icon {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 50px;
   height: 50px;
+  border: 6px solid white;
   border-radius: 50%;
-  background-color: white;
-  border: 2px solid black;
+  background-color: #ffd700;
   animation: 2s linear .01s infinite spin;
 
   svg {
@@ -44,8 +68,30 @@
     margin: auto;
     height: 50px;
     width: 50px;
-    margin-top: 6px;
+    filter: invert(12%) sepia(15%) saturate(1003%) hue-rotate(181deg) brightness(94%) contrast(88%);
   }
+}
+
+.badge-icon::before {
+  position: absolute;
+  border: 3px dotted #8c1616;
+  width: 50px;
+  height: 50px;
+  background: none;
+  display: block;
+  content: "";
+  border-radius: 50%;
+}
+
+.badge-icon::after {
+  position: absolute;
+  border: 3px ridge #956464;
+  width: 58px;
+  height: 58px;
+  background: none;
+  display: block;
+  content: "";
+  border-radius: 50%;
 }
 
 .badge-icon.slow-spin {
@@ -67,7 +113,7 @@
 
 @keyframes stand-out {
   from {
-    box-shadow: 4px 0 10px #ca8d3d;
+    box-shadow: 4px 0 16px #4DD1D1;
   }
   to {
     box-shadow: none;
