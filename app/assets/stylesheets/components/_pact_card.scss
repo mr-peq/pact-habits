@@ -4,6 +4,17 @@
   grid-gap: 0;
 }
 
+.pact-card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pact-card-category-xp {
+  color: #FFD700;
+}
+
+
 .grid-item {
   .pact-timeline-card {
     display: flex;
@@ -80,6 +91,17 @@
     align-items: center;
     width: 100px;
   }
+
+  .join-button {
+    font-size: 20px;
+    color: #333B4B;
+    font-weight: bold;
+    margin: 0;
+    background-color: transparent;
+    border:none;
+  }
+
+
 
   .pact-card-xp-amount {
     font-size: 20px;

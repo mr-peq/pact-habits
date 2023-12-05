@@ -38,7 +38,11 @@
   <body style="background-color: #242933; margin-bottom: 120px;">
     <%= render "shared/top_navbar"%>
     <%= render "shared/bottom_navbar" %>
-    <%= render "shared/flashes" %>
+    <% flash.each do |type, message| %>
+      <div data-controller="alert" class="<%= type == 'notice' ? 'notice' : 'alert' %>">
+        <%= message %>
+      </div>
+    <% end %>
 
   <div class="container" style="margin-bottom: 120px">
     <%= yield %>
