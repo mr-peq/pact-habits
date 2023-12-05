@@ -21,21 +21,6 @@
     </div>
   </div>
 
-  <!--
-  <div class="badge-contents">
-    <div class="badge-details">
-      <div class="mb-0"><%= badge.description %></div>
-    </div>
-    <div class="badge-status">
-      <% if owned %>
-        <i class="fa-solid fa-key"></i>
-      <% else %>
-        <i class="fa-solid fa-lock"></i>
-      <% end %>
-    </div>
-  </div>
-   -->
-
   <% if owned %>
     <button class="launch-modal"></button>
   <% end %>
@@ -46,7 +31,10 @@
           <%= render partial: "badges/#{badge.name.downcase.gsub('-', '_').gsub(' ', '_').gsub('=', 'is')}" %>
         </div>
       </div>
-      <button class="get-badge btn btn-primary">Claim my badge !</button>
+      <%= simple_form_for @avatar do |f| %>
+        <%= f.input :badge_id, as: :hidden, input_html: { value: badge.id } %>
+        <%= f.submit %>
+      <% end %>
     </div>
   </div>
 </div>
