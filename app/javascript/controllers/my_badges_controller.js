@@ -1,4 +1,5 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
+import confetti from "canvas-confetti";
 
 // Connects to data-controller="my-badges"
 export default class extends Controller {
@@ -59,6 +60,11 @@ export default class extends Controller {
       .then((data) => {
         document.documentElement.style.setProperty('--mbcolor', "#ffffff");
         this.myBadgesTarget.parentElement.outerHTML = data.html;
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
       });
     }, 2500);
   }

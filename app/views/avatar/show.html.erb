@@ -39,7 +39,7 @@
     </div>
      -->
 
-    <div data-controller="my-badges">
+    <div data-controller="my-badges" id="myBadges">
       <%= render "my_badges", locals: { my_badges: @my_badges } %>
 
       <% @user_badges.each do |user_badge| %>
