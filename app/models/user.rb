@@ -16,12 +16,16 @@ class User < ApplicationRecord
   has_one_attached :avatar_picture
 
   def sort_pacts
-    achieved_pacts = user_pacts.where(status: "achieved").map(&:pact)
+    achieved_pacts = get_achieved_pacts
     ride_pacts = get_specific_pacts(achieved_pacts, "ride")
     walk_pacts = get_specific_pacts(achieved_pacts, "walk")
     hike_pacts = get_specific_pacts(achieved_pacts, "hike")
     run_pacts = get_specific_pacts(achieved_pacts, "run")
     assign_badges(achieved_pacts:, ride_pacts:, walk_pacts:, hike_pacts:, run_pacts:)
+  end
+
+  def get_achieved_pacts
+    user_pacts.where(status: "achieved").map(&:pact)
   end
 
   def get_specific_pacts(pacts, category)
@@ -130,4 +134,15 @@ class User < ApplicationRecord
       UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Pact-man")
     end
   end
+
+  def total_duration_and_distance(category_pacts)
+    total_duration = 0
+    total_distance = 0
+    category_pacts.each do |pact|
+      total_distance += pact.distance unless pact.distance.nil?
+      total_duration += pact.duration unless pact.duration.nil?
+    end
+    { total_duration:, total_distance: }
+  end
+
 end
