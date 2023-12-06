@@ -9,7 +9,7 @@
           <div class="avatar-bio">
             <div class="avatar-profile">
               <div class="circle-xp circle-xp-dashboard" data-controller="circle-xp">
-                <%= image_tag "https://i.pinimg.com/originals/58/20/fe/5820fe42115912f3e21d6588c6d6637f.jpg", width: 90, height: 90, class: "avatar-picture", alt: "User Avatar", style: "margin-bottom: 0;" %>
+                <%= image_tag @user.avatar_picture, width: 90, height: 90, class: "avatar-picture", alt: "User Avatar", style: "margin-bottom: 0;" %>
                 <div class="d-none" data-circle-xp-target="xp"><%= @avatar.xp %></div>
                 <div class="d-none" data-circle-xp-target="toNext"><%= @avatar.level.to_next %></div>
               </div>

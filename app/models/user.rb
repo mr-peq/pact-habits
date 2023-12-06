@@ -19,9 +19,9 @@ class User < ApplicationRecord
     achieved_pacts = get_achieved_pacts
     ride_pacts = get_specific_pacts(achieved_pacts, "ride")
     walk_pacts = get_specific_pacts(achieved_pacts, "walk")
-    hike_pacts = get_specific_pacts(achieved_pacts, "hike")
+    swim_pacts = get_specific_pacts(achieved_pacts, "swim")
     run_pacts = get_specific_pacts(achieved_pacts, "run")
-    assign_badges(achieved_pacts:, ride_pacts:, walk_pacts:, hike_pacts:, run_pacts:)
+    assign_badges(achieved_pacts:, ride_pacts:, walk_pacts:, swim_pacts:, run_pacts:)
   end
 
   def get_achieved_pacts
@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   def assign_badges(args = {})
     assign_walk_badges(args[:walk_pacts])
-    assign_hike_badges(args[:hike_pacts])
+    assign_swim_badges(args[:swim_pacts])
     assign_run_badges(args[:run_pacts])
     assign_ride_badges(args[:ride_pacts])
     assign_pact_badges(args[:achieved_pacts])
@@ -57,10 +57,10 @@ class User < ApplicationRecord
     end
   end
 
-  def assign_hike_badges(hike_pacts)
+  def assign_swim_badges(swim_pacts)
     total_duration = 0
     total_distance = 0
-    hike_pacts.each do |pact|
+    swim_pacts.each do |pact|
       total_distance += pact.distance unless pact.distance.nil?
       total_duration += pact.duration unless pact.duration.nil?
     end
@@ -114,8 +114,8 @@ class User < ApplicationRecord
       UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Welcome To The Club")
     end
     if achieved_pacts.count >= 5
-      badge = Badge.find_by(name: "Just Getting Started !")
-      UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Just Getting Started !")
+      badge = Badge.find_by(name: "Just Getting Started")
+      UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Just Getting Started")
     end
     if achieved_pacts.count >= 10
       badge = Badge.find_by(name: "Getting Fit")

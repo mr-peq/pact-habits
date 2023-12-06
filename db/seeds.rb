@@ -57,15 +57,17 @@ user_joseph = User.create!(joseph)
 theodore_url = "https://avatars.githubusercontent.com/u/141660300?v=4"
 ismael_url = "https://avatars.githubusercontent.com/u/29755099?v=4}"
 joseph_url = "https://avatars.githubusercontent.com/u/145439534?v=4"
-avatar_picture_url = "https://www.fightersgeneration.com/np7/char/guy-ffrevenge-bust.png"
+ismael_avatar_picture_url = "https://i.pinimg.com/736x/58/20/fe/5820fe42115912f3e21d6588c6d6637f.jpg"
+theodore_avatar_picture_url = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/96f49e5d-b3ae-4ab5-811e-6d11efa2c445/d8duzka-9b898560-1a0c-49c5-996e-2e75970329de.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk2ZjQ5ZTVkLWIzYWUtNGFiNS04MTFlLTZkMTFlZmEyYzQ0NVwvZDhkdXprYS05Yjg5ODU2MC0xYTBjLTQ5YzUtOTk2ZS0yZTc1OTcwMzI5ZGUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.UbN9_vPuoTQE3qplAo9BhgKyeyjkhLDx48_ZYKRPQuQ"
+joseph_avatar_picture_url = "https://pbs.twimg.com/profile_images/1589659852271280128/KhrL02UB_400x400.jpg"
 
-user_theodore.photo.attach(io: URI.open(theodore_url), filename: 'photo.jpg')
 user_ismael.photo.attach(io: URI.open(ismael_url), filename: 'photo.jpg')
+user_theodore.photo.attach(io: URI.open(theodore_url), filename: 'photo.jpg')
 user_joseph.photo.attach(io: URI.open(joseph_url), filename: 'photo.jpg')
 
-user_theodore.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
-user_ismael.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
-user_joseph.avatar_picture.attach(io: URI.open(avatar_picture_url), filename: 'avatar-picture.jpg')
+user_ismael.avatar_picture.attach(io: URI.open(ismael_avatar_picture_url), filename: 'ismael-avatar-picture.jpg')
+user_theodore.avatar_picture.attach(io: URI.open(theodore_avatar_picture_url), filename: 'theodore-avatar-picture.jpg')
+user_joseph.avatar_picture.attach(io: URI.open(joseph_avatar_picture_url), filename: 'joseph-avatar-picture.jpg')
 
 
 # ============================= AVATARS & LEVELS ==================================
@@ -133,7 +135,7 @@ Beneficiary.create!(name: "Action Contre La Faim")
 # ============================= PACTS & CHALLENGES ==================================
 puts "Creating 8 new user pacts and 2 challenges..."
 
-CATEGORIES = %w[ride run walk hike]
+CATEGORIES = %w[ride run walk swim]
 DISTANCES = [10, 20, 30]    # => km
 DURATION = [30, 60, 90]    # => min
 WEEKDAYS_ARRAY = [0, 1, 2, 3, 4, 5, 6]
@@ -204,8 +206,13 @@ end
 # Achieved
 4.times do
   pact = Pact.find(i)
+  user = User.all.sample
+  while user.first_name == "Ismaël"
+    user = User.all.sample
+  end
+
   UserPact.create!(
-    user: User.all.sample,
+    user: user,
     pact: pact,
     deadline_at: Time.now - (rand(1..30) * rand(0..24) * 3600),
     bet: BETS.sample,
@@ -233,7 +240,7 @@ end
 2.times do
   pact = Pact.find(i)
   UserPact.create!(
-    user: User.find_by(first_name: "Ismaël"),
+    user: User.find_by(first_name: "Théodore"),
     pact: pact,
     deadline_at: Time.now - (rand(1..30) * rand(0..24) * 3600),
     bet: BETS.sample,
@@ -253,6 +260,7 @@ end
   end
   i += 1
 end
+
 
 # ============================= SUGGESTED CHALLENGES ==================================
 
@@ -275,10 +283,69 @@ Badge.create!(name: "Ambitions Of A Rider", description: "Ride a total of 50 km"
 Badge.create!(name: "Tour De France", description: "Ride a total of 10 hours", category: "ride")
 Badge.create!(name: "Slowly But Surely", description: "Walk a total of 50 km", category: "walk")
 Badge.create!(name: "Turtle-Person", description: "Walk a total of 10 hours", category: "walk")
-Badge.create!(name: "Hiker", description: "Hike a total of 50 km", category: "hike")
-Badge.create!(name: "I Live In The Mountains", description: "Hike a total of 10 hours", category: "hike")
+Badge.create!(name: "Hiker", description: "Hike a total of 50 km", category: "swim")
+Badge.create!(name: "I Live In The Mountains", description: "Hike a total of 10 hours", category: "swim")
 Badge.create!(name: "Marathon", description: "Run a total of 50 km", category: "run")
 Badge.create!(name: "Forrest Gump", description: "Run a total of 10 hours", category: "run")
+
+
+# ============================= CUSTOM PACTS FOR ISMAEL ==================================
+puts "Creating custom pacts for Ismaël..."
+
+ismael = User.find_by(first_name: "Ismaël")
+
+pact_1 = Pact.create!(category: "ride", distance: 20, xp: 80)
+pact_2 = Pact.create!(category: "ride", distance: 20, xp: 80)
+pact_3 = Pact.create!(category: "ride", duration: 140, xp: 100)
+pact_4 = Pact.create!(category: "walk", distance: 14, xp: 30)
+pact_5 = Pact.create!(category: "walk", duration: 90, xp: 45)
+pact_6 = Pact.create!(category: "walk", duration: 60, xp: 30)
+pact_7 = Pact.create!(category: "run", distance: 21, xp: 135)
+pact_8 = Pact.create!(category: "run", duration: 80, xp: 70)
+pact_9 = Pact.create!(category: "ride", duration: 260, xp: 200)
+pact_10 = Pact.create!(category: "ride", duration: 100, xp: 55)
+
+ongoing_pact = Pact.create!(category: "ride", duration: 120, xp: 90)
+
+ismael_pacts = [pact_1, pact_2, pact_3, pact_4, pact_5, pact_6, pact_7, pact_8, pact_9, pact_10]
+ismael_pacts.each do |pact|
+  UserPact.create!(
+    user: ismael,
+    pact: pact,
+    deadline_at: Time.now - (rand(1..30) * rand(0..24) * 3600),
+    bet: BETS.sample,
+    beneficiary: Beneficiary.all.sample,
+    status: 1
+  )
+end
+
+UserPact.create!(
+  user: User.find_by(first_name: "Ismaël"),
+  pact: ongoing_pact,
+  deadline_at: Time.now + (3 * 24 * 3600), # => 3 days
+  bet: BETS.sample,
+  beneficiary: Beneficiary.all.sample,
+  status: 0
+)
+
+UserBadge.create!(
+  badge: Badge.find_by(name: "Welcome To The Club"),
+  user: ismael,
+  claimed: true
+)
+
+UserBadge.create!(
+  badge: Badge.find_by(name: "Just Getting Started"),
+  user: ismael,
+  claimed: true
+)
+
+UserBadge.create!(
+  badge: Badge.find_by(name: "Getting Fit"),
+  user: ismael,
+  claimed: true
+)
+
 
 # ============================= USERS STATS ==================================
 
