@@ -1,0 +1,44 @@
+<div class="badge-card-locked my-3">
+  <div class="badge-card-locked-top">
+    <div class="badge-card-filter"></div>
+
+    <div class="badge-card-icon">
+      <div class="badge-icon" style="animation: none; background-color: #D8D8D8;">
+        <%= render partial: "badges/#{badge.name.downcase.gsub('-', '_').gsub(' ', '_').gsub('=', 'is')}" %>
+      </div>
+    </div>
+
+    <div class="badge-card-content">
+      <div class="badge-details">
+        <em class="badge-name"><%= badge.name %></em>
+        <div class="badge-description"><%= badge.description %></div>
+      </div>
+
+      <div class="badge-status">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+
+    </div>
+  </div>
+
+  <% category = badge.category %>
+  <% quantity_needed = badge.description[/\d+/].to_i %>
+  <% achieved_pacts = current_user.get_achieved_pacts %>
+  <% if category != "pacts" %>
+    <% category_pacts = current_user.get_specific_pacts(achieved_pacts, category) %>
+    <% units = badge.description.split.last %>
+    <% if units == "km" %>
+      <% total_distance = current_user.total_duration_and_distance(category_pacts)[:total_distance] %>
+      <% width_percentage = (total_distance.to_f / quantity_needed ) * 100 %>
+    <% else %>
+      <% total_duration = current_user.total_duration_and_distance(category_pacts)[:total_duration] / 60 %>
+      <% width_percentage = (total_duration.to_f / quantity_needed ) * 100 %>
+    <% end %>
+  <% else %>
+      <% width_percentage = (achieved_pacts.count.to_f / quantity_needed ) * 100 %>
+  <% end %>
+
+  <div class="badge-card-locked-progression">
+    <div class="badge-progress" style="width: <%= width_percentage %>%"></div>
+  </div>
+</div>

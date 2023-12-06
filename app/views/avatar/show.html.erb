@@ -50,7 +50,7 @@
       <% end %>
 
       <% @missing_badges.each do |missing_badge| %>
-      <%= render "badge_card", badge: missing_badge, owned: false %>
+      <%= render "badge_card_locked", badge: missing_badge %>
       <% end %>
     </div>
 

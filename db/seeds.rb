@@ -271,13 +271,13 @@ Badge.create!(name: "Getting Fit", description: "Achieve 10 pacts", category: "p
 Badge.create!(name: "Pacting-it-out", description: "Achieve 20 pacts", category: "pacts")
 Badge.create!(name: "Sweat = Success", description: "Achieve 50 pacts", category: "pacts")
 Badge.create!(name: "Pact-man", description: "Achieve 100 pacts", category: "pacts")
-Badge.create!(name: "Ambitions Of A Rider", description: "Ride a total of 50km", category: "ride")
+Badge.create!(name: "Ambitions Of A Rider", description: "Ride a total of 50 km", category: "ride")
 Badge.create!(name: "Tour De France", description: "Ride a total of 10 hours", category: "ride")
-Badge.create!(name: "Slowly But Surely", description: "Walk a total of 50km", category: "walk")
+Badge.create!(name: "Slowly But Surely", description: "Walk a total of 50 km", category: "walk")
 Badge.create!(name: "Turtle-Person", description: "Walk a total of 10 hours", category: "walk")
-Badge.create!(name: "Hiker", description: "Hike a total of 50km", category: "hike")
+Badge.create!(name: "Hiker", description: "Hike a total of 50 km", category: "hike")
 Badge.create!(name: "I Live In The Mountains", description: "Hike a total of 10 hours", category: "hike")
-Badge.create!(name: "Marathon", description: "Run a total of 50km", category: "run")
+Badge.create!(name: "Marathon", description: "Run a total of 50 km", category: "run")
 Badge.create!(name: "Forrest Gump", description: "Run a total of 10 hours", category: "run")
 
 # ============================= USERS STATS ==================================
