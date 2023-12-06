@@ -1,21 +1,32 @@
 <div class="container mt-4" data-controller="multi-step-form" data-multi-step-form-target="form">
-  <h2 class="text-center" style="font-weight: bold">- Make a new Pact -</h2>
-  <br>
+  <h2 class="text-center" style="font-weight: bold; color:#A6ACBA;">- Make a new Pact -</h2>
   <br>
   <%= simple_form_for @pact, url: pacts_path, html: { class: 'form-horizontal' } do |f| %>
     <%= f.error_notification %>
 
     <!-- Step 1: Category and Distance/Duration -->
     <div data-multi-step-form-target="step">
-      <h3>I make a pact with myself to:</h3>
+      <h3 style="color:#A6ACBA;">Choose your activity:</h3>
+
       <div class="category-wrapper d-flex justify-content-around flex-wrap mt-4" data-controller="category-select">
         <%= f.collection_radio_buttons :category, Pact::CATEGORIES, :to_s, :humanize do |b| %>
-          <label class="category-item card text-white text-center p-2" style="background-image: url('<%= category_background_image(b.value) %>');" data-action="click->category-select#selectCategory">
+          <label class="category-item card text-center p-2" data-action="click->category-select#selectCategory">
             <%= b.radio_button class: 'category-selector d-none', data: { 'multi-step-form-target': 'category' } %>
+            <% case b.object %>
+              <% when "run" %>
+                <i class="fa-solid fa-person-running" style="font-size: 40px; margin-bottom: 5px"></i>
+              <% when "ride" %>
+                <i class="fa-solid fa-bicycle" style="font-size: 40px"></i>
+              <% when "walk" %>
+                <i class="fa-solid fa-shoe-prints" style="font-size: 40px"></i>
+              <% else %>
+                <i class="fa-sharp fa-solid fa-person-swimming" style="font-size: 40px"></i>
+            <% end %>
             <%= b.text %>
           </label>
         <% end %>
       </div>
+
 
       <%= f.hidden_field :xp, 'data-multi-step-form-target': 'xp' %>
 
@@ -35,7 +46,7 @@
           <button type="button" class="btn btn-decrement" data-action="click->stepper#decrement">-</button>
 
           <!-- Distance/Duration Input -->
-          <%= f.input :distance, label: false, as: :integer, value: 10, min: 1, input_html: { 'data-stepper-target': 'value', 'data-multi-step-form-target': 'distance', 'data-distance-duration-target': 'input' } %>
+          <%= f.input :distance, label: false, as: :integer, value: 10, min: 1, input_html: { 'data-stepper-target': 'value', 'data-multi-step-form-target': 'distance', 'data-distance-duration-target': 'input', value: 10 } %>
 
           <!-- Increment Button -->
           <button type="button" class="btn btn-increment" data-action="click->stepper#increment">+</button>
@@ -45,8 +56,9 @@
 
     <%= simple_fields_for @user_pact do |up| %>
       <!-- Step 2: Deadline (Hidden initially) -->
-      <div data-multi-step-form-target="step" class="d-none" data-controller="datetime-picker" data-datetime-picker-anytime-value="false">
+      <div data-multi-step-form-target="step" class="d-none" style="margin-bottom: 30px" data-controller="datetime-picker" data-datetime-picker-anytime-value="false">
         <div class="mb-3">
+          <h3 style="color:#A6ACBA;">Deadline:</h3>
           <%= up.input :deadline_at, as: :string, label: false, input_html: { class: 'form-control', 'data-datetime-picker-target': 'datetime', 'data-multi-step-form-target': 'deadline' } %>
         </div>
           <%= f.simple_fields_for :user_pact do |up| %>
@@ -78,7 +90,7 @@
       <!-- Step 3: Beneficiary and Bet (Hidden initially) -->
       <div data-multi-step-form-target="step" class="d-none">
         <div class="mb-3">
-          <h3>Or give:</h3>
+          <h3 style="color:#A6ACBA;">Or give:</h3>
             <div class="slider-wrapper" data-controller="slider">
               <!-- Slider input for bet -->
               <%= up.input :bet, label: false, as: :range, input_html: { min: 5, max: 50, value: 10, class: 'form-control-range', 'data-action': 'input->slider#updateValue', 'data-slider-target': 'range', 'data-multi-step-form-target': 'bet' } %>
@@ -87,7 +99,7 @@
             </div>
           <br>
           <br>
-          <h3>to:</h3>
+          <h3 style="color:#A6ACBA;">to:</h3>
             <div class="beneficiary-wrapper d-flex justify-content-around flex-wrap" data-controller="category-select">
               <% @beneficiaries.each do |beneficiary| %>
                 <div data-beneficiary-id="<%= beneficiary.id %>" data-beneficiary-name="<%= beneficiary.name %>">
