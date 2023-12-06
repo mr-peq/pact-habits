@@ -16,7 +16,7 @@ export default class extends Controller {
     const totalTime = new Date(+this.deadlineTarget.innerText) - new Date(+this.createdAtTarget.innerText);
     const timeLeft = new Date(+this.deadlineTarget.innerText) - Date.now();
     const fillPercentage = Math.round((timeLeft / totalTime) * 100);
-    this.element.style = `background: linear-gradient(white, white) content-box no-repeat, conic-gradient(#afff00 ${fillPercentage}%, 0, #767776f0 ) border-box;`;
+    this.element.style = `background: linear-gradient(white, white) content-box no-repeat, conic-gradient(#4ECDC4 ${fillPercentage}%, 0, #A6ACBA ) border-box;`;
     console.log(this.element.style.background);
   }
 }

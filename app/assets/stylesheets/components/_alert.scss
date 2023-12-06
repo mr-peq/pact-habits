@@ -1,6 +1,41 @@
-.alert {
+/* Base styles for all alerts */
+.alert, .notice {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  opacity: 0.9;
   position: fixed;
-  bottom: 100px;
-  right: 16px;
+  right: 20px;
+  left: 20px;
+  bottom: 750px;
   z-index: 1000;
+  transition: opacity 0.5s ease, top 0.5s ease;
+}
+
+/* Specific styles for notice messages */
+.notice {
+  color: #333B4B; /* Text color */
+  background-color: #4ECDC4; /* Background color for notice */
+  border-color: #3da6a2;
+}
+
+/* Specific styles for alert messages */
+.alert {
+  color: #333B4B; /* Text color */
+  background-color: #F67280; /* Background color for alert */
+  border-color: #e3646e;
+}
+
+/* Animation to fade out the alert */
+@keyframes fadeOut {
+  from { opacity: 0.9; bottom: 750px; }
+  to { opacity: 0; bottom: 800px; }
+}
+
+/* Class to trigger fade out animation */
+.fade-out {
+  animation-name: fadeOut;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }

@@ -1,3 +1,84 @@
+<div class="grid-item">
+  <div class="pact-timeline-card">
+    <div class="timeline">
+      <div class="line"></div>
+      <div class="circle"></div>
+    </div>
+    <div class="pact-pact-card">
+      <div class="pact-card-time">
+        <% if challenge.completion_duration == 1 %>
+          <p class="mb-0">Deadline: <%= challenge.completion_duration %> Week</p>
+        <% end %>
+      </div>
+      <div class="pact-box">
+        <% if clickable %>
+          <%= link_to "", pact_path(challenge), class: "pact-clickable" %>
+        <% end %>
+        <div class="pact-card-content">
+          <div class="pact-card-top-row">
+            <p class="pact-card-category"><%= challenge.category.capitalize %>
+              <% case challenge.category %>
+                <% when "run" %>
+                  <i class="fa-solid fa-person-running"></i>
+                <% when "ride" %>
+                  <i class="fa-solid fa-bicycle"></i>
+                <% when "walk" %>
+                  <i class="fa-solid fa-shoe-prints"></i>
+                <% else %>
+                  <i class="fa-sharp fa-solid fa-person-swimming"></i>
+                <% end %>
+            </p>
+            <div class="pact-card-category-xp">
+              <p><i class="fa-solid fa-star"></i> +<%= challenge.xp %> XP</p>
+            </div>
+          </div>
+          <div class="pact-card-details">
+            <% if challenge.distance.nil? %>
+              <p class="pact-card-distanceOrDuration"><i class="fa-solid fa-stopwatch"></i> <%= challenge.duration %> min</p>
+            <% else %>
+              <p class="pact-card-distanceOrDuration"><i class="fa-solid fa-arrows-left-right"></i> <%= challenge.distance %> km</p>
+            <% end %>
+            <div class="challenge-card-friends" style="display: flex;">
+              <% challenge.ongoing_challengers.each do |challenger| %>
+                <div class="challenge-friend-avatar friend-ongoing">
+                  <p class="mb-0"><%= challenger.first_name[0] %></p>
+                </div>
+              <% end %>
+              <% challenge.achieved_challengers.each do |challenger| %>
+                <div class="challenge-friend-avatar friend-achieved">
+                  <p class="mb-0"><%= challenger.first_name[0] %></p>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <!-- Conditional bottom sections -->
+          <% if challenge.recurring %>
+            <div class="pact-card-bottom">
+              <div class="weekdays">
+                <% selected_weekdays = challenge.weekdays.map(&:to_i) %>
+                <div class="weekday-info">
+                  <% ['M', 'T', 'W', 'T', 'F', 'S', 'S'].each_with_index do |day, index| %>
+                    <% if selected_weekdays.include?(index) %>
+                      <div class="weekday-circle weekday-selected">
+                        <%= day %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="pact-card-xp">
+          <button class="join-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">JOIN <i class="fa-solid fa-rocket"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CODE THEODORE
+
 <div class="pact-card my-3 challenge">
   <% if clickable %>
     <%= link_to "", pact_path(challenge), class: "pact-clickable" %>
@@ -48,3 +129,4 @@
     </div>
 
 </div>
+ -->
