@@ -29,6 +29,7 @@ class PactsController < ApplicationController
 
   def join
     @challenge = Pact.find(params[:id])
+    @beneficiaries = Beneficiary.all
     ActiveRecord::Base.transaction do
       if @challenge.save!
         # Create the associated UserPact

@@ -90,7 +90,8 @@
       <!-- Step 3: Beneficiary and Bet (Hidden initially) -->
       <div data-multi-step-form-target="step" class="d-none">
         <div class="mb-3">
-          <h3 style="color:#A6ACBA;">Or give:</h3>
+          <h3 style="color:#A6ACBA;">Bet:</h3>
+          <br>
             <div class="slider-wrapper" data-controller="slider">
               <!-- Slider input for bet -->
               <%= up.input :bet, label: false, as: :range, input_html: { min: 5, max: 50, value: 10, class: 'form-control-range', 'data-action': 'input->slider#updateValue', 'data-slider-target': 'range', 'data-multi-step-form-target': 'bet' } %>
@@ -98,13 +99,13 @@
               <span id="betValue" data-slider-target="valueDisplay">10</span>
             </div>
           <br>
-          <br>
-          <h3 style="color:#A6ACBA;">to:</h3>
+          <h3 style="color:#A6ACBA;">For:</h3>
             <div class="beneficiary-wrapper d-flex justify-content-around flex-wrap" data-controller="category-select">
               <% @beneficiaries.each do |beneficiary| %>
                 <div data-beneficiary-id="<%= beneficiary.id %>" data-beneficiary-name="<%= beneficiary.name %>">
                   <%= up.radio_button :beneficiary_id, beneficiary.id, class: 'beneficiary-selector d-none', id: "beneficiary_#{beneficiary.id}", data: { 'multi-step-form-target': 'beneficiary' } %>
-                  <label for="beneficiary_<%= beneficiary.id %>" class="beneficiary-item text-center p-2" style="background-image: url('<%= beneficiary_image(beneficiary) %>');" data-action="click->category-select#selectBeneficiary">
+                  <label for="beneficiary_<%= beneficiary.id %>" class="beneficiary-item text-center p-2" data-action="click->category-select#selectBeneficiary">
+                    <span class="beneficiary-name"><%= beneficiary.name %></span>
                   </label>
                 </div>
               <% end %>
@@ -116,11 +117,10 @@
 
       <!-- Step 4: Confirmation Step -->
       <div data-multi-step-form-target="step" class="d-none" id="confirmation-step">
-        <h3>Confirm Your Pact</h3>
         <!-- Dynamic confirmation message -->
         <div id="confirmation-message" class="confirmation-message"></div>
         <!-- Submit button -->
-        <div class="pact-btn-container mt-5">
+        <div class="pact-card-finish mt-5">
           <%= f.button :submit, "Make my Pact", class: 'btn btn-pact' %>
         </div>
       </div>
