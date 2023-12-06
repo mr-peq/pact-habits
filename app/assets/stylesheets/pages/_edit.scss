@@ -16,7 +16,7 @@
   border: 1.7vh solid transparent;
   border-radius: 50%;
   background: linear-gradient(white, white) content-box no-repeat,
-              conic-gradient(#afff00 100%, 0, #767776f0 ) border-box;
+              conic-gradient(#4ECDC4 100%, 0, #A6ACBA ) border-box;
   margin-bottom: 1em;
 }
 
@@ -44,4 +44,24 @@
 
 .timer-text {
   font-size: 1em;
+}
+
+.pact-card-finish {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.pact-card-finish input[type="submit"] {
+  background-color: #4ECDC4;
+  color: #333B4B;
+  border: none;
+  padding: 20px 60px;
+  border-radius: 12px;
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

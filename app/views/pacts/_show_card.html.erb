@@ -1,0 +1,60 @@
+<div class="grid-item mb-5">
+  <div class="pact-timeline-card">
+    <div class="pact-pact-card">
+      <div class="pact-card-time" style="font-size: 16px; margin-bottom: 10px">Deadline: <%= user_pact.deadline_at.strftime('%A, %b %e')%> at <%= user_pact.deadline_at.strftime('%H:%M') %></div>
+      <div class="pact-box">
+        <% if clickable %>
+          <%= link_to "", edit_pact_path(user_pact), class: "pact-clickable" %>
+        <% end %>
+        <div class="pact-card-content">
+          <p class="pact-card-category"><%= user_pact.pact.category.capitalize %>
+            <% case user_pact.pact.category %>
+              <% when "run" %>
+                <i class="fa-solid fa-person-running"></i>
+              <% when "ride" %>
+                <i class="fa-solid fa-bicycle"></i>
+              <% when "walk" %>
+                <i class="fa-solid fa-shoe-prints"></i>
+              <% else %>
+                <i class="fa-sharp fa-solid fa-person-swimming"></i>
+              <% end %>
+          </p>
+          <div class="pact-card-details">
+            <% if user_pact.pact.distance.nil? %>
+              <p class="pact-card-distanceOrDuration"><i class="fa-solid fa-stopwatch"></i> <%= user_pact.pact.duration %>min</p>
+            <% else %>
+              <p class="pact-card-distanceOrDuration"><i class="fa-solid fa-arrows-left-right"></i> <%= user_pact.pact.distance %>km</p>
+            <% end %>
+            <p class="pact-bet-amount"><i class="fa-solid fa-coins"></i> <%= user_pact.bet %> €</p>
+          </div>
+        <!-- Conditional bottom sections -->
+          <% if user_pact.pact.recurring %>
+            <div class="pact-card-bottom">
+              <div class="weekdays">
+                <% start_date = user_pact.created_at.to_date %>
+                <% end_date = user_pact.deadline_at.to_date %>
+                <% selected_weekdays = user_pact.pact.weekdays.map(&:to_i) %>
+                <% passed_count, total_count = count_total_day_occurrences(start_date, end_date, selected_weekdays) %>
+                <div class="weekday-info">
+                  <% ['M', 'T', 'W', 'T', 'F', 'S', 'S'].each_with_index do |day, index| %>
+                    <% if selected_weekdays.include?(index) %>
+                      <div class="weekday-circle weekday-selected">
+                        <%= day %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  <span class="iteration-counter" style="font-size: 14px">(<%= passed_count %>/<%= total_count %>)</span>
+                </div>
+              </div>
+            </div>
+        <% end %>
+
+        </div>
+        <div class="pact-card-xp">
+          <p class="pact-card-xp-amount">+<%= user_pact.pact.xp %> XP</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

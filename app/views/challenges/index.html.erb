@@ -1,6 +1,8 @@
-<div class="w-100 my-5">
-  <h3 class="section-title mb-3">Challenges</h3>
+<div class="date-group">
+  <h3>Challenges</h3>
   <% @challenges.each do |challenge| %>
+  <div class="grid-container">
     <%= render partial: "challenge_card", locals: { challenge: challenge, clickable: true } %>
   <% end %>
+  </div>
 </div>

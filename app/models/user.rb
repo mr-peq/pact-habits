@@ -105,27 +105,27 @@ class User < ApplicationRecord
   end
 
   def assign_pact_badges(achieved_pacts)
-    if achieved_pacts.count > 1
+    if achieved_pacts.count > 0
       badge = Badge.find_by(name: "Welcome To The Club")
       UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Welcome To The Club")
     end
-    if achieved_pacts.count > 5
+    if achieved_pacts.count >= 5
       badge = Badge.find_by(name: "Just Getting Started !")
       UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Just Getting Started !")
     end
-    if achieved_pacts.count > 10
+    if achieved_pacts.count >= 10
       badge = Badge.find_by(name: "Getting Fit")
       UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Getting Fit")
     end
-    if achieved_pacts.count > 20
+    if achieved_pacts.count >= 20
       badge = Badge.find_by(name: "Pacting-it-out")
       UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Pacting-it-out")
     end
-    if achieved_pacts.count > 50
+    if achieved_pacts.count >= 50
       badge = Badge.find_by(name: "Sweat = Success")
       UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Sweat = Success")
     end
-    if achieved_pacts.count > 100
+    if achieved_pacts.count >= 100
       badge = Badge.find_by(name: "Pact-man")
       UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Pact-man")
     end

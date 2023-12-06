@@ -7,6 +7,36 @@
   font-weight: bold;
 }
 
+.avatar-page-resume {
+  margin-bottom: 1.6em;
+  margin-top: 1em;
+}
+
+.avatar-page-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1.6em;
+}
+
+.avatar-resume-stat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  p {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+}
+
+.stat-illustration {
+  filter: invert(82%) sepia(26%) saturate(862%) hue-rotate(119deg) brightness(86%) contrast(89%);
+  width: 50px;
+  height: 50px;
+}
+
 .resume {
   height: 150px;
   display: flex;
@@ -43,9 +73,60 @@
 }
 
 .my-badges {
+  position:relative;
   display: flex;
-  height: 150px;
-  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  overflow: hidden;
+  padding: 1em;
+}
+
+.my-badges::before {
+  content: "";
+  position: absolute;
+  width: 97%;
+  height: 90%;
+  background: none;
+  display: block;
+  border: 1px solid #242933;
+  box-shadow: 4px 0 12px #222833;
+}
+
+:root {
+  --mbcolor: white;
+}
+
+.my-badges::after {
+  content: "";
+  position: absolute;
+  margin: -20px;
+  width: 40px;
+  height: 40px;
+  top: 0;
+  right: 0;
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 360px var(--mbcolor);
+  z-index: -1;
+}
+
+.insert-badge-star {
+  width: 50px;
+  height: 50px;
+  filter: invert(100%) sepia(93%) saturate(0%) hue-rotate(201deg) brightness(106%) contrast(106%);
+  animation: 1s linear 1 shine-on;
+}
+
+@keyframes shine-on {
+  0% {
+    transform: rotate(0deg) scale(0.1);
+  } 50% {
+    transform: rotate(180deg) scale(0.5);
+  } 75% {
+    transform: rotate(270deg) scale(0.75);
+  } 100% {
+    transform: rotate(360deg) scale(1);
+  }
 }
 
 .update-avatar, .tournament, .see-ranking {

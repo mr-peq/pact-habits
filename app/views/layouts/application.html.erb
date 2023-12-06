@@ -14,6 +14,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <%= favicon_link_tag asset_path('logo_icon.png'), rel: 'icon', type: 'image/png' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -36,7 +38,11 @@
   <body style="background-color: #242933; margin-bottom: 120px;">
     <%= render "shared/top_navbar"%>
     <%= render "shared/bottom_navbar" %>
-    <%= render "shared/flashes" %>
+    <% flash.each do |type, message| %>
+      <div data-controller="alert" class="<%= type == 'notice' ? 'notice' : 'alert' %>">
+        <%= message %>
+      </div>
+    <% end %>
 
   <div class="container" style="margin-bottom: 120px">
     <%= yield %>

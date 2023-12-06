@@ -266,7 +266,7 @@ end
 puts "Creating Badges..."
 
 Badge.create!(name: "Welcome To The Club", description: "Achieve 1 pact", category: "pacts")
-Badge.create!(name: "Just Getting Started !", description: "Achieve 5 pacts", category: "pacts")
+Badge.create!(name: "Just Getting Started", description: "Achieve 5 pacts", category: "pacts")
 Badge.create!(name: "Getting Fit", description: "Achieve 10 pacts", category: "pacts")
 Badge.create!(name: "Pacting-it-out", description: "Achieve 20 pacts", category: "pacts")
 Badge.create!(name: "Sweat = Success", description: "Achieve 50 pacts", category: "pacts")

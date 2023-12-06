@@ -1,0 +1,16 @@
+.swiper-container {
+  max-width: 100%; /* Adjust according to your layout */
+  overflow: hidden; /* Prevents horizontal scrolling */
+}
+
+.swiper-wrapper {
+  margin-bottom: 20px; /* Reduce this value as needed */
+}
+
+.swiper-pagination {
+  position: relative;
+}
+
+:root {
+  --swiper-theme-color: #4ECDC4; 
+}
