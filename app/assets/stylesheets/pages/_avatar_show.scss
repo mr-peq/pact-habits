@@ -12,6 +12,16 @@
   margin-top: 1em;
 }
 
+.circle-xp {
+  width: 28vmin;
+  height: 28vmin;
+  border: 1.7vh solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(white, white) content-box no-repeat,
+              conic-gradient(#4ECDC4 100%, 0, #A6ACBA ) border-box;
+  margin-bottom: 1em;
+}
+
 .avatar-page-stats {
   display: flex;
   justify-content: space-around;
