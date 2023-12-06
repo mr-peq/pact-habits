@@ -5,11 +5,7 @@
       <div class="circle"></div>
     </div>
     <div class="pact-pact-card">
-      <div class="pact-card-time">
-        <% if challenge.completion_duration == 1 %>
-          <p class="mb-0">Deadline: <%= challenge.completion_duration %> Week</p>
-        <% end %>
-      </div>
+      
       <div class="pact-box">
         <div class="pact-card-content">
           <div class="pact-card-top-row">
@@ -74,7 +70,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body small">
-            <%= simple_form_for :challenge, url: "pacts#join", method: :post, html: { id: 'new_challenge_form' } do |f| %>
+            <%= simple_form_for challenge, url: join_challenge_path(challenge), method: :post, html: { id: 'new_challenge_form' } do |f| %>
               <%= simple_fields_for :user_pact do |up| %>
                 <div data-multi-step-form-target="step">
                   <div>
@@ -101,7 +97,7 @@
                 </div>
               <% end %>
             <div class="pact-card-finish" style="margin-top: 1em;">
-              <%= f.button :submit, "Join this challenge!", class: 'pact-card-finish' %>
+              <%= f.button :submit, class: 'pact-card-finish' %>
             </div>
             <% end %>
           </div>
