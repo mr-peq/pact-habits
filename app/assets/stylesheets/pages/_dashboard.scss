@@ -46,8 +46,17 @@
 }
 
 .avatar-picture {
-  border: 6px solid #4ECDC4;
+  // border: 6px solid #4ECDC4;
   border-radius: 50%;
+}
+
+.circle-xp-dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 23vmin !important;
+  height: 23vmin !important;
+  margin-bottom: 0 !important;
 }
 
 .avatar-status {

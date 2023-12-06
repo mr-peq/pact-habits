@@ -25,6 +25,7 @@ class PagesController < ApplicationController
     # All user_pacts for the current user:
     @user = current_user
     @user_pacts = current_user.user_pacts
+    @avatar = current_user.avatar
 
     # And to separate them based on their status:
     @ongoing_pacts = @user_pacts.where(status: :ongoing)

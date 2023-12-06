@@ -12,6 +12,16 @@
   margin-top: 1em;
 }
 
+.circle-xp {
+  width: 28vmin;
+  height: 28vmin;
+  border: 1.7vh solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(white, white) content-box no-repeat,
+              conic-gradient(#4ECDC4 100%, 0, #A6ACBA ) border-box;
+  margin-bottom: 1em;
+}
+
 .avatar-page-stats {
   display: flex;
   justify-content: space-around;
@@ -26,8 +36,13 @@
   flex-direction: column;
 
   p {
+    font-size: 1em;
+    color: #A6ACBA;
+  }
+  p:last-child {
     font-weight: bold;
     font-size: 1.5em;
+    color: white;
   }
 }
 
@@ -94,7 +109,7 @@
 }
 
 :root {
-  --mbcolor: white;
+  --mbcolor: #96e8e0;
 }
 
 .my-badges::after {
