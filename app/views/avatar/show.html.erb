@@ -14,14 +14,17 @@
       <div class="avatar-page-stats">
         <div class="avatar-resume-stat">
           <%= image_tag "stat-illustrations/ranking.svg", class: "stat-illustration" %>
+          <p class="mb-0">Ranking</p>
           <p class="mb-0"> 288</p>
         </div>
         <div class="avatar-resume-stat">
           <%= image_tag "stat-illustrations/badge.svg", class: "stat-illustration" %>
+          <p class="mb-0">Badges</p>
           <p class="mb-0"> <%= @my_badges.count %> / <%= @all_badges_count %></p>
         </div>
         <div class="avatar-resume-stat">
           <%= image_tag "stat-illustrations/xp.svg", class: "stat-illustration" %>
+          <p class="mb-0">Total XP</p>
           <p class="mb-0"> <%= @user.total_xp %></p>
         </div>
       </div>
