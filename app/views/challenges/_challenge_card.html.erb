@@ -38,12 +38,12 @@
             <div class="challenge-card-friends" style="display: flex;">
               <% challenge.ongoing_challengers.each do |challenger| %>
                 <div class="challenge-friend-avatar friend-ongoing">
-                  <p class="mb-0"><%= challenger.first_name[0] %></p>
+                  <%= image_tag challenger.avatar_picture, width: 40, height: 40, class: "avatar-picture-small" %>
                 </div>
               <% end %>
               <% challenge.achieved_challengers.each do |challenger| %>
                 <div class="challenge-friend-avatar friend-achieved">
-                  <p class="mb-0"><%= challenger.first_name[0] %></p>
+                  <%= image_tag challenger.avatar_picture, width: 40, height: 40, class: "avatar-picture-small" %>
                 </div>
               <% end %>
             </div>
