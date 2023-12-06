@@ -135,7 +135,7 @@ Beneficiary.create!(name: "Action Contre La Faim")
 # ============================= PACTS & CHALLENGES ==================================
 puts "Creating 8 new user pacts and 2 challenges..."
 
-CATEGORIES = %w[ride run walk hike]
+CATEGORIES = %w[ride run walk swim]
 DISTANCES = [10, 20, 30]    # => km
 DURATION = [30, 60, 90]    # => min
 WEEKDAYS_ARRAY = [0, 1, 2, 3, 4, 5, 6]
@@ -283,8 +283,8 @@ Badge.create!(name: "Ambitions Of A Rider", description: "Ride a total of 50 km"
 Badge.create!(name: "Tour De France", description: "Ride a total of 10 hours", category: "ride")
 Badge.create!(name: "Slowly But Surely", description: "Walk a total of 50 km", category: "walk")
 Badge.create!(name: "Turtle-Person", description: "Walk a total of 10 hours", category: "walk")
-Badge.create!(name: "Hiker", description: "Hike a total of 50 km", category: "hike")
-Badge.create!(name: "I Live In The Mountains", description: "Hike a total of 10 hours", category: "hike")
+Badge.create!(name: "Hiker", description: "Hike a total of 50 km", category: "swim")
+Badge.create!(name: "I Live In The Mountains", description: "Hike a total of 10 hours", category: "swim")
 Badge.create!(name: "Marathon", description: "Run a total of 50 km", category: "run")
 Badge.create!(name: "Forrest Gump", description: "Run a total of 10 hours", category: "run")
 
