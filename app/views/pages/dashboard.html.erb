@@ -59,7 +59,7 @@
         <!-- Content of the badges -->
         <div class="dashboard-avatar w-100 mt-4">
         <div class="disclaimer">
-          <h3><strong class="highlight-text"><br>Keep Pushing!</strong> <br><br>You have <strong class="highlight-text"><%=@ongoing_pacts.count%></strong> ongoing pacts, with <strong class="highlight-text"><%= @total_ongoing_bet %>€</strong> on the line </h3>
+          <h3><strong class="highlight-text"><br>Keep Pushing! <i class="fa-solid fa-meteor"></i></strong> <br><br>You have <strong class="highlight-text"><%=@ongoing_pacts.count%></strong> ongoing pacts, with <strong class="highlight-text"><%= @total_ongoing_bet %>€</strong> on the line </h3>
         </div>
       </div>
       </div>
@@ -120,8 +120,6 @@
 </div>
 
 <!-- Ongoing pacts sorted -->
-<br>
-
 
 <% @ongoing_pacts_sorted.each do |date, pacts| %>
   <div class="date-group">
