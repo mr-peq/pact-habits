@@ -2,7 +2,12 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["day", "step", "previousButton", "nextButton", "form", "category", "distance", "deadline", "bet", "beneficiary", "categoryConfirmation", "distanceOrDurationConfirmation", "deadlineConfirmation", "betConfirmation", "beneficiaryConfirmation", "recurring"]
+  static targets = ["form", "day", "step", "previousButton", "nextButton", "form", "category", "distance", "deadline", "bet", "beneficiary", "categoryConfirmation", "distanceOrDurationConfirmation", "deadlineConfirmation", "betConfirmation", "beneficiaryConfirmation", "recurring"]
+
+  join(event) {
+    const challengeId = event.currentTarget.dataset.challengeId;
+    this.formTarget.action = `/pacts/${challengeId}/join`;
+  }
 
   initialize() {
     this.showCurrentStep()
@@ -76,7 +81,7 @@ export default class extends Controller {
     const selectedType = document.querySelector('input[name="distance_type"]:checked').value;
 
     // Generate the confirmation message
-    let confirmationHtml = `You committed to <strong class="highlight">${category}</strong> for <strong class="highlight">${distanceOrDuration}</strong> ${selectedType === "distance" ? 'Km' : 'min'}`;
+    let confirmationHtml = `You committed to <strong class="highlight">${category}</strong> for <strong class="highlight">${distanceOrDuration} ${selectedType === "distance" ? 'Km' : 'min'}</strong>`;
     if (recurring) {
       confirmationHtml += ` every:<ul class="weekday-list">`;
       selectedWeekdays.forEach(day => {

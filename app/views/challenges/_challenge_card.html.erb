@@ -11,9 +11,6 @@
         <% end %>
       </div>
       <div class="pact-box">
-        <% if clickable %>
-          <%= link_to "", pact_path(challenge), class: "pact-clickable" %>
-        <% end %>
         <div class="pact-card-content">
           <div class="pact-card-top-row">
             <p class="pact-card-category"><%= challenge.category.capitalize %>
@@ -70,63 +67,46 @@
           <% end %>
         </div>
         <div class="pact-card-xp">
-          <button class="join-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">JOIN <i class="fa-solid fa-rocket"></i></button>
+          <button class="join-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" data-challenge-id="<%= challenge.id %>" data-action="multi-step-form#join">JOIN <i class="fa-solid fa-rocket"></i></button>
+          <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel" data-controller="multi-step-form">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasBottomLabel"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body small">
+            <%= simple_form_for :challenge, url: "pacts#join", method: :post, html: { id: 'new_challenge_form' } do |f| %>
+              <%= simple_fields_for :user_pact do |up| %>
+                <div data-multi-step-form-target="step">
+                  <div>
+                    <h3 style="color:#A6ACBA;">Bet:</h3>
+                    <br>
+                      <div class="slider-wrapper" data-controller="slider">
+                        <!-- Slider input for bet -->
+                        <%= up.input :bet, label: false, as: :range, input_html: { min: 5, max: 50, value: 10, class: 'form-control-range', 'data-action': 'input->slider#updateValue', 'data-slider-target': 'range', 'data-multi-step-form-target': 'bet' } %>
+                        <!-- Display the current value of the slider -->
+                        <span id="betValue" data-slider-target="valueDisplay">10</span>
+                      </div>
+                    <br>
+                    <h3 style="color:#A6ACBA;">For:</h3>
+                      <div class="beneficiary-wrapper d-flex justify-content-around flex-wrap" data-controller="category-select">
+                        <% @beneficiaries.each do |beneficiary| %>
+                          <div data-beneficiary-id="<%= beneficiary.id %>" data-beneficiary-name="<%= beneficiary.name %>">
+                            <%= up.radio_button :beneficiary_id, beneficiary.id, class: 'beneficiary-selector d-none', id: "beneficiary_#{beneficiary.id}", data: { 'multi-step-form-target': 'beneficiary' } %>
+                            <label for="beneficiary_<%= beneficiary.id %>" class="beneficiary-item text-center p-2" data-action="click->category-select#selectBeneficiary">
+                              <span class="beneficiary-name"><%= beneficiary.name %></span>
+                            </label>
+                          </div>
+                        <% end %>
+                      </div>
+                  </div>
+                </div>
+              <% end %>
+              <%= f.submit "I'm taking this challenge!", class: "pact-card-finish"%>
+            <% end %>
+          </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- CODE THEODORE
-
-<div class="pact-card my-3 challenge">
-  <% if clickable %>
-    <%= link_to "", pact_path(challenge), class: "pact-clickable" %>
-  <% end %>
-  <div class="pact-card-top">
-    <div class="pact-card-details">
-      <h3>Sport <i class="fa-solid fa-people-group"></i></h3>
-      <% if challenge.distance.nil? %>
-      <p class="mb-0"><%= challenge.category.capitalize %> > <%= challenge.duration %> minutes</p>
-      <% else %>
-      <p class="mb-0"><%= challenge.category.capitalize %> > <%= challenge.distance %> km</p>
-      <% end %>
-      <% if challenge.completion_duration == 1 %>
-        <p class="mb-0">Deadline : <%= challenge.completion_duration %> Week</p>
-      <% else %>
-        <p class="mb-0">Deadline : <%= challenge.completion_duration %> Weeks</p>
-      <% end %>
-    </div>
-    <div class="challenge-card-xp">
-      <p class="mb-0"><%= challenge.xp %>XP</p>
-    </div>
-  </div>
-
-    <div class="pact-card-bottom mt-3">
-    <% if challenge.recurring %>
-      <div class="weekdays">
-        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(0) %>">M</div>
-        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(1) %>">T</div>
-        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(2) %>">W</div>
-        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(3) %>">T</div>
-        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(4) %>">F</div>
-        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(5) %>">S</div>
-        <div class="weekday-circle <%= 'weekday-selected' if challenge.weekdays.include?(6) %>">S</div>
-      </div>
-    <% end %>
-      <div class="challenge-card-friends" style="display: flex;">
-        <% challenge.ongoing_challengers.each do |challenger| %>
-          <div class="challenge-friend-avatar friend-ongoing">
-            <p class="mb-0"><%= challenger.first_name[0] %></p>
-          </div>
-        <% end %>
-        <% challenge.achieved_challengers.each do |challenger| %>
-          <div class="challenge-friend-avatar friend-achieved">
-            <p class="mb-0"><%= challenger.first_name[0] %></p>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-</div>
- -->
