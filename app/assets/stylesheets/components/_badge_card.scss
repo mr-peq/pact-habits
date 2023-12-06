@@ -92,6 +92,7 @@
   display: block;
   content: "";
   border-radius: 50%;
+  box-shadow: 4px 0 12px #797878;
 }
 
 .badge-icon.slow-spin {
@@ -147,13 +148,6 @@
   align-items: center;
 }
 
-.modal-container {
-  text-align: center;
-  background: white;
-  border: 1px solid black;
-  padding: 1em;
-}
-
 .modal-badge {
   width: 340px;
   height: 280px;
@@ -162,10 +156,15 @@
   align-items: center;
 }
 
-.modal-badge-icon {
-  font-size: 7em;
-  color: red;
-  animation: 2s linear .01s infinite spin
+.badge-hidden-submit {
+  width: 152px;
+  height: 152px;
+  border-radius: 50%;
+  background: none;
+  z-index: 1;
+  position: absolute;
+  top: -12px;
+  left: -12px;
 }
 
 @keyframes spin {

@@ -22,12 +22,25 @@ class AvatarController < ApplicationController
     badge = Badge.find(params[:avatar][:badge_id])
     user_badge.user = current_user
     user_badge.badge = badge
+
     if user_badge.save
       UserBadge.where(user: current_user).where(badge: badge).find_by(claimed: false).destroy
-      redirect_to avatar_path(self)
+      @my_badges = current_user.user_badges.where(claimed: true).map(&:badge)
+      respond_to do |format|
+        format.json { render json: { html: render_to_string(partial: "avatar/my_badges", locals: { my_badges: @my_badges }, formats: :html) } }
+      end
     else
-      raise
+      redirect_to avatar_path(self)
     end
+
+    # if user_badge.save
+    #   UserBadge.where(user: current_user).where(badge: badge).find_by(claimed: false).destroy
+    #   @my_badges = current_user.user_badges.where(claimed: true).map(&:badge)
+    #   # redirect_to avatar_path(self)
+    # else
+    #   redirect_to avatar_path(self)
+    # end
+
     # @avatar = Avatar.find(params[:id])
     # response = JSON.parse(request.body.read)
     # stats = response["stats"]

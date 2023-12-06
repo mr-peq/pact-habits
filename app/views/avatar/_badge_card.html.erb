@@ -28,16 +28,16 @@
     <button class="launch-modal"></button>
   <% end %>
   <div class="custom-modal d-none">
-    <div class="modal-container">
+    <div class="modal-container" data-my-badges-target="modal">
       <div class="modal-badge">
         <div class="modal-badge-icon">
+          <%= simple_form_for @avatar, html: { data: { my_badges_target: "form", action: "click->my-badges#getBadge" } } do |f| %>
+            <%= f.input :badge_id, as: :hidden, input_html: { value: badge.id } %>
+            <%= f.submit "", class: "badge-hidden-submit" %>
+          <% end %>
           <%= render partial: "badges/#{badge.name.downcase.gsub('-', '_').gsub(' ', '_').gsub('=', 'is')}" %>
         </div>
       </div>
-      <%= simple_form_for @avatar do |f| %>
-        <%= f.input :badge_id, as: :hidden, input_html: { value: badge.id } %>
-        <%= f.submit %>
-      <% end %>
     </div>
   </div>
 </div>

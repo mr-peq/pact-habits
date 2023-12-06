@@ -93,6 +93,10 @@
   box-shadow: 4px 0 12px #222833;
 }
 
+:root {
+  --mbcolor: white;
+}
+
 .my-badges::after {
   content: "";
   position: absolute;
@@ -102,8 +106,27 @@
   top: 0;
   right: 0;
   transform: rotate(45deg);
-  box-shadow: 0 0 0 360px white;
+  box-shadow: 0 0 0 360px var(--mbcolor);
   z-index: -1;
+}
+
+.insert-badge-star {
+  width: 50px;
+  height: 50px;
+  filter: invert(100%) sepia(93%) saturate(0%) hue-rotate(201deg) brightness(106%) contrast(106%);
+  animation: 1s linear 1 shine-on;
+}
+
+@keyframes shine-on {
+  0% {
+    transform: rotate(0deg) scale(0.1);
+  } 50% {
+    transform: rotate(180deg) scale(0.5);
+  } 75% {
+    transform: rotate(270deg) scale(0.75);
+  } 100% {
+    transform: rotate(360deg) scale(1);
+  }
 }
 
 .update-avatar, .tournament, .see-ranking {
