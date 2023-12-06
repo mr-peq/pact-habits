@@ -8,7 +8,7 @@
     <div class="avatar-page-resume">
       <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
         <div class="circle-xp" data-controller="circle-xp">
-          <%= image_tag "https://i.pinimg.com/originals/58/20/fe/5820fe42115912f3e21d6588c6d6637f.jpg", width: 100, height: 100, class: "avatar-picture", alt: "User Avatar", style: "margin-bottom: .5em;" %>
+          <%= image_tag @user.avatar_picture, width: 100, height: 100, class: "avatar-picture", alt: "User Avatar", style: "margin-bottom: .5em;" %>
           <div class="d-none" data-circle-xp-target="xp"><%= @avatar.xp %></div>
           <div class="d-none" data-circle-xp-target="toNext"><%= @avatar.level.to_next %></div>
         </div>

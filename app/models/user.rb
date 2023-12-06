@@ -114,8 +114,8 @@ class User < ApplicationRecord
       UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Welcome To The Club")
     end
     if achieved_pacts.count >= 5
-      badge = Badge.find_by(name: "Just Getting Started !")
-      UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Just Getting Started !")
+      badge = Badge.find_by(name: "Just Getting Started")
+      UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Just Getting Started")
     end
     if achieved_pacts.count >= 10
       badge = Badge.find_by(name: "Getting Fit")
