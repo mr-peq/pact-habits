@@ -6,5 +6,6 @@ class ChallengesController < ApplicationController
     # @not_user_challenges = not_user_pacts.includes(:pact).where(pacts: { challenge: true }).uniq(&:pact_id)
     @challenges = Pact.where(challenge: true).reject { |challenge| challenge.users.include?(current_user) }
     @beneficiaries = Beneficiary.all
+    @user = current_user
   end
 end
