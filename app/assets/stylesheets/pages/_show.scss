@@ -31,10 +31,11 @@
   text-align: center;
 }
 
-.offcanvas {
-  --bs-offcanvas-height: 43vh;
-}
-
 .offcanvas-header {
   padding-bottom: 0;
+}
+
+.offcanvas.showing, .offcanvas.show:not(.hiding) {
+  height: 750px;
+  background-color: #333B4B;
 }
