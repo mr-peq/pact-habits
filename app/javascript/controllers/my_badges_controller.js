@@ -72,7 +72,7 @@ export default class extends Controller {
       })
       .then(response => response.json())
       .then((data) => {
-        document.documentElement.style.setProperty('--mbcolor', "#ffffff");
+        document.documentElement.style.setProperty('--mbcolor', "#96e8e0");
         this.myBadgesTarget.parentElement.outerHTML = data.html;
         confetti({
           particleCount: 100,

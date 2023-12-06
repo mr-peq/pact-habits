@@ -1,27 +1,30 @@
-<% content_for :meta_title, "#{@avatar.user.nickname}" %>
-<% content_for :meta_description, "Cet avatar a les skills suivantes #{ }"%>
-<% content_for :meta_image, "#{cl_image_path(@avatar.user.avatar_picture.key)}" %>
-
 <div class="avatar-page">
 
   <div data-controller="badge">
     <div class="avatar-page-resume">
-      <div style="text-align: center">
-        <%= image_tag "https://i.pinimg.com/originals/58/20/fe/5820fe42115912f3e21d6588c6d6637f.jpg", width: 100, height: 100, class: "avatar-picture", alt: "User Avatar", style: "margin-bottom: .5em;" %>
+      <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+        <div class="circle-xp" data-controller="circle-xp">
+          <%= image_tag @user.avatar_picture, width: 100, height: 100, class: "avatar-picture", alt: "User Avatar", style: "margin-bottom: .5em;" %>
+          <div class="d-none" data-circle-xp-target="xp"><%= @avatar.xp %></div>
+          <div class="d-none" data-circle-xp-target="toNext"><%= @avatar.level.to_next %></div>
+        </div>
         <h3 class="avatar-page-level">Level <%= @avatar.level.current %></h3>
       </div>
 
       <div class="avatar-page-stats">
         <div class="avatar-resume-stat">
           <%= image_tag "stat-illustrations/ranking.svg", class: "stat-illustration" %>
+          <p class="mb-0">Ranking</p>
           <p class="mb-0"> 288</p>
         </div>
         <div class="avatar-resume-stat">
           <%= image_tag "stat-illustrations/badge.svg", class: "stat-illustration" %>
+          <p class="mb-0">Badges</p>
           <p class="mb-0"> <%= @my_badges.count %> / <%= @all_badges_count %></p>
         </div>
         <div class="avatar-resume-stat">
           <%= image_tag "stat-illustrations/xp.svg", class: "stat-illustration" %>
+          <p class="mb-0">Total XP</p>
           <p class="mb-0"> <%= @user.total_xp %></p>
         </div>
       </div>
@@ -47,7 +50,7 @@
       <% end %>
 
       <% @missing_badges.each do |missing_badge| %>
-      <%= render "badge_card", badge: missing_badge, owned: false %>
+      <%= render "badge_card_locked", badge: missing_badge %>
       <% end %>
     </div>
 

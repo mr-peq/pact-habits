@@ -53,20 +53,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_113511) do
 
   create_table "avatars", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "level_id", null: false
+    t.integer "upgrade_points", default: 4
     t.integer "health", default: 100
     t.integer "attack", default: 10
     t.integer "crit_rate", default: 2
     t.integer "magic_power", default: 10
+    t.integer "magic_defense", default: 10
     t.integer "defense", default: 10
     t.integer "mana", default: 100
     t.integer "speed", default: 10
     t.integer "stamina", default: 10
+    t.integer "xp", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "magic_defense", default: 10
-    t.integer "upgrade_points", default: 4
-    t.bigint "level_id", null: false
-    t.integer "xp", default: 0
     t.index ["level_id"], name: "index_avatars_on_level_id"
     t.index ["user_id"], name: "index_avatars_on_user_id"
   end
