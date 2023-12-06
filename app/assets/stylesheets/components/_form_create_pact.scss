@@ -29,10 +29,27 @@
   text-align: center;
   background-color: #4ECDC4;
   color: #333B4B;
+  filter: grayscale(100%);
 }
 
 .category-item.grayscale {
-  filter: grayscale(100%);
+  flex: 1;
+  border: none;
+  align-items: center;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 10px;
+  width: 180px;
+  height: 120px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #4ECDC4;
+  color: #333B4B;
 }
 
 .category-item.selected {
@@ -215,6 +232,55 @@
   top: 180px;
 }
 
+.flatpickr-calendar {
+  width: 310px; /* Set the width you want */
+  height: auto; /* Set a fixed height if necessary */
+}
+
+/* To change the background color of the calendar */
+.flatpickr-calendar,
+.flatpickr-time input:hover, .flatpickr-time .flatpickr-am-pm:hover, .flatpickr-time input:focus, .flatpickr-time .flatpickr-am-pm:focus
+{
+  background: #333B4B; /* Replace #yourColor with the color you want */
+}
+
+/* To change the color of the days */
+.flatpickr-day,
+span.flatpickr-weekday,
+.flatpickr-current-month,
+.flatpickr-monthDropdown-months,
+.flatpickr-current-month input.cur-year,
+.flatpickr-time input {
+  color: #A6ACBA; /* Replace #yourColor with the color you want */
+}
+
+.flatpickr-time .numInputWrapper span.arrowUp:after {
+  border-top-color: #A6ACBA;
+}
+
+.flatpickr-time .numInputWrapper span.arrowUp:after {
+  border-bottom-color: #A6ACBA;
+}
+
+.flatpickr-time .numInputWrapper span.arrowDown:after {
+  border-bottom-color: #A6ACBA;
+}
+
+.flatpickr-time .numInputWrapper span.arrowDown:after {
+  border-top-color: #A6ACBA;
+}
+
+
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+  fill: #A6ACBA;
+}
+
+/* To change the color of the selected day */
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover {
+  background: #4ECDC4; /* Replace #yourColor with the color you want */
+}
+
 // ---------------------------------------------------------------------------//
 // ---------------------------------------------------------------------------//
 // ! CSS FOR WEEKDAY TOGGLE (STEP 2 FORM) //
@@ -243,6 +309,7 @@
 }
 
 .toggle-option {
+  color: #333B4B;
   z-index: 1;
   flex-grow: 1;
   text-align: center; /* Center text in the toggle option area */
