@@ -18,23 +18,36 @@ export default class extends Controller {
     const body = new FormData(this.formTarget);
 
     const modal = this.formTarget.parentElement.parentElement.parentElement;
+
+    // 1st ANIMATION
     modal.classList.remove('modal-container');
-    this.formTarget.parentElement.classList.add('spin-faster');
+    // this.formTarget.parentElement.classList.add('spin-faster');
+    this.formTarget.parentElement.classList.add('spin-and-climb');
+
+    // setTimeout(() => {
+    //   this.formTarget.parentElement.classList.remove('spin-faster');
+    //   this.formTarget.parentElement.classList.add('spin-even-faster');
+    // }, 500);
+
+    // setTimeout(() => {
+    //   this.formTarget.parentElement.classList.remove('spin-even-faster');
+    //   this.formTarget.parentElement.classList.add('spin-rocket');
+    // }, 750);
+
+    // setTimeout(() => {
+    //   this.formTarget.parentElement.classList.remove('spin-rocket');
+    //   this.formTarget.parentElement.classList.add('dive-in');
+    // }, 1000);
+
+    setTimeout(() => {
+      this.formTarget.parentElement.classList.remove('spin-and-climb');
+      this.formTarget.parentElement.classList.add('spin-faster');
+    }, 2000);
 
     setTimeout(() => {
       this.formTarget.parentElement.classList.remove('spin-faster');
-      this.formTarget.parentElement.classList.add('spin-even-faster');
-    }, 500);
-
-    setTimeout(() => {
-      this.formTarget.parentElement.classList.remove('spin-even-faster');
-      this.formTarget.parentElement.classList.add('spin-rocket');
-    }, 750);
-
-    setTimeout(() => {
-      this.formTarget.parentElement.classList.remove('spin-rocket');
       this.formTarget.parentElement.classList.add('dive-in');
-    }, 1000);
+    }, 3000);
 
     setTimeout(() => {
       this.formTarget.parentElement.classList.remove('dive-in');
@@ -46,7 +59,8 @@ export default class extends Controller {
         'beforeend',
         '<div class="insert-badge-star mx-2"><img src="/assets/special/insert-badge-star-a422445f4e003685727bacccb6c4e5921049212495a401b54e5ea4d4ddacd5c6.svg"></div>'
         );
-    }, 1500);
+    }, 3500);
+    // before: 1500
 
     setTimeout(() => {
       fetch(url, {
@@ -66,6 +80,7 @@ export default class extends Controller {
           origin: { y: 0.6 }
         });
       });
-    }, 2500);
+    }, 4500);
+    // before: 2500
   }
 }
