@@ -191,6 +191,10 @@ i = Pact.first.id
 4.times do
   pact = Pact.find(i)
   deadline_at = pact.recurring ? Time.now + (7 * 24 * 3600) : Time.now + (rand(2..12) * 3600)
+  user = User.all.sample
+  while user.first_name == "Ismaël"
+    user = User.all.sample
+  end
 
   UserPact.create!(
     user: User.all.sample,
