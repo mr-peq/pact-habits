@@ -67,7 +67,7 @@ export default class extends Controller {
         const currentBadges = +(this.badgesCountTarget.innerText.slice(0, 1));
         this.badgesCountTarget.innerText = `${currentBadges + 1} / 14`;
       });
-    }, 3600);
+    }, 4500);
     // before: 2500
   }
 }
