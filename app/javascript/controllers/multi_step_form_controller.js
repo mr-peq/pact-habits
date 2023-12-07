@@ -11,7 +11,6 @@ export default class extends Controller {
 
   initialize() {
     this.showCurrentStep()
-    console.log(this.categoryTargets);
   }
 
   showCurrentStep() {
@@ -21,8 +20,6 @@ export default class extends Controller {
       } else {
         element.classList.add("d-none"); // Hide other steps
       }
-
-      console.log(this.currentStep)
     });
 
     // Only show the Next button on the first step
@@ -149,11 +146,13 @@ export default class extends Controller {
   }
 
   openFlatpickrOnStep2() {
-    const datetimePickerController = this.application.getControllerForElementAndIdentifier(
-      this.formTarget,
-      "datetime-picker"
-    );
-    datetimePickerController.openFlatpickr();
+    const test = this.application;
+    // debugger
+    // const datetimePickerController = this.application.getControllerForElementAndIdentifier(
+    //   this.formTarget,
+    //   "datetime-picker"
+    // );
+    // datetimePickerController.openFlatpickr();
   }
 
   isBeforeConfirmationStep() {

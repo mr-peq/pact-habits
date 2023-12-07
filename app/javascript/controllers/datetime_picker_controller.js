@@ -6,6 +6,12 @@ export default class extends Controller {
 
   connect() {
     this.initializeFlatpickr();
+    const flatpickrHours = document.querySelector('.flatpickr-hour');
+
+    flatpickrHours.addEventListener('focus', () => {
+      console.log("HOURS focused");
+      flatpickrHours.blur();
+    });
   }
 
   initializeFlatpickr() {
