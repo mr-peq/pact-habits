@@ -8,7 +8,7 @@
   position: fixed;
   right: 20px;
   left: 20px;
-  bottom: 750px;
+  bottom: 650px;
   z-index: 1000;
   transition: opacity 0.5s ease, top 0.5s ease;
 }
@@ -29,8 +29,8 @@
 
 /* Animation to fade out the alert */
 @keyframes fadeOut {
-  from { opacity: 0.9; bottom: 750px; }
-  to { opacity: 0; bottom: 800px; }
+  from { opacity: 0.9; bottom: 650px; }
+  to { opacity: 0; bottom: 700px; }
 }
 
 /* Class to trigger fade out animation */
