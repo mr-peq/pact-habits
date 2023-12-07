@@ -2,7 +2,7 @@
   <h3 class="section-title mb-3" style="text-align: left;">My badges</h3>
   <div class="my-badges" data-my-badges-target="myBadges">
     <% @my_badges.each do |badge| %>
-      <div class="badge-icon mx-2" style="animation: none;">
+      <div class="badge-icon my-badges-badge mx-2"">
         <%= render partial: "badges/#{badge.name.downcase.gsub('-', '_').gsub(' ', '_').gsub('=', 'is')}" %>
       </div>
     <% end %>

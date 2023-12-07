@@ -179,9 +179,19 @@ end
   Pact.create!(random_pact_stats(false))
 end
 
-2.times do
-  Pact.create!(random_pact_stats(true))
-end
+Pact.create!(random_pact_stats(true))
+
+# ======= CUSTOM CHALLENGE FOR DEMO-DAY
+Pact.create!(
+  category: "swim",
+  distance: nil,
+  duration: DURATION.sample,
+  recurring: false,
+  weekdays: [],
+  xp: 120,
+  challenge: true,
+  completion_duration: 2
+)
 
 # ============================= USER_PACTS ==================================
 puts "Binding pacts to users..."
@@ -227,7 +237,7 @@ end
 end
 
 # Failed
-4.times do
+3.times do
   pact = Pact.find(i)
   UserPact.create!(
     user: User.all.sample,
@@ -239,6 +249,17 @@ end
   )
   i += 1
 end
+
+pact = Pact.find(i)
+UserPact.create!(
+  user: user_ismael,
+  pact: pact,
+  deadline_at: Time.now - (rand(1..30) * rand(0..24) * 3600),
+  bet: BETS.sample,
+  beneficiary: Beneficiary.all.sample,
+  status: 2
+)
+i += 1
 
 # Challenges
 2.times do
