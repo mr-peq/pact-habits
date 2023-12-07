@@ -5,11 +5,7 @@
       <div class="circle"></div>
     </div>
     <div class="pact-pact-card">
-      <div class="pact-card-time">
-        <% if challenge.completion_duration == 1 %>
-          <p class="mb-0">Deadline: <%= challenge.completion_duration %> Week</p>
-        <% end %>
-      </div>
+      
       <div class="pact-box">
         <div class="pact-card-content">
           <div class="pact-card-top-row">
@@ -67,18 +63,18 @@
           <% end %>
         </div>
         <div class="pact-card-xp">
-          <button class="join-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" data-challenge-id="<%= challenge.id %>" data-action="multi-step-form#join">JOIN <i class="fa-solid fa-rocket"></i></button>
-          <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel" data-controller="multi-step-form">
+          <button class="join-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" data-challenge-id="<%= challenge.id %>" data-action="multi-step-form#join">Join <i class="fa-solid fa-rocket"></i></button>
+          <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel" data-controller="multi-step-form" style="height: 600px;">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="offcanvasBottomLabel"></h5>
               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body small">
-            <%= simple_form_for :challenge, url: "pacts#join", method: :post, html: { id: 'new_challenge_form' } do |f| %>
+            <%= simple_form_for challenge, url: join_challenge_path(challenge), method: :post, html: { id: 'new_challenge_form' } do |f| %>
               <%= simple_fields_for :user_pact do |up| %>
                 <div data-multi-step-form-target="step">
                   <div>
-                    <h3 style="color:#A6ACBA; margin-top:10px">Bet:</h3>
+                    <h3 style="color:#A6ACBA; margin-top:10px; border-bottom: none;">Bet:</h3>
                     <br>
                       <div class="slider-wrapper" data-controller="slider">
                         <!-- Slider input for bet -->
@@ -86,7 +82,7 @@
                         <!-- Display the current value of the slider -->
                         <span id="betValue" data-slider-target="valueDisplay">10</span>
                       </div>
-                    <h3 style="color:#A6ACBA; margin-top:10px">For:</h3>
+                    <h3 style="color:#A6ACBA; margin-top:10px; border-bottom: none;">For:</h3>
                       <div class="beneficiary-wrapper d-flex justify-content-around flex-wrap" data-controller="category-select">
                         <% @beneficiaries.each do |beneficiary| %>
                           <div data-beneficiary-id="<%= beneficiary.id %>" data-beneficiary-name="<%= beneficiary.name %>">
@@ -100,8 +96,8 @@
                   </div>
                 </div>
               <% end %>
-            <div class="pact-card-finish">
-              <%= f.button :submit, "Join!", class: 'pact-card-finish' %>
+            <div class="pact-card-finish" style="margin-top: 1em;">
+              <%= f.button :submit, class: 'pact-card-finish' %>
             </div>
             <% end %>
           </div>
