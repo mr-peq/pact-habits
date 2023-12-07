@@ -38,22 +38,24 @@
     <%= favicon_link_tag 'logo_icon.png', rel: 'icon', type: 'image/png' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <%= javascript_include_tag 'manifest' %>
-
 
   </head>
 
-  <body style="background-color: #242933; margin-bottom: 120px;">
-    <%= render "shared/top_navbar"%>
-    <%= render "shared/bottom_navbar" %>
+  <body style="background-color: #242933">
     <% flash.each do |type, message| %>
       <div data-controller="alert" class="<%= type == 'notice' ? 'notice' : 'alert' %>">
         <%= message %>
       </div>
     <% end %>
 
-    <div class="container" style="margin-bottom: 120px">
-      <%= yield %>
+    <div class="main-content">
+      <%= render "shared/top_navbar"%>
+      <div class="yield-content">
+        <div class="container">
+          <%= yield %>
+        </div>
+      </div>
+      <%= render "shared/bottom_navbar" %>
     </div>
   </body>
 </html>

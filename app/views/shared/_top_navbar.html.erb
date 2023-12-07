@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top top-navbar" data-controller="top-navbar" data-top-navbar-target="navbar">
+<nav class="navbar top-navbar" data-controller="top-navbar" data-top-navbar-target="navbar">
   <div class="container d-flex justify-content-between align-items-center" style="height: 56px;">
     <!-- App Logo -->
     <div class="navbar-logo">
@@ -8,10 +8,8 @@
     <!-- User Picture -->
     <div class="navbar-user">
       <% if current_user %>
-      <%= link_to cl_image_tag(current_user.photo.key, alt: "User", class: "user-picture"), account_path %>
+        <%= link_to cl_image_tag(current_user.photo.key, alt: "User", class: "user-picture"), account_path %>
       <% end %>
-    </div>
-
     </div>
   </div>
 </nav>
