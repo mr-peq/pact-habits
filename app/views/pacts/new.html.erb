@@ -1,5 +1,10 @@
 <div class="container mt-4" data-controller="multi-step-form" data-multi-step-form-target="form">
-  <h2 class="text-center" style="font-weight: bold; color:#A6ACBA;">- Make a new Pact -</h2>
+  <div class="form-progression">
+    <div class="form-progression-slot form-progression-slot-filled" data-multi-step-form-target="progressionSlot0"></div>
+    <div class="form-progression-slot" data-multi-step-form-target="progressionSlot1"></div>
+    <div class="form-progression-slot" data-multi-step-form-target="progressionSlot2"></div>
+    <div class="form-progression-slot" data-multi-step-form-target="progressionSlot3"></div>
+  </div>
   <br>
   <%= simple_form_for @pact, url: pacts_path, html: { class: 'form-horizontal' } do |f| %>
     <%= f.error_notification %>
