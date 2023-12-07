@@ -1,3 +1,14 @@
+h4 {
+  margin-left: 2em;
+  color: #4ECDC4;
+  margin-block: 1em;
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+
 .challenge-card-xp {
   padding: 1em;
   border-radius: 50%;
@@ -13,10 +24,31 @@
   color: rgba(225, 43, 43, 0.77);
 }
 
+.challenge-card-category-xp {
+  color: #FFD700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.challenge-card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .challenge-card-friends {
   display: flex;
   right: 0;
   align-items: center;
+
+  div:first-child {
+    z-index: 1;
+  }
 }
 
 .challenge-friend-avatar {
@@ -43,4 +75,19 @@
 .friend-achieved {
   background-color: #ecdf1e;
   color: white;
+}
+
+#offcanvas-custom-submit {
+  text-transform: none;
+}
+
+.offcanvas-body .beneficiary-item {
+  padding: 10px;
+  height: 130px !important;
+  width: 130px;
+  border-radius: 50%;
+
+  span {
+    font-size: 1.1em;
+  }
 }

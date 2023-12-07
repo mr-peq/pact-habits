@@ -1,8 +1,31 @@
 <div class="date-group">
   <h3>Challenges</h3>
-  <% @challenges.each do |challenge| %>
-  <div class="grid-container">
-    <%= render partial: "challenge_card", locals: { challenge: challenge, clickable: true } %>
+  <% if @challenges_1w.count.positive? %>
+    <h4><i class="fa-solid fa-hourglass-start"></i> 1 week</h4>
+    <% @challenges_1w.each do |challenge| %>
+    <div class="grid-container">
+      <%= render partial: "challenge_card", locals: { challenge: challenge, clickable: true } %>
+    <% end %>
   <% end %>
-  </div>
+</div>
+
+<div class="date-group">
+  <% if @challenges_2w.count.positive? %>
+    <h4><i class="fa-solid fa-hourglass-start"></i> 2 weeks</h4>
+    <% @challenges_2w.each do |challenge| %>
+    <div class="grid-container">
+      <%= render partial: "challenge_card", locals: { challenge: challenge, clickable: true } %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="date-group">
+  <% if @challenges_3w.count.positive? %>
+    <h4><i class="fa-solid fa-hourglass-start"></i> 3 weeks</h4>
+    <% @challenges_3w.each do |challenge| %>
+    <div class="grid-container">
+      <%= render partial: "challenge_card", locals: { challenge: challenge, clickable: true } %>
+    <% end %>
+    </div>
+  <% end %>
 </div>
