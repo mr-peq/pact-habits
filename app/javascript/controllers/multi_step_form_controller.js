@@ -77,6 +77,7 @@ export default class extends Controller {
 
 
 
+
     // Access the distance_duration_controller
     const selectedType = document.querySelector('input[name="distance_type"]:checked').value;
 
