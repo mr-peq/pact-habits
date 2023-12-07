@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :dashboard ]
+  # skip_before_action :authenticate_user!, only: [ :dashboard ]
 
   def next_occurrence_date(user_pact)
     return user_pact.deadline_at.to_date unless user_pact.pact.recurring
