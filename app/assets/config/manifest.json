@@ -1,6 +1,6 @@
 {
- "background_color": "white",
- "description": "Le Wagon is Europe's best coding bootcamp for creative people & entrepreneurs. Learn to code in 9 weeks with our fullstack coding bootcamp.",
+ "background_color": "#242933",
+ "description": "Join PactHabit: Commit to your goals, challenge yourself, and track your progress as you turn ambitions into habits with a community that keeps you accountable.",
  "display": "fullscreen",
  "name": "PactHabit",
  "icons": [

@@ -76,4 +76,5 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = false
 
   config.hosts.clear
+  config.hosts << /[a-z0-9\-\.]+\.ngrok-free\.app/
 end
