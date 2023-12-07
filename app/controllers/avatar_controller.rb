@@ -15,6 +15,7 @@ class AvatarController < ApplicationController
     @all_badges_count = Badge.all.count
 
     @user = current_user
+    @current_user_rank = User.where('total_xp > ?', current_user.total_xp).count + 1
   end
 
   def update

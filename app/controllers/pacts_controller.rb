@@ -34,8 +34,8 @@ class PactsController < ApplicationController
       if @challenge.save!
         # Create the associated UserPact
         deadline_at = Time.now + @challenge.completion_duration.week
-        beneficiary = Beneficiary.find(params[:beneficiary_id])
-        @user_pact = UserPact.new(deadline_at: deadline_at, bet: params[:bet], beneficiary: beneficiary)
+        beneficiary = Beneficiary.find(params[:user_pact][:beneficiary_id])
+        @user_pact = UserPact.new(deadline_at: deadline_at, bet: params[:user_pact][:bet], beneficiary: beneficiary)
         @user_pact.pact = @challenge
         @user_pact.user = current_user
         raise ActiveRecord::Rollback, "UserPact couldn't be created" unless @user_pact.save
@@ -43,7 +43,7 @@ class PactsController < ApplicationController
         # Redirect to the homepage if successfull
         redirect_to root_path, notice: 'Good luck for this challenge, champ! 💪'
       else
-        redirect_to pact_path(@challenge), alert: "Something went wrong, please try again."
+        redirect_to challenges_path, alert: "Something went wrong, please try again."
       end
     end
   end

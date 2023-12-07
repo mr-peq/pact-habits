@@ -1,0 +1,37 @@
+.sign-in-container {
+  color: white;
+  padding: 2em;
+}
+
+.sign-in-input {
+  margin-left: 0;
+}
+
+.remember-me {
+  display: flex;
+  justify-content: center;
+}
+
+.log-in-button {
+  color: #242933;
+  background-color: #4ECDC4;
+  font-weight: bold;
+  padding: 0.5em 2em;
+  border-radius: 10px;
+}
+
+.devise-links-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6em;
+}
+
+.devise-links {
+  text-decoration: none;
+  background-color: #A4AAB8;
+  margin-bottom: 0.8em;
+  font-weight: normal;
+  color: white;
+}
