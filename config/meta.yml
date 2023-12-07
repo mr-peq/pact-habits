@@ -1,6 +1,6 @@
 # config/meta.yml
 meta_product_name: pacthabit
-meta_title: Pacthabit – Forge a pact with your future self!
+meta_title: Pacthabit - Forge a pact with your future self!
 meta_description: Individuals aged 18-45, actively seeking personal growth, open to financial incentives as accountability for not achieving their objectives
 meta_image: cover.png # should exist in `app/assets/images/`
 twitter_account: pacthabit # required for Twitter Cards
