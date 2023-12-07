@@ -7,7 +7,6 @@ export default class extends Controller {
   static targets = ["modal"]
 
   connect() {
-    console.log("Pact controller connected");
   }
 
   validate(e) {
@@ -15,10 +14,6 @@ export default class extends Controller {
     this.showModal();
     const waitMessage = document.getElementById('waitMessage');
     const form = document.querySelector('form');
-    // const typed = new Typed('#waitMessage', {
-    //   strings: ['test', 'test'],
-    //   typeSpeed: 50,
-    // });
 
     const messages = [
       "Compiling data...",

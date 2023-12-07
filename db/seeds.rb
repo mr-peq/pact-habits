@@ -283,8 +283,8 @@ Badge.create!(name: "Ambitions Of A Rider", description: "Ride a total of 50 km"
 Badge.create!(name: "Tour De France", description: "Ride a total of 10 hours", category: "ride")
 Badge.create!(name: "Slowly But Surely", description: "Walk a total of 50 km", category: "walk")
 Badge.create!(name: "Turtle-Person", description: "Walk a total of 10 hours", category: "walk")
-Badge.create!(name: "Hiker", description: "Hike a total of 50 km", category: "swim")
-Badge.create!(name: "I Live In The Mountains", description: "Hike a total of 10 hours", category: "swim")
+Badge.create!(name: "Mermaid", description: "Swim a total of 50 km", category: "swim")
+Badge.create!(name: "Yellow Submarine", description: "Swim a total of 10 hours", category: "swim")
 Badge.create!(name: "Marathon", description: "Run a total of 50 km", category: "run")
 Badge.create!(name: "Forrest Gump", description: "Run a total of 10 hours", category: "run")
 
@@ -299,15 +299,19 @@ pact_2 = Pact.create!(category: "ride", distance: 20, xp: 80)
 pact_3 = Pact.create!(category: "ride", duration: 140, xp: 100)
 pact_4 = Pact.create!(category: "walk", distance: 14, xp: 30)
 pact_5 = Pact.create!(category: "walk", duration: 90, xp: 45)
-pact_6 = Pact.create!(category: "walk", duration: 60, xp: 30)
+pact_6 = Pact.create!(category: "run", duration: 60, xp: 30)
 pact_7 = Pact.create!(category: "run", distance: 21, xp: 135)
 pact_8 = Pact.create!(category: "run", duration: 80, xp: 70)
-pact_9 = Pact.create!(category: "ride", duration: 260, xp: 200)
-pact_10 = Pact.create!(category: "ride", duration: 100, xp: 55)
+pact_9 = Pact.create!(category: "run", duration: 260, xp: 200)
+pact_10 = Pact.create!(category: "run", duration: 100, xp: 55)
 
-ongoing_pact = Pact.create!(category: "ride", duration: 120, xp: 90)
+ongoing_pact_1 = { pact: Pact.create!(category: "run", duration: 120, xp: 90), deadline_at: Time.now + (3 * 24 * 3600) }
+ongoing_pact_2 = { pact: Pact.create!(category: "run", distance: 20, xp: 150), deadline_at: Time.now + (5 * 24 * 3600) + ( 4 * 3600) }
+ongoing_pact_3 = { pact: Pact.create!(category: "swim", duration: 90, xp: 60), deadline_at: Time.now + (5 * 24 * 3600) + ( 12 * 3600) }
+ongoing_pacts = [ongoing_pact_1, ongoing_pact_2, ongoing_pact_3]
 
 ismael_pacts = [pact_1, pact_2, pact_3, pact_4, pact_5, pact_6, pact_7, pact_8, pact_9, pact_10]
+
 ismael_pacts.each do |pact|
   UserPact.create!(
     user: ismael,
@@ -319,14 +323,16 @@ ismael_pacts.each do |pact|
   )
 end
 
-UserPact.create!(
-  user: User.find_by(first_name: "Ismaël"),
-  pact: ongoing_pact,
-  deadline_at: Time.now + (3 * 24 * 3600), # => 3 days
-  bet: BETS.sample,
-  beneficiary: Beneficiary.all.sample,
-  status: 0
-)
+ongoing_pacts.each do |pact|
+  UserPact.create!(
+    user: User.find_by(first_name: "Ismaël"),
+    pact: pact[:pact],
+    deadline_at: pact[:deadline_at],
+    bet: BETS.sample,
+    beneficiary: Beneficiary.all.sample,
+    status: 0
+  )
+end
 
 UserBadge.create!(
   badge: Badge.find_by(name: "Welcome To The Club"),

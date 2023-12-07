@@ -65,12 +65,12 @@ class User < ApplicationRecord
       total_duration += pact.duration unless pact.duration.nil?
     end
     if total_distance >= 50
-      badge = Badge.find_by(name: "Hiker")
-      UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Hiker")
+      badge = Badge.find_by(name: "Mermaid")
+      UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Mermaid")
     end
     if total_duration >= 600
-      badge = Badge.find_by(name: "I Live In The Mountains")
-      UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "I Live In The Mountains")
+      badge = Badge.find_by(name: "Yellow Submarine")
+      UserBadge.create!(user: self, badge: badge) unless badges.exists?(name: "Yellow Submarine")
     end
   end
 

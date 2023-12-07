@@ -7,8 +7,6 @@ export default class extends Controller {
   static targets = ["form", "myBadges"];
 
   connect() {
-    console.log("BADGES CONTROLLER");
-    console.log(this.formTarget);
   }
 
   getBadge(event) {
@@ -21,23 +19,7 @@ export default class extends Controller {
 
     // 1st ANIMATION
     modal.classList.remove('modal-container');
-    // this.formTarget.parentElement.classList.add('spin-faster');
     this.formTarget.parentElement.classList.add('spin-and-climb');
-
-    // setTimeout(() => {
-    //   this.formTarget.parentElement.classList.remove('spin-faster');
-    //   this.formTarget.parentElement.classList.add('spin-even-faster');
-    // }, 500);
-
-    // setTimeout(() => {
-    //   this.formTarget.parentElement.classList.remove('spin-even-faster');
-    //   this.formTarget.parentElement.classList.add('spin-rocket');
-    // }, 750);
-
-    // setTimeout(() => {
-    //   this.formTarget.parentElement.classList.remove('spin-rocket');
-    //   this.formTarget.parentElement.classList.add('dive-in');
-    // }, 1000);
 
     setTimeout(() => {
       this.formTarget.parentElement.classList.remove('spin-and-climb');
