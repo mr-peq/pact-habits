@@ -177,23 +177,10 @@
 }
 
 @keyframes spin-and-climb {
-  0% {
+  from {
     top: 0;
-  } 12% {
-    top: -12px;
-  } 25% {
-    top: -25px;
-  } 37% {
-    top: -37px;
-  } 50% {
-    top: -50px;
-  } 62% {
-    top: -62px;
-  } 75% {
-    top: -75px;
-  } 87% {
-    top: -87px;
-  } 100% {
+  }
+  to {
     top: -100px;
   }
 }

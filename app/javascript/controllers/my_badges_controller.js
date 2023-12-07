@@ -4,7 +4,7 @@ import confetti from "canvas-confetti";
 // Connects to data-controller="my-badges"
 export default class extends Controller {
 
-  static targets = ["form", "myBadges"];
+  static targets = ["form", "myBadges", "badgesCount"];
 
   connect() {
   }
@@ -22,20 +22,23 @@ export default class extends Controller {
     this.formTarget.parentElement.classList.add('spin-and-climb');
 
     setTimeout(() => {
-      this.formTarget.parentElement.classList.remove('spin-and-climb');
       this.formTarget.parentElement.classList.add('spin-faster');
+    }, 1800);
+
+    setTimeout(() => {
+      this.formTarget.parentElement.classList.remove('spin-and-climb');
     }, 2000);
 
     setTimeout(() => {
-      this.formTarget.parentElement.classList.remove('spin-faster');
       this.formTarget.parentElement.classList.add('dive-in');
+      this.formTarget.parentElement.classList.remove('spin-faster');
     }, 3000);
 
     setTimeout(() => {
-      this.formTarget.parentElement.classList.remove('dive-in');
       this.formTarget.parentElement.classList.add('d-none');
+      this.formTarget.parentElement.classList.remove('dive-in');
       const badgeCard = modal.parentElement.parentElement;
-      this.element.removeChild(badgeCard);
+      badgeCard.remove();
       document.documentElement.style.setProperty('--mbcolor', "#666");
       this.myBadgesTarget.insertAdjacentHTML(
         'beforeend',
@@ -61,6 +64,8 @@ export default class extends Controller {
           spread: 70,
           origin: { y: 0.6 }
         });
+        const currentBadges = +(this.badgesCountTarget.innerText.slice(0, 1));
+        this.badgesCountTarget.innerText = `${currentBadges + 1} / 14`;
       });
     }, 4500);
     // before: 2500
