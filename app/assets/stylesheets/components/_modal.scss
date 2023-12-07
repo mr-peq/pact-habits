@@ -166,11 +166,11 @@
     right: -50px;
     transform: rotateY(180deg) scale(0.5);
   } 75% {
-    top: 0;
+    top: 20;
     right: -75px;
     transform: rotateY(270deg) scale(0.25);
   } 100% {
-    top: 30px;
+    top: 100px;
     right: -100px;
     transform: rotateY(360deg) scale(0.1);
   }
