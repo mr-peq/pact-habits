@@ -2,7 +2,29 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["form", "day", "step", "previousButton", "nextButton", "form", "category", "distance", "deadline", "bet", "beneficiary", "categoryConfirmation", "distanceOrDurationConfirmation", "deadlineConfirmation", "betConfirmation", "beneficiaryConfirmation", "recurring"]
+  static targets = [
+    "progressionSlot0",
+    "progressionSlot1",
+    "progressionSlot2",
+    "progressionSlot3",
+    "form",
+    "day",
+    "step",
+    "previousButton",
+    "nextButton",
+    "form",
+    "category",
+    "distance",
+    "deadline",
+    "bet",
+    "beneficiary",
+    "categoryConfirmation",
+    "distanceOrDurationConfirmation",
+    "deadlineConfirmation",
+    "betConfirmation",
+    "beneficiaryConfirmation",
+    "recurring"
+  ]
 
   join(event) {
     const challengeId = event.currentTarget.dataset.challengeId;
@@ -61,8 +83,16 @@ export default class extends Controller {
 
   captureData() {
     const category = this.selectedRadioButtonValue(this.categoryTargets);
-    const distanceOrDuration = this.distanceTarget.value
-    const deadline = this.deadlineTarget.value;
+    const distanceOrDuration = this.distanceTarget.value;
+
+    let deadline = new Date(this.deadlineTarget.value);
+    const options = {
+      weekday: "long",
+      month: "short",
+      day: "numeric"
+    }
+    deadline = new Intl.DateTimeFormat("en-US", options).format(deadline);
+
     const bet = this.betTarget.value;
     const beneficiaryId = this.selectedRadioButtonValue(this.beneficiaryTargets);
     const beneficiaryNameElement = document.querySelector(`[data-beneficiary-id="${beneficiaryId}"]`);
@@ -142,6 +172,11 @@ export default class extends Controller {
 
     if (this.currentStep === 1) { // Assuming step 2 is index 1
       this.openFlatpickrOnStep2();
+      this[`progressionSlot${this.currentStep}Target`].classList.add('form-progression-slot-filled');
+    } else if (this.currentStep === 2) {
+      this[`progressionSlot${this.currentStep}Target`].classList.add('form-progression-slot-filled');
+    } else if (this.currentStep === 3) {
+      this[`progressionSlot${this.currentStep}Target`].classList.add('form-progression-slot-filled');
     }
   }
 
@@ -164,6 +199,14 @@ export default class extends Controller {
   }
 
   previous() {
+    if (this.currentStep === 1) {
+      this[`progressionSlot${this.currentStep}Target`].classList.remove('form-progression-slot-filled');
+    } else if (this.currentStep === 2) {
+      this[`progressionSlot${this.currentStep}Target`].classList.remove('form-progression-slot-filled');
+    } else if (this.currentStep === 3) {
+      this[`progressionSlot${this.currentStep}Target`].classList.remove('form-progression-slot-filled');
+    }
+
     if (this.currentStep >= 1) {
       this.currentStep--
       this.showCurrentStep()

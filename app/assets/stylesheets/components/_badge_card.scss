@@ -127,6 +127,10 @@
   animation: 4s linear .01s infinite spin;
 }
 
+.my-badges-badge {
+  animation: none;
+}
+
 .badge-card-content {
   padding: 1em;
   display: flex;
