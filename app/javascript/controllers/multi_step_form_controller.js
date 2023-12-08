@@ -83,8 +83,16 @@ export default class extends Controller {
 
   captureData() {
     const category = this.selectedRadioButtonValue(this.categoryTargets);
-    const distanceOrDuration = this.distanceTarget.value
-    const deadline = this.deadlineTarget.value;
+    const distanceOrDuration = this.distanceTarget.value;
+
+    let deadline = new Date(this.deadlineTarget.value);
+    const options = {
+      weekday: "long",
+      month: "short",
+      day: "numeric"
+    }
+    deadline = new Intl.DateTimeFormat("en-US", options).format(deadline);
+
     const bet = this.betTarget.value;
     const beneficiaryId = this.selectedRadioButtonValue(this.beneficiaryTargets);
     const beneficiaryNameElement = document.querySelector(`[data-beneficiary-id="${beneficiaryId}"]`);
