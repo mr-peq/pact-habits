@@ -1,6 +1,6 @@
 ## Pact Habit
 
-Gamified app where users set habit goals, back them with financial stakes, engage in a community and collect badges aligned with their new habits
+Gamified mobile app where users set habit goals, back them with financial stakes, engage in a community and collect badges aligned with their new habits
 
 
 ### SET UP:
