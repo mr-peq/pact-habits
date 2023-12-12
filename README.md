@@ -1,9 +1,9 @@
-##Pact Habit
+## Pact Habit
 
 Gamified app where users set habit goals, back them with financial stakes, engage in a community and collect badges aligned with their new habits
 
 
-###SET UP:
+### SET UP:
 
 Make sure you have **Rails 7**, **Ruby 3.1.2** and **postgreSQL** installed, then run:
 
